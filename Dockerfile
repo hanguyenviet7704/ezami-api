@@ -23,9 +23,18 @@ RUN ls -la /app/build/libs/ || echo "Build folder not found"
 FROM eclipse-temurin:17-jre
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
-RUN groupadd -g 1001 appuser || true && useradd -r -u 1001 -g appuser appuser || true
-WORKDIR /app
 
+RUN groupadd -g 1001 appuser || true && useradd -r -u 1001 -g appuser appuser || true
+
+WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
 
-RUN mkdir -p /app/uploads && chown -R appuser:appuse
+# Create uploads directories and set permissions
+RUN mkdir -p /app/uploads/images /app/uploads/avatars /app/uploads/temp \
+  && chown -R appuser:appuser /app/uploads
+
+USER appuser
+EXPOSE 8080
+
+ENV JAVA_OPTS="-Xmx512m -Xms256m -XX:+UseG1GC -XX:G1HeapRegionSize=16m -XX:+UseContainerSupport"
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
