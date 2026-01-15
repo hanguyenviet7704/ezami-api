@@ -2,21 +2,19 @@
 FROM gradle:8.5-jdk17 AS builder
 
 WORKDIR /app
-# Force rebuild - Fixed FK constraint violation in diagnostic answer (Jan 7, 2026)
-ARG CACHEBUST=4
+ARG CACHEBUST=2
 
-# Copy Gradle wrapper and config files
 COPY gradlew gradlew.bat ./
 COPY gradle/ gradle/
 COPY build.gradle settings.gradle ./
 
+RUN chmod +x gradlew && sed -i 's/\r$//' gradlew
+
 # Download dependencies
 RUN ./gradlew dependencies --no-daemon || true
 
-# Copy source code
 COPY src/ src/
 
-# Build application
 RUN ./gradlew clean build -x test --no-daemon --stacktrace
 RUN ls -la /app/build/libs/ || echo "Build folder not found"
 
@@ -30,14 +28,4 @@ WORKDIR /app
 
 COPY --from=builder /app/build/libs/*.jar app.jar
 
-# Create uploads directory for user-uploaded files
-RUN mkdir -p /app/uploads && chown -R appuser:appuser /app
-
-USER appuser
-EXPOSE 8080
-
-# Create uploads subdirectories
-RUN mkdir -p /app/uploads/images /app/uploads/avatars /app/uploads/temp
-
-ENV JAVA_OPTS="-Xmx512m -Xms256m -XX:+UseG1GC -XX:G1HeapRegionSize=16m -XX:+UseContainerSupport"
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+RUN mkdir -p /app/uploads && chown -R appuser:appuse
