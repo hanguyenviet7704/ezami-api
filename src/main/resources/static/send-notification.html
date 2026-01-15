@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Thông Báo Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .header h1 {
+            color: #1e293b;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .status.loading {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+
+        .quick-actions {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .quick-actions h3 {
+            margin-bottom: 15px;
+            color: #374151;
+            font-size: 16px;
+        }
+
+        .quick-btn {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 12px;
+            background: #e5e7eb;
+            color: #374151;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .quick-btn:hover {
+            background: #d1d5db;
+        }
+
+        .history {
+            margin-top: 30px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+
+        .history-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 13px;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-time {
+            color: #6b7280;
+            font-size: 11px;
+        }
+
+        .notification-preview {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .preview-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .preview-message {
+            color: #4b5563;
+            margin-bottom: 8px;
+        }
+
+        .preview-meta {
+            font-size: 12px;
+            color: #6b7280;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Gửi Thông Báo Test</h1>
+            <p>Công cụ test gửi notification thông qua WebSocket</p>
+        </div>
+
+        <form id="notificationForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="userId">User ID <span style="color: red;">*</span></label>
+                    <input type="number" id="userId" required placeholder="Nhập User ID" value="16378">
+                </div>
+                <div class="form-group">
+                    <label for="notificationType">Loại thông báo</label>
+                    <select id="notificationType">
+                        <!-- KHÓA HỌC / HỌC TẬP -->
+                        <option value="COURSE_NEW_CONTENT">📚 Nội dung khóa học mới</option>
+                        <option value="COURSE_ACCESS_EXPIRY">⏰ Hết hạn truy cập khóa học</option>
+
+                        <!-- THI CỬ / MOCK TEST -->
+                        <option value="QUIZ_REGISTER_SUCCESS">✅ Đăng ký Mock test thành công</option>
+                        <option value="QUIZ_RESULT">📊 Kết quả thi</option>
+                        <option value="QUIZ_REMINDER">📝 Nhắc nhở làm bài</option>
+
+                        <!-- THANH TOÁN / ĐƠN HÀNG -->
+                        <option value="PAYMENT_SUCCESS">💰 Thanh toán thành công</option>
+                        <option value="PAYMENT_FAILED">❌ Thanh toán thất bại</option>
+                        <option value="ORDER_REFUNDED">💸 Hoàn tiền</option>
+                        <option value="ORDER_CANCELED">🚫 Hủy đơn</option>
+                        <option value="PAYMENT_PENDING_REMINDER">⏳ Nhắc thanh toán</option>
+                        <option value="INVOICE_AVAILABLE">🧾 Hóa đơn có sẵn</option>
+
+                        <!-- KHUYẾN MÃI / ƯU ĐÃI -->
+                        <option value="PROMOTION_NEW_VOUCHER">🎫 Voucher mới</option>
+                        <option value="PROMOTION_FLASH_SALE">⚡ Flash sale</option>
+                        <option value="PROMOTION_PERSONALIZED">🎯 Ưu đãi cá nhân</option>
+
+                        <!-- HỆ THỐNG / TÀI KHOẢN -->
+                        <option value="SYSTEM_INFO">ℹ️ Thông tin hệ thống</option>
+                        <option value="SYSTEM_POLICY_UPDATE">📋 Cập nhật chính sách</option>
+                        <option value="SYSTEM_MAINTENANCE">🔧 Bảo trì hệ thống</option>
+                        <option value="ACCOUNT_SECURITY_ALERT">🔒 Cảnh báo bảo mật</option>
+                        <option value="ACCOUNT_LOCKED">🚨 Khóa tài khoản</option>
+
+                        <!-- AFFILIATE / CỘNG TÁC VIÊN -->
+                        <option value="AFFILIATE_APPLICATION_RESULT">📝 Kết quả affiliate</option>
+                        <option value="AFFILIATE_COMMISSION">💼 Hoa hồng affiliate</option>
+                        <option value="AFFILIATE_WITHDRAWAL_STATUS">💳 Trạng thái rút tiền</option>
+
+                        <!-- HỖ TRỢ / CSKH -->
+                        <option value="SUPPORT_TICKET_REPLY">💬 Trả lời ticket hỗ trợ</option>
+                        <option value="SUPPORT_CHANNEL_SUGGESTION">💡 Gợi ý kênh hỗ trợ</option>
+                        <option value="MENTOR_FEEDBACK">👨‍🏫 Phản hồi mentor</option>
+
+                        <!-- TƯƠNG TÁC CƠ BẢN -->
+                        <option value="POST_NEW_COMMENT">💬 Bình luận mới</option>
+                        <option value="COMMENT_REPLY">↩️ Trả lời bình luận</option>
+                        <option value="POST_NEW_REACTION">👍 React bài viết</option>
+                        <option value="COMMENT_NEW_REACTION">❤️ React bình luận</option>
+
+                        <!-- GIỮ CHÂN & GỢI Ý -->
+                        <option value="RETENTION_INACTIVE_REMINDER">🔔 Nhắc quay lại</option>
+                        <option value="RETENTION_UNFINISHED_COURSE">📖 Hoàn thành khóa học</option>
+                        <option value="RETENTION_NEW_CHAPTER_OPEN">📄 Chương mới</option>
+                        <option value="RECOMMEND_ROLE_BASED">🎯 Gợi ý theo role</option>
+                        <option value="RECOMMEND_WEAKNESS_FOCUS">📈 Cải thiện điểm yếu</option>
+                        <option value="RECOMMEND_MOCK_TEST_READY">🎓 Mock test sẵn sàng</option>
+                        <option value="RECOMMEND_RELATED_ARTICLE">📰 Bài viết liên quan</option>
+
+                        <!-- MẠNG XÃ HỘI -->
+                        <option value="SOCIAL_INVITE_FRIEND">👥 Mời bạn bè</option>
+                        <option value="SOCIAL_INVITE_REWARD">🎁 Thưởng mời bạn</option>
+                        <option value="SOCIAL_ADMIN_POST">👑 Bài viết admin</option>
+                        <option value="SOCIAL_COMMUNITY_HIGHLIGHT">⭐ Bài viết nổi bật</option>
+                        <option value="SOCIAL_FOLLOWING_NEW_POST">📢 Bài viết người theo dõi</option>
+                        <option value="SOCIAL_TRENDING_CONTENT">🔥 Nội dung trending</option>
+                        <option value="SOCIAL_WATCHED_POST_COMMENT">👀 Bình luận bài theo dõi</option>
+
+                        <!-- CỘNG ĐỒNG -->
+                        <option value="COMMUNITY_QUESTION_ANSWERED">❓ Trả lời câu hỏi</option>
+                        <option value="COMMUNITY_MENTION">@️⃣ Nhắc đến bạn</option>
+                        <option value="COMMUNITY_POST_REACTION">👍 Upvote bài viết</option>
+                        <option value="COMMUNITY_TOPIC_MESSAGE">💌 Tin nhắn topic</option>
+                        <option value="COMMUNITY_ROLE_ASSIGNED">👔 Gán role mới</option>
+
+                        <!-- BẢO MẬT & CẬP NHẬT -->
+                        <option value="SECURITY_NEW_DEVICE_LOGIN">🆕 Đăng nhập thiết bị mới</option>
+                        <option value="SECURITY_SUSPICIOUS_ACTIVITY">⚠️ Hoạt động bất thường</option>
+                        <option value="SYSTEM_APP_UPDATE_AVAILABLE">📱 Cập nhật app mới</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Tiêu đề <span style="color: red;">*</span></label>
+                <input type="text" id="title" required placeholder="Nhập tiêu đề thông báo" maxlength="255">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Nội dung <span style="color: red;">*</span></label>
+                <textarea id="message" required placeholder="Nhập nội dung thông báo..."></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="actionUrl">Action URL (tùy chọn)</label>
+                    <input type="text" id="actionUrl" placeholder="/orders/123, /quiz/456...">
+                </div>
+                <div class="form-group">
+                    <label for="objectId">Object ID (tùy chọn)</label>
+                    <input type="number" id="objectId" placeholder="123 (ID đơn hàng, quiz, khóa học...)">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="srcUserId">Src User ID (tùy chọn)</label>
+                    <input type="number" id="srcUserId" placeholder="ID người thực hiện hành động">
+                </div>
+                <div class="form-group">
+                    <label for="srcObjectType">Loại đối tượng (tùy chọn)</label>
+                    <select id="srcObjectType">
+                        <option value="">-- Chọn loại --</option>
+                        <option value="order">📦 Đơn hàng (Order)</option>
+                        <option value="quiz">📝 Bài thi (Quiz)</option>
+                        <option value="course">📚 Khóa học (Course)</option>
+                        <option value="comment">💬 Bình luận (Comment)</option>
+                        <option value="feed">📰 Bài viết (Feed)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn-primary">📤 Gửi Thông Báo</button>
+                <button type="button" id="clearBtn" class="btn-secondary">🗑️ Xóa Form</button>
+            </div>
+        </form>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h3>⚡ Thông báo nhanh</h3>
+            <button class="quick-btn" onclick="fillQuickNotification('payment_success')">💰 Thanh toán thành công</button>
+            <button class="quick-btn" onclick="fillQuickNotification('payment_failed')">❌ Thanh toán thất bại</button>
+            <button class="quick-btn" onclick="fillQuickNotification('quiz_result')">📊 Kết quả thi</button>
+            <button class="quick-btn" onclick="fillQuickNotification('course_new_content')">📚 Nội dung khóa học mới</button>
+            <button class="quick-btn" onclick="fillQuickNotification('promotion_flash_sale')">⚡ Flash sale</button>
+            <button class="quick-btn" onclick="fillQuickNotification('system_maintenance')">🔧 Bảo trì hệ thống</button>
+            <button class="quick-btn" onclick="fillQuickNotification('security_alert')">🔒 Cảnh báo bảo mật</button>
+            <button class="quick-btn" onclick="fillQuickNotification('post_new_comment')">💬 Bình luận mới</button>
+            <button class="quick-btn" onclick="fillQuickNotification('community_mention')">@️⃣ Nhắc đến bạn</button>
+            <button class="quick-btn" onclick="fillQuickNotification('retention_reminder')">🔔 Nhắc quay lại</button>
+        </div>
+
+        <!-- Payment Notification Section -->
+        <div class="quick-actions" style="border: 2px solid #3b82f6; background: linear-gradient(135deg, #dbeafe 0%, #f0f9ff 100%);">
+            <h3>💳 Thông báo thanh toán chuyên dụng</h3>
+            <div style="margin: 15px 0;">
+                <div class="form-row">
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="paymentUserId" style="font-size: 12px;">User ID:</label>
+                        <input type="number" id="paymentUserId" value="16378" style="padding: 6px; font-size: 12px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="paymentOrderId" style="font-size: 12px;">Order ID:</label>
+                        <input type="number" id="paymentOrderId" value="12345" style="padding: 6px; font-size: 12px;">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="paymentOrderTotal" style="font-size: 12px;">Số tiền:</label>
+                        <input type="text" id="paymentOrderTotal" value="500,000 VND" style="padding: 6px; font-size: 12px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="paymentReason" style="font-size: 12px;">Lý do (nếu thất bại):</label>
+                        <input type="text" id="paymentReason" value="Thẻ không đủ tiền" style="padding: 6px; font-size: 12px;">
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+                    <button class="quick-btn" onclick="sendPaymentNotification('success')" style="background: #10b981; color: white; margin: 5px 10px; padding: 10px 15px;">
+                        ✅ Gửi thông báo thành công
+                    </button>
+                    <button class="quick-btn" onclick="sendPaymentNotification('failed')" style="background: #ef4444; color: white; margin: 5px 10px; padding: 10px 15px;">
+                        ❌ Gửi thông báo thất bại
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Preview -->
+        <div class="notification-preview" id="notificationPreview" style="display: none;">
+            <div class="preview-title" id="previewTitle"></div>
+            <div class="preview-message" id="previewMessage"></div>
+            <div class="preview-meta">
+                <span id="previewType"></span>
+                <span id="previewTime"></span>
+            </div>
+        </div>
+
+        <!-- Status Messages -->
+        <div id="status" class="status"></div>
+
+        <!-- History -->
+        <div class="history" id="history" style="display: none;">
+            <div style="padding: 10px 15px; background: #f3f4f6; font-weight: 600; font-size: 14px;">
+                📋 Lịch sử gửi thông báo
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form elements
+        const form = document.getElementById('notificationForm');
+        const userIdInput = document.getElementById('userId');
+        const titleInput = document.getElementById('title');
+        const messageInput = document.getElementById('message');
+        const typeSelect = document.getElementById('notificationType');
+        const actionUrlInput = document.getElementById('actionUrl');
+        const objectIdInput = document.getElementById('objectId');
+        const srcUserIdInput = document.getElementById('srcUserId');
+        const srcObjectTypeSelect = document.getElementById('srcObjectType');
+        const clearBtn = document.getElementById('clearBtn');
+        const status = document.getElementById('status');
+        const history = document.getElementById('history');
+        const preview = document.getElementById('notificationPreview');
+
+        // Quick notification templates
+        const quickTemplates = {
+            payment_success: {
+                type: 'PAYMENT_SUCCESS',
+                title: '💰 Thanh toán thành công!',
+                message: 'Cảm ơn bạn đã thanh toán. Đơn hàng #12345 đã được xác nhận với số tiền 500,000 VND.',
+                actionUrl: '/orders/12345',
+                objectId: '12345',
+                srcUserId: '16378',
+                srcObjectType: 'order'
+            },
+            payment_failed: {
+                type: 'PAYMENT_FAILED',
+                title: '❌ Thanh toán thất bại',
+                message: 'Đơn hàng #12346 thanh toán thất bại: Thẻ không đủ tiền. Vui lòng kiểm tra lại thông tin thanh toán.',
+                actionUrl: '/orders/12346',
+                objectId: '12346',
+                srcUserId: '16378',
+                srcObjectType: 'order'
+            },
+            quiz_result: {
+                type: 'QUIZ_RESULT',
+                title: '📊 Có kết quả bài thi',
+                message: 'Kết quả bài thi "Java Programming Advanced" đã có. Bạn đạt 85/100 điểm. Chúc mừng!',
+                actionUrl: '/quiz/789/result',
+                objectId: '789',
+                srcUserId: '1',
+                srcObjectType: 'quiz'
+            },
+            course_new_content: {
+                type: 'COURSE_NEW_CONTENT',
+                title: '📚 Nội dung khóa học mới',
+                message: 'Khóa học "Spring Boot Master Class" có nội dung mới: "Microservices Architecture". Hãy xem ngay!',
+                actionUrl: '/course/456',
+                objectId: '456',
+                srcUserId: '1',
+                srcObjectType: 'course'
+            },
+            promotion_flash_sale: {
+                type: 'PROMOTION_FLASH_SALE',
+                title: '⚡ Flash Sale đặc biệt!',
+                message: 'Flash Sale 70% tất cả khóa học trong 24h tiếp theo. Đừng bỏ lỡ cơ hội vàng này!',
+                actionUrl: '/promotion/flash-sale',
+                objectId: '999',
+                srcUserId: '1',
+                srcObjectType: 'course'
+            },
+            system_maintenance: {
+                type: 'SYSTEM_MAINTENANCE',
+                title: '🔧 Thông báo bảo trì hệ thống',
+                message: 'Hệ thống sẽ được bảo trì từ 2:00 - 4:00 sáng ngày mai. Trong thời gian này, một số tính năng có thể bị gián đoạn.',
+                actionUrl: '/system-status',
+                objectId: '',
+                srcUserId: '1',
+                srcObjectType: ''
+            },
+            security_alert: {
+                type: 'ACCOUNT_SECURITY_ALERT',
+                title: '🔒 Cảnh báo bảo mật',
+                message: 'Chúng tôi phát hiện đăng nhập từ thiết bị mới. Nếu không phải bạn, vui lòng đổi mật khẩu ngay lập tức.',
+                actionUrl: '/profile/security',
+                objectId: '',
+                srcUserId: '1',
+                srcObjectType: ''
+            },
+            post_new_comment: {
+                type: 'POST_NEW_COMMENT',
+                title: '💬 Có bình luận mới',
+                message: 'Có người đã bình luận vào bài viết "Kinh nghiệm học Java" của bạn.',
+                actionUrl: '/post/123',
+                objectId: '123',
+                srcUserId: '456',
+                srcObjectType: 'feed'
+            },
+            community_mention: {
+                type: 'COMMUNITY_MENTION',
+                title: '@️⃣ Bạn được nhắc đến',
+                message: '@john_doe đã nhắc đến bạn trong bài viết về Spring Security.',
+                actionUrl: '/community/post/789',
+                objectId: '789',
+                srcUserId: '456',
+                srcObjectType: 'feed'
+            },
+            retention_reminder: {
+                type: 'RETENTION_INACTIVE_REMINDER',
+                title: '🔔 Nhắc nhở quay lại học',
+                message: 'Bạn đã không học trong 3 ngày rồi. Hãy tiếp tục hành trình học tập để đạt mục tiêu nhé!',
+                actionUrl: '/dashboard',
+                objectId: '',
+                srcUserId: '1',
+                srcObjectType: ''
+            }
+        };
+
+        // Fill quick notification
+        function fillQuickNotification(type) {
+            const template = quickTemplates[type];
+            if (template) {
+                typeSelect.value = template.type;
+                titleInput.value = template.title;
+                messageInput.value = template.message;
+                actionUrlInput.value = template.actionUrl;
+                objectIdInput.value = template.objectId;
+                srcUserIdInput.value = template.srcUserId;
+                srcObjectTypeSelect.value = template.srcObjectType;
+
+                updatePreview();
+                showStatus('Đã điền template ' + type, 'success');
+            }
+        }
+
+        // Update preview
+        function updatePreview() {
+            const title = titleInput.value.trim();
+            const message = messageInput.value.trim();
+            const type = typeSelect.value;
+
+            if (title && message) {
+                document.getElementById('previewTitle').textContent = title;
+                document.getElementById('previewMessage').textContent = message;
+                document.getElementById('previewType').textContent = type;
+
+                // Format time in Vietnam timezone
+                const vietnamTime = new Date().toLocaleString('vi-VN', {
+                    timeZone: 'Asia/Ho_Chi_Minh',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                document.getElementById('previewTime').textContent = vietnamTime;
+
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        // Show status message
+        function showStatus(message, type) {
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+
+            if (type !== 'loading') {
+                setTimeout(() => {
+                    status.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Add to history
+        function addToHistory(notification, success) {
+            const historyItem = document.createElement('div');
+            historyItem.className = 'history-item';
+
+            // Format time in Vietnam timezone
+            const vietnamTime = new Date().toLocaleString('vi-VN', {
+                timeZone: 'Asia/Ho_Chi_Minh',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            const icon = success ? '✅' : '❌';
+            const statusText = success ? 'Thành công' : 'Thất bại';
+
+            historyItem.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>${icon} ${notification.title}</strong>
+                        <div style="color: #6b7280; font-size: 11px;">User ID: ${notification.userId} | Type: ${notification.type}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="color: ${success ? '#059669' : '#dc2626'}; font-weight: 600; font-size: 12px;">${statusText}</div>
+                        <div class="history-time">${vietnamTime}</div>
+                    </div>
+                </div>
+            `;
+
+            history.appendChild(historyItem);
+            history.style.display = 'block';
+
+            // Keep only last 10 items
+            const items = history.querySelectorAll('.history-item');
+            if (items.length > 11) { // +1 for header
+                items[1].remove(); // Remove oldest (skip header)
+            }
+        }
+
+        // Send notification
+        async function sendNotification(notificationData) {
+            const params = new URLSearchParams();
+            params.append('userId', notificationData.userId);
+            params.append('title', notificationData.title);
+            params.append('message', notificationData.message);
+            params.append('type', notificationData.type);
+
+            if (notificationData.actionUrl) {
+                params.append('actionUrl', notificationData.actionUrl);
+            }
+
+            if (notificationData.objectId) {
+                params.append('objectId', notificationData.objectId);
+            }
+
+            if (notificationData.srcUserId) {
+                params.append('srcUserId', notificationData.srcUserId);
+            }
+
+            if (notificationData.srcObjectType) {
+                params.append('srcObjectType', notificationData.srcObjectType);
+            }
+
+            try {
+                const response = await fetch('/api/notifications/test-send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: params
+                });
+
+                const result = await response.json(); // Parse as JSON to get ApiResponse
+
+                if (response.ok && result.code === 200) {
+                    // Success case
+                    const successMessage = result.message || '✅ Thông báo đã được gửi thành công!';
+                    showStatus(successMessage, 'success');
+                    addToHistory(notificationData, true);
+                    return true;
+                } else {
+                    // Error case - API returned error in ApiResponse format
+                    const errorMessage = result.message || `Server error: ${response.status}`;
+                    throw new Error(errorMessage);
+                }
+            } catch (error) {
+                // Network error or other exceptions
+                let errorMessage = error.message;
+                if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Không thể kết nối đến server. Vui lòng kiểm tra server có đang chạy không.';
+                } else if (error.name === 'SyntaxError') {
+                    errorMessage = 'Server trả về dữ liệu không hợp lệ. Vui lòng kiểm tra logs server.';
+                }
+
+                showStatus(`❌ Lỗi gửi thông báo: ${errorMessage}`, 'error');
+                addToHistory(notificationData, false);
+                return false;
+            }
+        }
+
+        // Send payment notification using dedicated endpoints
+        async function sendPaymentNotification(type) {
+            const userId = document.getElementById('paymentUserId').value.trim();
+            const orderId = document.getElementById('paymentOrderId').value.trim();
+
+            if (!userId || !orderId) {
+                showStatus('❌ Vui lòng điền User ID và Order ID!', 'error');
+                return;
+            }
+
+            const params = new URLSearchParams();
+            params.append('userId', userId);
+            params.append('orderId', orderId);
+
+            let endpoint = '';
+            let notificationData = {
+                userId: userId,
+                title: '',
+                message: '',
+                type: '',
+                actionUrl: `/orders/${orderId}`,
+                objectId: orderId,
+                srcUserId: userId,
+                srcObjectType: 'order'
+            };
+
+            if (type === 'success') {
+                const orderTotal = document.getElementById('paymentOrderTotal').value.trim();
+                params.append('orderTotal', orderTotal || '500,000 VND');
+                params.append('srcUserId', userId);
+
+                endpoint = '/api/notifications/payment/success';
+                notificationData.title = '✅ Thanh toán thành công!';
+                notificationData.message = `Đơn hàng #${orderId} đã được thanh toán thành công với số tiền ${orderTotal || '500,000 VND'}`;
+                notificationData.type = 'PAYMENT_SUCCESS';
+            } else if (type === 'failed') {
+                const reason = document.getElementById('paymentReason').value.trim();
+                params.append('reason', reason || 'Thẻ không đủ tiền');
+                params.append('srcUserId', userId);
+
+                endpoint = '/api/notifications/payment/failed';
+                notificationData.title = '❌ Thanh toán thất bại';
+                notificationData.message = `Đơn hàng #${orderId} thanh toán thất bại: ${reason || 'Thẻ không đủ tiền'}`;
+                notificationData.type = 'PAYMENT_FAILED';
+            }
+
+            showStatus('📤 Đang gửi thông báo thanh toán...', 'loading');
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: params
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.code === 200) {
+                    const successMessage = result.message || '✅ Thông báo thanh toán đã được gửi thành công!';
+                    showStatus(successMessage, 'success');
+                    addToHistory(notificationData, true);
+                } else {
+                    const errorMessage = result.message || `Server error: ${response.status}`;
+                    throw new Error(errorMessage);
+                }
+            } catch (error) {
+                let errorMessage = error.message;
+                if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Không thể kết nối đến server. Vui lòng kiểm tra server có đang chạy không.';
+                }
+
+                showStatus(`❌ Lỗi gửi thông báo thanh toán: ${errorMessage}`, 'error');
+                addToHistory(notificationData, false);
+            }
+        }
+
+        // Form submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const notificationData = {
+                userId: userIdInput.value.trim(),
+                title: titleInput.value.trim(),
+                message: messageInput.value.trim(),
+                type: typeSelect.value,
+                actionUrl: actionUrlInput.value.trim(),
+                objectId: objectIdInput.value.trim(),
+                srcUserId: srcUserIdInput.value.trim(),
+                srcObjectType: srcObjectTypeSelect.value
+            };
+
+            if (!notificationData.userId || !notificationData.title || !notificationData.message) {
+                showStatus('❌ Vui lòng điền đầy đủ các trường bắt buộc!', 'error');
+                return;
+            }
+
+            showStatus('📤 Đang gửi thông báo...', 'loading');
+            await sendNotification(notificationData);
+        });
+
+        // Clear form
+        clearBtn.addEventListener('click', function() {
+            form.reset();
+            userIdInput.value = '16378'; // Keep default user ID
+            preview.style.display = 'none';
+            showStatus('🗑️ Đã xóa form', 'success');
+        });
+
+        // Real-time preview
+        [titleInput, messageInput, typeSelect].forEach(element => {
+            element.addEventListener('input', updatePreview);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showStatus('📧 Công cụ gửi thông báo đã sẵn sàng!', 'success');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,708 @@
+{
+  "certification": "AZURE_AZ104",
+  "total_templates": 25,
+  "instructions": "Replace all [TEMPLATE] and [Replace...] text with actual content",
+  "official_source": "https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/",
+  "questions": [
+    {
+      "title": "AZURE_AZ104_D1_Q1",
+      "question": "[TEMPLATE] Question about: Manage Azure identities and governance (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Manage Azure identities and governance (15–20%)]",
+      "domain": "Manage Azure identities and governance (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_1"
+    },
+    {
+      "title": "AZURE_AZ104_D1_Q2",
+      "question": "[TEMPLATE] Question about: Manage Azure identities and governance (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Manage Azure identities and governance (15–20%)]",
+      "domain": "Manage Azure identities and governance (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_1"
+    },
+    {
+      "title": "AZURE_AZ104_D1_Q3",
+      "question": "[TEMPLATE] Question about: Manage Azure identities and governance (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Manage Azure identities and governance (15–20%)]",
+      "domain": "Manage Azure identities and governance (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_1"
+    },
+    {
+      "title": "AZURE_AZ104_D1_Q4",
+      "question": "[TEMPLATE] Question about: Manage Azure identities and governance (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Manage Azure identities and governance (15–20%)]",
+      "domain": "Manage Azure identities and governance (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_1"
+    },
+    {
+      "title": "AZURE_AZ104_D1_Q5",
+      "question": "[TEMPLATE] Question about: Manage Azure identities and governance (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Manage Azure identities and governance (15–20%)]",
+      "domain": "Manage Azure identities and governance (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_1"
+    },
+    {
+      "title": "AZURE_AZ104_D2_Q1",
+      "question": "[TEMPLATE] Question about: Implement and manage storage (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage storage (15–20%)]",
+      "domain": "Implement and manage storage (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_2"
+    },
+    {
+      "title": "AZURE_AZ104_D2_Q2",
+      "question": "[TEMPLATE] Question about: Implement and manage storage (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage storage (15–20%)]",
+      "domain": "Implement and manage storage (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_2"
+    },
+    {
+      "title": "AZURE_AZ104_D2_Q3",
+      "question": "[TEMPLATE] Question about: Implement and manage storage (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage storage (15–20%)]",
+      "domain": "Implement and manage storage (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_2"
+    },
+    {
+      "title": "AZURE_AZ104_D2_Q4",
+      "question": "[TEMPLATE] Question about: Implement and manage storage (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage storage (15–20%)]",
+      "domain": "Implement and manage storage (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_2"
+    },
+    {
+      "title": "AZURE_AZ104_D2_Q5",
+      "question": "[TEMPLATE] Question about: Implement and manage storage (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage storage (15–20%)]",
+      "domain": "Implement and manage storage (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_2"
+    },
+    {
+      "title": "AZURE_AZ104_D3_Q1",
+      "question": "[TEMPLATE] Question about: Deploy and manage Azure compute resources (20–25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Deploy and manage Azure compute resources (20–25%)]",
+      "domain": "Deploy and manage Azure compute resources (20–25%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_3"
+    },
+    {
+      "title": "AZURE_AZ104_D3_Q2",
+      "question": "[TEMPLATE] Question about: Deploy and manage Azure compute resources (20–25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Deploy and manage Azure compute resources (20–25%)]",
+      "domain": "Deploy and manage Azure compute resources (20–25%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_3"
+    },
+    {
+      "title": "AZURE_AZ104_D3_Q3",
+      "question": "[TEMPLATE] Question about: Deploy and manage Azure compute resources (20–25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Deploy and manage Azure compute resources (20–25%)]",
+      "domain": "Deploy and manage Azure compute resources (20–25%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_3"
+    },
+    {
+      "title": "AZURE_AZ104_D3_Q4",
+      "question": "[TEMPLATE] Question about: Deploy and manage Azure compute resources (20–25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Deploy and manage Azure compute resources (20–25%)]",
+      "domain": "Deploy and manage Azure compute resources (20–25%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_3"
+    },
+    {
+      "title": "AZURE_AZ104_D3_Q5",
+      "question": "[TEMPLATE] Question about: Deploy and manage Azure compute resources (20–25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Deploy and manage Azure compute resources (20–25%)]",
+      "domain": "Deploy and manage Azure compute resources (20–25%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_3"
+    },
+    {
+      "title": "AZURE_AZ104_D4_Q1",
+      "question": "[TEMPLATE] Question about: Implement and manage virtual networking (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage virtual networking (15–20%)]",
+      "domain": "Implement and manage virtual networking (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_4"
+    },
+    {
+      "title": "AZURE_AZ104_D4_Q2",
+      "question": "[TEMPLATE] Question about: Implement and manage virtual networking (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage virtual networking (15–20%)]",
+      "domain": "Implement and manage virtual networking (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_4"
+    },
+    {
+      "title": "AZURE_AZ104_D4_Q3",
+      "question": "[TEMPLATE] Question about: Implement and manage virtual networking (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage virtual networking (15–20%)]",
+      "domain": "Implement and manage virtual networking (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_4"
+    },
+    {
+      "title": "AZURE_AZ104_D4_Q4",
+      "question": "[TEMPLATE] Question about: Implement and manage virtual networking (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage virtual networking (15–20%)]",
+      "domain": "Implement and manage virtual networking (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_4"
+    },
+    {
+      "title": "AZURE_AZ104_D4_Q5",
+      "question": "[TEMPLATE] Question about: Implement and manage virtual networking (15–20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Implement and manage virtual networking (15–20%)]",
+      "domain": "Implement and manage virtual networking (15–20%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_4"
+    },
+    {
+      "title": "AZURE_AZ104_D5_Q1",
+      "question": "[TEMPLATE] Question about: Monitor and maintain Azure resources (10–15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Monitor and maintain Azure resources (10–15%)]",
+      "domain": "Monitor and maintain Azure resources (10–15%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_5"
+    },
+    {
+      "title": "AZURE_AZ104_D5_Q2",
+      "question": "[TEMPLATE] Question about: Monitor and maintain Azure resources (10–15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Monitor and maintain Azure resources (10–15%)]",
+      "domain": "Monitor and maintain Azure resources (10–15%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_5"
+    },
+    {
+      "title": "AZURE_AZ104_D5_Q3",
+      "question": "[TEMPLATE] Question about: Monitor and maintain Azure resources (10–15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Monitor and maintain Azure resources (10–15%)]",
+      "domain": "Monitor and maintain Azure resources (10–15%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_5"
+    },
+    {
+      "title": "AZURE_AZ104_D5_Q4",
+      "question": "[TEMPLATE] Question about: Monitor and maintain Azure resources (10–15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Monitor and maintain Azure resources (10–15%)]",
+      "domain": "Monitor and maintain Azure resources (10–15%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_5"
+    },
+    {
+      "title": "AZURE_AZ104_D5_Q5",
+      "question": "[TEMPLATE] Question about: Monitor and maintain Azure resources (10–15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Monitor and maintain Azure resources (10–15%)]",
+      "domain": "Monitor and maintain Azure resources (10–15%)",
+      "cert_code": "AZURE_AZ104",
+      "status": "template",
+      "skill_code": "AZURE_AZ104_DOMAIN_5"
+    }
+  ]
+}

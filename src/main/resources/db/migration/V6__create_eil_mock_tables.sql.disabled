@@ -1,0 +1,96 @@
+-- EIL Mock Test Tables Migration
+-- Creates: eil_mock_results
+
+-- Mock Test Results Table
+CREATE TABLE IF NOT EXISTS eil_mock_results (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL COMMENT 'References wp_users.ID',
+    quiz_id BIGINT NOT NULL COMMENT 'References wp_learndash_pro_quiz_master.id',
+    activity_id BIGINT COMMENT 'References wp_learndash_user_activity.activity_id',
+    session_id VARCHAR(36) COMMENT 'Session UUID if applicable',
+    test_type VARCHAR(30) DEFAULT 'TOEIC' COMMENT 'Type: TOEIC, IELTS, etc.',
+
+    -- Score breakdown
+    listening_score INT DEFAULT 0 COMMENT 'Listening section score',
+    reading_score INT DEFAULT 0 COMMENT 'Reading section score',
+    total_score INT DEFAULT 0 COMMENT 'Total combined score',
+    max_score INT DEFAULT 990 COMMENT 'Maximum possible score',
+    raw_percentage DECIMAL(5,2) COMMENT 'Raw percentage correct',
+
+    -- Part scores (JSON for flexibility)
+    part_scores JSON COMMENT 'Detailed part-by-part scores',
+
+    -- Prediction & Analysis
+    pass_probability DECIMAL(5,4) COMMENT 'ML predicted pass probability (0.0-1.0)',
+    pass_status VARCHAR(30) COMMENT 'LIKELY_PASS, BORDERLINE, NEEDS_WORK',
+    predicted_score_min INT COMMENT 'Predicted minimum score',
+    predicted_score_max INT COMMENT 'Predicted maximum score',
+    confidence_level DECIMAL(5,4) COMMENT 'Confidence in prediction',
+
+    -- Skill Analysis
+    weak_skills JSON COMMENT 'Array of weak skill IDs with scores',
+    strong_skills JSON COMMENT 'Array of strong skill IDs with scores',
+    skill_scores JSON COMMENT 'Map of skill_id to score',
+
+    -- Recommendations
+    recommendations JSON COMMENT 'AI-generated recommendations',
+    action_plan TEXT COMMENT 'AI-generated study plan',
+    priority_skills JSON COMMENT 'Skills to prioritize',
+    estimated_improvement_days INT COMMENT 'Estimated days to improve',
+
+    -- Timing
+    time_spent_seconds INT DEFAULT 0 COMMENT 'Total time spent',
+    time_per_section JSON COMMENT 'Time spent per section',
+    completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'When mock was completed',
+
+    -- Metadata
+    metadata JSON COMMENT 'Additional metadata',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX idx_eil_mock_user (user_id),
+    INDEX idx_eil_mock_quiz (quiz_id),
+    INDEX idx_eil_mock_activity (activity_id),
+    INDEX idx_eil_mock_type (test_type),
+    INDEX idx_eil_mock_pass_prob (pass_probability),
+    INDEX idx_eil_mock_total_score (total_score),
+    INDEX idx_eil_mock_completed (completed_at),
+    INDEX idx_eil_mock_created (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- User Readiness Snapshots (optional, for tracking progress over time)
+CREATE TABLE IF NOT EXISTS eil_readiness_snapshots (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL COMMENT 'References wp_users.ID',
+    test_type VARCHAR(30) DEFAULT 'TOEIC' COMMENT 'Type: TOEIC, IELTS, etc.',
+    target_score INT COMMENT 'User target score',
+
+    -- Readiness metrics
+    overall_readiness DECIMAL(5,4) COMMENT 'Overall readiness 0.0-1.0',
+    listening_readiness DECIMAL(5,4) COMMENT 'Listening section readiness',
+    reading_readiness DECIMAL(5,4) COMMENT 'Reading section readiness',
+    category_readiness JSON COMMENT 'Map of category to readiness',
+
+    -- Prediction
+    predicted_score INT COMMENT 'Current predicted score',
+    pass_probability DECIMAL(5,4) COMMENT 'Pass probability',
+    gap_to_target INT COMMENT 'Score gap to target',
+
+    -- Progress
+    days_practiced INT COMMENT 'Days of practice',
+    questions_answered INT COMMENT 'Total questions answered',
+    sessions_completed INT COMMENT 'Practice sessions completed',
+    mocks_completed INT COMMENT 'Mock tests completed',
+
+    -- Recommendations
+    priority_skills JSON COMMENT 'Priority skills to work on',
+    estimated_days_to_ready INT COMMENT 'Estimated days until ready',
+
+    snapshot_date DATE NOT NULL COMMENT 'Date of snapshot',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    INDEX idx_eil_ready_user (user_id),
+    INDEX idx_eil_ready_type (test_type),
+    INDEX idx_eil_ready_date (snapshot_date),
+    INDEX idx_eil_ready_user_date (user_id, snapshot_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

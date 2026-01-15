@@ -1,0 +1,230 @@
+-- BA Question-Skill Mappings
+-- Maps BA questions to skills based on category and content
+
+-- Get skill IDs
+SET @planning_id = (SELECT id FROM eil_skills WHERE code = 'BA_PLANNING');
+SET @elicit_id = (SELECT id FROM eil_skills WHERE code = 'BA_ELICITATION');
+SET @req_id = (SELECT id FROM eil_skills WHERE code = 'BA_REQUIREMENTS');
+SET @strategy_id = (SELECT id FROM eil_skills WHERE code = 'BA_STRATEGY');
+SET @design_id = (SELECT id FROM eil_skills WHERE code = 'BA_DESIGN');
+SET @eval_id = (SELECT id FROM eil_skills WHERE code = 'BA_EVALUATION');
+
+-- Level 2 skills
+SET @approach_id = (SELECT id FROM eil_skills WHERE code = 'BA_APPROACH');
+SET @stakeholder_id = (SELECT id FROM eil_skills WHERE code = 'BA_STAKEHOLDER');
+SET @conduct_id = (SELECT id FROM eil_skills WHERE code = 'BA_CONDUCT_ELICIT');
+SET @trace_id = (SELECT id FROM eil_skills WHERE code = 'BA_TRACE_REQ');
+SET @specify_id = (SELECT id FROM eil_skills WHERE code = 'BA_SPECIFY_REQ');
+SET @verify_id = (SELECT id FROM eil_skills WHERE code = 'BA_VERIFY_REQ');
+SET @validate_id = (SELECT id FROM eil_skills WHERE code = 'BA_VALIDATE_REQ');
+SET @current_id = (SELECT id FROM eil_skills WHERE code = 'BA_CURRENT_STATE');
+SET @future_id = (SELECT id FROM eil_skills WHERE code = 'BA_FUTURE_STATE');
+SET @measure_id = (SELECT id FROM eil_skills WHERE code = 'BA_MEASURE_SOLUTION');
+
+-- Map ECBA (Entry Certificate) to basic skills - easier difficulty
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @planning_id, 2, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'ECBA'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map CCBA (Certification of Capability) to intermediate skills
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @design_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CCBA'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map CBAP (Certified Business Analysis Professional) to advanced skills
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @strategy_id, 4, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CBAP'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map CBAP_RADD (Requirements Analysis & Design Definition)
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @design_id, 4, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CBAP_RADD'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map CBAP_SA (Strategy Analysis)
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @strategy_id, 4, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CBAP_SA'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map CBAP_RLCM (Requirements Lifecycle Management)
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @req_id, 4, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CBAP_RLCM'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map CBAP_BAPM (BA Planning and Monitoring)
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @planning_id, 4, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CBAP_BAPM'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map CBAP_SE (Solution Evaluation)
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @eval_id, 4, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CBAP_SE'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map CBAP_EC (Elicitation & Collaboration)
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @elicit_id, 4, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CBAP_EC'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map CCBA sub-categories (intermediate level)
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @design_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CCBA_RADD'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @elicit_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CCBA_EC'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @req_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CCBA_RLCM'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @planning_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CCBA_BAPM'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @strategy_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CCBA_SA'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @eval_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'CCBA_SE'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Content-based mappings for specific techniques (secondary skill mappings)
+
+-- Elicitation techniques
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @conduct_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name LIKE 'CBAP%' OR c.category_name LIKE 'CCBA%' OR c.category_name = 'ECBA')
+AND (LOWER(q.question) LIKE '%interview%' OR LOWER(q.question) LIKE '%phỏng vấn%'
+     OR LOWER(q.question) LIKE '%workshop%' OR LOWER(q.question) LIKE '%brainstorm%'
+     OR LOWER(q.question) LIKE '%observation%' OR LOWER(q.question) LIKE '%survey%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Stakeholder management
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @stakeholder_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name LIKE 'CBAP%' OR c.category_name LIKE 'CCBA%' OR c.category_name = 'ECBA')
+AND (LOWER(q.question) LIKE '%stakeholder%' OR LOWER(q.question) LIKE '%sponsor%' OR LOWER(q.question) LIKE '%customer%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Requirements traceability
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @trace_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name LIKE 'CBAP%' OR c.category_name LIKE 'CCBA%' OR c.category_name = 'ECBA')
+AND (LOWER(q.question) LIKE '%trace%' OR LOWER(q.question) LIKE '%traceability%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Verification/Validation
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @verify_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name LIKE 'CBAP%' OR c.category_name LIKE 'CCBA%' OR c.category_name = 'ECBA')
+AND (LOWER(q.question) LIKE '%verif%' OR LOWER(q.question) LIKE '%xác minh%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @validate_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name LIKE 'CBAP%' OR c.category_name LIKE 'CCBA%' OR c.category_name = 'ECBA')
+AND (LOWER(q.question) LIKE '%valid%' OR LOWER(q.question) LIKE '%kiểm chứng%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Use case / User story
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @specify_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name LIKE 'CBAP%' OR c.category_name LIKE 'CCBA%' OR c.category_name = 'ECBA')
+AND (LOWER(q.question) LIKE '%use case%' OR LOWER(q.question) LIKE '%user story%'
+     OR LOWER(q.question) LIKE '%process model%' OR LOWER(q.question) LIKE '%data model%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Current/Future state analysis
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @current_id, 4, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name LIKE 'CBAP%' OR c.category_name LIKE 'CCBA%' OR c.category_name = 'ECBA')
+AND (LOWER(q.question) LIKE '%current state%' OR LOWER(q.question) LIKE '%as-is%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @future_id, 4, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name LIKE 'CBAP%' OR c.category_name LIKE 'CCBA%' OR c.category_name = 'ECBA')
+AND (LOWER(q.question) LIKE '%future state%' OR LOWER(q.question) LIKE '%to-be%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Solution evaluation
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @measure_id, 4, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name LIKE 'CBAP%' OR c.category_name LIKE 'CCBA%' OR c.category_name = 'ECBA')
+AND (LOWER(q.question) LIKE '%kpi%' OR LOWER(q.question) LIKE '%metric%' OR LOWER(q.question) LIKE '%performance%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;

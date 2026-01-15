@@ -1,0 +1,190 @@
+spring:
+  datasource:
+    wordpress:
+      driver-class-name: ${DB_DRIVER}
+      url: ${DB_URL}
+      username: ${DB_USER}
+      password: ${DB_PASS}
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Ho_Chi_Minh
+
+  # Jackson timezone configuration for Vietnam time
+  jackson:
+    time-zone: Asia/Ho_Chi_Minh
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  redis:
+    host: ${SPRING_REDIS_HOST:localhost}
+    port: ${SPRING_REDIS_PORT:6379}
+    password: ${SPRING_REDIS_PASSWORD:}
+    database: 0
+    timeout: 2000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+
+  # Cache Configuration
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000 # 10 minutes
+      cache-null-values: false
+
+  # Flyway Database Migration Configuration
+  # Set FLYWAY_ENABLED=true to enable auto-migrations (default: false for production safety)
+  # Active migrations: V2-V8 (already applied)
+  # Disabled migrations: V9-V16 (.disabled suffix)
+  flyway:
+    enabled: ${FLYWAY_ENABLED:false}
+    baseline-on-migrate: true
+    baseline-version: 8
+    locations: classpath:db/migration
+    validate-on-migrate: ${FLYWAY_VALIDATE:false}
+    out-of-order: ${FLYWAY_OUT_OF_ORDER:false}
+
+# OpenAI Configuration for EIL AI Service
+openai:
+  api:
+    key: ${OPENAI_API_KEY:}
+    model: ${OPENAI_API_MODEL:gpt-4o}
+    timeout: ${OPENAI_API_TIMEOUT:30000}
+    max-retries: ${OPENAI_MAX_RETRIES:3}
+
+# EIL Module Configuration
+eil:
+  mastery:
+    alpha: ${EIL_MASTERY_ALPHA:0.3}
+    initial-level: ${EIL_MASTERY_INITIAL:0.5}
+  diagnostic:
+    default-questions: ${EIL_DIAGNOSTIC_QUESTIONS:30}
+    timeout-minutes: ${EIL_DIAGNOSTIC_TIMEOUT:60}
+  practice:
+    max-questions: ${EIL_PRACTICE_MAX_QUESTIONS:20}
+    default-questions: ${EIL_PRACTICE_DEFAULT_QUESTIONS:10}
+  explanation:
+    cache-version: ${EIL_EXPLANATION_CACHE_VERSION:1}
+    redis-ttl-hours: ${EIL_EXPLANATION_REDIS_TTL:24}
+    db-ttl-days: ${EIL_EXPLANATION_DB_TTL:30}
+
+jwt:
+  secret: ${JWT_SECRET:change-me-in-production}
+  cookie:
+    name: ${JWT_COOKIE_NAME:accessToken}
+    max-age: ${JWT_COOKIE_MAX_AGE:604800} # 7 days in seconds
+    secure: ${JWT_COOKIE_SECURE:false} # Set true in production (HTTPS only)
+    http-only: ${JWT_COOKIE_HTTP_ONLY:true} # Prevent JavaScript access (XSS protection)
+    same-site: ${JWT_COOKIE_SAME_SITE:Lax} # Lax for dev, None for cross-origin in prod
+
+google:
+  oauth2:
+    client-id: ${GOOGLE_CLIENT_ID}
+    client-secret: ${GOOGLE_CLIENT_SECRET}
+    redirect-uri: ${GOOGLE_REDIRECT_URI}
+    mobile-success-url: ${GOOGLE_REDIRECT_MOBILE_SUCCESS_URL}
+    web-success-url: ${GOOGLE_REDIRECT_WEB_SUCCESS_URL}
+revenueCat:
+  apiBaseUrl: ${REVENUECAT_API_BASE_URL}
+  secretApiKey: ${REVENUECAT_SECRET_API_KEY}
+  endpoints:
+    subscribers: ${REVENUECAT_SUBSCRIBERS_ENDPOINT}
+
+cors:
+  allowed-origins:
+    - http://localhost:3000
+    - http://localhost:8080
+    - http://127.0.0.1:3000
+    - http://127.0.0.1:8080
+    - https://api-v2.ezami.io
+    - https://v2.ezami.io
+    - https://ezami.io
+    - https://6da5a5c4214f.ngrok-free.app
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+    - PATCH
+  allowed-headers:
+    - Authorization
+    - Content-Type
+    - X-Requested-With
+    - Accept
+    - Origin
+    - Access-Control-Request-Method
+    - Access-Control-Request-Headers
+  exposed-headers:
+    - Authorization
+    - Content-Type
+    - X-Requested-With
+  allow-credentials: true
+  max-age: 3600
+  allow-private-network: false
+
+server:
+  port: ${SERVER_PORT:8080}
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 2048
+
+mail:
+  smtp:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    from: ${MAIL_FROM}
+    from.name: ${MAIL_FROM_NAME}
+
+    # --- VNPAY Configuration ---
+vnpay:
+  tmn-code: ${VNPAY_TMN_CODE}
+  hash-secret: ${VNPAY_HASH_SECRET}
+  api-url: ${VNPAY_API_URL:https://sandbox.vnpayment.vn/paymentv2/vpcpay.html}
+  return-url: ${VNPAY_RETURN_URL}
+  ipn-url: ${VNPAY_IPN_URL}
+  version: 2.1.0
+  currency: VND
+  locale: vn
+#
+#logging:
+#  level:
+#    net.ttddyy.dsproxy: DEBUG
+#    com.hth.udecareer.config.WordpressDatasourceConfiguration: DEBUG
+#    com.hth.udecareer.service.UserExistenceService: INFO
+#  pattern:
+#    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+file:
+  upload-dir: "uploads"
+app:
+  domain: ${APP_DOMAIN:https://api-v2.ezami.io}
+  asset-domain: ${ASSET_DOMAIN:https://asset.ezami.io}
+  qr:
+    payment:
+      bank-code: ${QR_DEFAULT_BANK_CODE:}
+      bank-account: ${QR_DEFAULT_BANK_ACCOUNT:}
+      ttl-seconds: ${QR_TTL_SECONDS:300}
+  firebase:
+    config-base64: ${FIREBASE_CONFIG_BASE64:}
+  #URL Back-end + '/go/'
+  #example: https://udecareer.com/go/
+  affiliate:
+    base-url: ${AFFILIATE_BASE_URL:https://ezami.io}
+
+servlet:
+  multipart:
+    max-file-size: 5MB
+    max-request-size: 10MB

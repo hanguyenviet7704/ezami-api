@@ -1,0 +1,68 @@
+-- ISTQB (Software Testing) Skills Seed Data
+-- Seeds ISTQB CTFL skill taxonomy
+
+-- Insert Category Level Skills (Level 1)
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, level, weight, is_active, priority) VALUES
+('ISTQB_FUNDAMENTALS', 'Fundamentals of Testing', 'Cơ bản về Kiểm thử', 'Understanding testing fundamentals', 'Hiểu cơ bản về kiểm thử', 'ISTQB', 1, 1.00, TRUE, 1),
+('ISTQB_LIFECYCLE', 'Testing Throughout SDLC', 'Kiểm thử trong SDLC', 'Testing across software development lifecycle', 'Kiểm thử trong vòng đời phát triển phần mềm', 'ISTQB', 1, 1.00, TRUE, 2),
+('ISTQB_STATIC', 'Static Testing', 'Kiểm thử tĩnh', 'Static testing techniques', 'Kỹ thuật kiểm thử tĩnh', 'ISTQB', 1, 1.00, TRUE, 3),
+('ISTQB_TECHNIQUES', 'Test Techniques', 'Kỹ thuật Kiểm thử', 'Test design techniques', 'Kỹ thuật thiết kế kiểm thử', 'ISTQB', 1, 1.00, TRUE, 4),
+('ISTQB_MANAGEMENT', 'Test Management', 'Quản lý Kiểm thử', 'Test management activities', 'Hoạt động quản lý kiểm thử', 'ISTQB', 1, 1.00, TRUE, 5),
+('ISTQB_TOOLS', 'Tool Support', 'Công cụ hỗ trợ', 'Tool support for testing', 'Công cụ hỗ trợ kiểm thử', 'ISTQB', 1, 1.00, TRUE, 6);
+
+-- Get parent IDs
+SET @fund_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_FUNDAMENTALS');
+SET @life_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_LIFECYCLE');
+SET @static_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_STATIC');
+SET @tech_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_TECHNIQUES');
+SET @mgmt_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_MANAGEMENT');
+SET @tools_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_TOOLS');
+
+-- Insert Level 2 - Fundamentals
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, is_active, priority) VALUES
+('ISTQB_WHAT_IS_TESTING', 'What is Testing', 'Kiểm thử là gì', 'Definition and objectives of testing', 'Định nghĩa và mục tiêu kiểm thử', 'ISTQB', 'FUNDAMENTALS', 2, @fund_id, 1.00, TRUE, 1),
+('ISTQB_WHY_NECESSARY', 'Why Testing is Necessary', 'Tại sao cần Kiểm thử', 'Importance of testing', 'Tầm quan trọng của kiểm thử', 'ISTQB', 'FUNDAMENTALS', 2, @fund_id, 1.00, TRUE, 2),
+('ISTQB_PRINCIPLES', 'Testing Principles', 'Nguyên tắc Kiểm thử', 'Seven testing principles', 'Bảy nguyên tắc kiểm thử', 'ISTQB', 'FUNDAMENTALS', 2, @fund_id, 1.00, TRUE, 3),
+('ISTQB_PROCESS', 'Test Process', 'Quy trình Kiểm thử', 'Test process activities', 'Hoạt động quy trình kiểm thử', 'ISTQB', 'FUNDAMENTALS', 2, @fund_id, 1.00, TRUE, 4);
+
+-- Insert Level 2 - Test Techniques
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, is_active, priority) VALUES
+('ISTQB_BLACKBOX', 'Black-box Techniques', 'Kỹ thuật hộp đen', 'Black-box test techniques', 'Kỹ thuật kiểm thử hộp đen', 'ISTQB', 'TECHNIQUES', 2, @tech_id, 1.00, TRUE, 1),
+('ISTQB_WHITEBOX', 'White-box Techniques', 'Kỹ thuật hộp trắng', 'White-box test techniques', 'Kỹ thuật kiểm thử hộp trắng', 'ISTQB', 'TECHNIQUES', 2, @tech_id, 1.00, TRUE, 2),
+('ISTQB_EXPERIENCE', 'Experience-based Techniques', 'Kỹ thuật dựa trên kinh nghiệm', 'Experience-based test techniques', 'Kỹ thuật kiểm thử dựa trên kinh nghiệm', 'ISTQB', 'TECHNIQUES', 2, @tech_id, 1.00, TRUE, 3);
+
+-- Insert Level 2 - Test Management
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, is_active, priority) VALUES
+('ISTQB_ORGANIZATION', 'Test Organization', 'Tổ chức Kiểm thử', 'Test organization and roles', 'Tổ chức và vai trò kiểm thử', 'ISTQB', 'MANAGEMENT', 2, @mgmt_id, 1.00, TRUE, 1),
+('ISTQB_PLANNING', 'Test Planning', 'Lập kế hoạch Kiểm thử', 'Test planning activities', 'Hoạt động lập kế hoạch kiểm thử', 'ISTQB', 'MANAGEMENT', 2, @mgmt_id, 1.00, TRUE, 2),
+('ISTQB_MONITORING', 'Test Monitoring', 'Giám sát Kiểm thử', 'Test monitoring and control', 'Giám sát và kiểm soát kiểm thử', 'ISTQB', 'MANAGEMENT', 2, @mgmt_id, 1.00, TRUE, 3),
+('ISTQB_RISK', 'Risk-based Testing', 'Kiểm thử dựa trên rủi ro', 'Risk-based testing approach', 'Phương pháp kiểm thử dựa trên rủi ro', 'ISTQB', 'MANAGEMENT', 2, @mgmt_id, 1.00, TRUE, 4),
+('ISTQB_DEFECT', 'Defect Management', 'Quản lý Lỗi', 'Defect management process', 'Quy trình quản lý lỗi', 'ISTQB', 'MANAGEMENT', 2, @mgmt_id, 1.00, TRUE, 5);
+
+-- Get Level 2 IDs for Level 3
+SET @blackbox_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_BLACKBOX');
+SET @whitebox_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_WHITEBOX');
+SET @principles_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_PRINCIPLES');
+
+-- Insert Level 3 - Black-box Techniques
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, difficulty_range_min, difficulty_range_max, is_active, priority) VALUES
+('ISTQB_EP', 'Equivalence Partitioning', 'Phân vùng tương đương', 'Equivalence partitioning technique', 'Kỹ thuật phân vùng tương đương', 'ISTQB', 'TECHNIQUES', 3, @blackbox_id, 1.00, 2, 4, TRUE, 1),
+('ISTQB_BVA', 'Boundary Value Analysis', 'Phân tích giá trị biên', 'Boundary value analysis technique', 'Kỹ thuật phân tích giá trị biên', 'ISTQB', 'TECHNIQUES', 3, @blackbox_id, 1.00, 2, 4, TRUE, 2),
+('ISTQB_DT', 'Decision Table', 'Bảng quyết định', 'Decision table testing', 'Kiểm thử bảng quyết định', 'ISTQB', 'TECHNIQUES', 3, @blackbox_id, 1.00, 3, 5, TRUE, 3),
+('ISTQB_STT', 'State Transition', 'Chuyển đổi trạng thái', 'State transition testing', 'Kiểm thử chuyển đổi trạng thái', 'ISTQB', 'TECHNIQUES', 3, @blackbox_id, 1.00, 3, 5, TRUE, 4),
+('ISTQB_UC', 'Use Case Testing', 'Kiểm thử Use Case', 'Use case testing technique', 'Kỹ thuật kiểm thử Use Case', 'ISTQB', 'TECHNIQUES', 3, @blackbox_id, 1.00, 2, 4, TRUE, 5);
+
+-- Insert Level 3 - White-box Techniques
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, difficulty_range_min, difficulty_range_max, is_active, priority) VALUES
+('ISTQB_STATEMENT', 'Statement Coverage', 'Độ bao phủ câu lệnh', 'Statement coverage testing', 'Kiểm thử độ bao phủ câu lệnh', 'ISTQB', 'TECHNIQUES', 3, @whitebox_id, 1.00, 2, 4, TRUE, 1),
+('ISTQB_DECISION', 'Decision Coverage', 'Độ bao phủ quyết định', 'Decision coverage testing', 'Kiểm thử độ bao phủ quyết định', 'ISTQB', 'TECHNIQUES', 3, @whitebox_id, 1.00, 3, 5, TRUE, 2);
+
+-- Insert Level 3 - Testing Principles
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, difficulty_range_min, difficulty_range_max, is_active, priority) VALUES
+('ISTQB_SHOWS_DEFECTS', 'Testing Shows Defects', 'Kiểm thử phát hiện lỗi', 'Testing shows presence of defects', 'Kiểm thử cho thấy sự hiện diện của lỗi', 'ISTQB', 'FUNDAMENTALS', 3, @principles_id, 1.00, 1, 3, TRUE, 1),
+('ISTQB_EXHAUSTIVE', 'Exhaustive Testing', 'Kiểm thử toàn diện', 'Exhaustive testing is impossible', 'Kiểm thử toàn diện là bất khả thi', 'ISTQB', 'FUNDAMENTALS', 3, @principles_id, 1.00, 1, 3, TRUE, 2),
+('ISTQB_EARLY', 'Early Testing', 'Kiểm thử sớm', 'Early testing saves time and money', 'Kiểm thử sớm tiết kiệm thời gian và chi phí', 'ISTQB', 'FUNDAMENTALS', 3, @principles_id, 1.00, 1, 3, TRUE, 3),
+('ISTQB_CLUSTERING', 'Defect Clustering', 'Tập trung lỗi', 'Defects cluster together', 'Lỗi có xu hướng tập trung', 'ISTQB', 'FUNDAMENTALS', 3, @principles_id, 1.00, 2, 4, TRUE, 4),
+('ISTQB_PESTICIDE', 'Pesticide Paradox', 'Nghịch lý thuốc trừ sâu', 'Tests need regular updating', 'Kiểm thử cần được cập nhật thường xuyên', 'ISTQB', 'FUNDAMENTALS', 3, @principles_id, 1.00, 2, 4, TRUE, 5),
+('ISTQB_CONTEXT', 'Context Dependent', 'Phụ thuộc ngữ cảnh', 'Testing is context dependent', 'Kiểm thử phụ thuộc vào ngữ cảnh', 'ISTQB', 'FUNDAMENTALS', 3, @principles_id, 1.00, 2, 4, TRUE, 6),
+('ISTQB_FALLACY', 'Absence of Errors Fallacy', 'Ngụy biện không lỗi', 'Finding no defects is not success', 'Không tìm thấy lỗi không có nghĩa thành công', 'ISTQB', 'FUNDAMENTALS', 3, @principles_id, 1.00, 2, 4, TRUE, 7);

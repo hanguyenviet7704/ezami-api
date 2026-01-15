@@ -1,0 +1,192 @@
+-- ISTQB Question-Skill Mappings
+-- Maps ISTQB questions to skills based on category and content
+
+-- Get skill IDs
+SET @fund_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_FUNDAMENTALS');
+SET @life_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_LIFECYCLE');
+SET @static_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_STATIC');
+SET @tech_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_TECHNIQUES');
+SET @mgmt_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_MANAGEMENT');
+SET @tools_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_TOOLS');
+
+-- Level 2 skills
+SET @what_is_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_WHAT_IS_TESTING');
+SET @why_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_WHY_NECESSARY');
+SET @principles_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_PRINCIPLES');
+SET @process_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_PROCESS');
+SET @blackbox_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_BLACKBOX');
+SET @whitebox_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_WHITEBOX');
+SET @experience_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_EXPERIENCE');
+SET @org_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_ORGANIZATION');
+SET @planning_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_PLANNING');
+SET @monitoring_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_MONITORING');
+SET @risk_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_RISK');
+SET @defect_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_DEFECT');
+
+-- Level 3 skills - Black-box
+SET @ep_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_EP');
+SET @bva_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_BVA');
+SET @dt_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_DT');
+SET @stt_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_STT');
+SET @uc_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_UC');
+
+-- Level 3 skills - White-box
+SET @statement_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_STATEMENT');
+SET @decision_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_DECISION');
+
+-- Level 3 skills - Principles
+SET @shows_defects_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_SHOWS_DEFECTS');
+SET @exhaustive_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_EXHAUSTIVE');
+SET @early_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_EARLY');
+SET @clustering_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_CLUSTERING');
+SET @pesticide_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_PESTICIDE');
+SET @context_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_CONTEXT');
+SET @fallacy_id = (SELECT id FROM eil_skills WHERE code = 'ISTQB_FALLACY');
+
+-- Map ISTQB_CTFL (general) to Fundamentals
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @fund_id, 2, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'ISTQB_CTFL'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map ISTQB_CTLF_K1 (Knowledge Level 1) to What is Testing
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @what_is_id, 1, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'ISTQB_CTLF_K1'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map ISTQB_CTLF_K2 (Knowledge Level 2) to Test Process
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @process_id, 2, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'ISTQB_CTLF_K2'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map ISTQB_CTLF_K3 (Knowledge Level 3) to Test Techniques
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @tech_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'ISTQB_CTLF_K3'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map ISTQB_TM (Test Management) to Management skills
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @mgmt_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'ISTQB_TM'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map ISTQB_TA (Test Automation/Analysis) to Tools
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @tools_id, 3, 1.00, TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1 AND c.category_name = 'ISTQB_TA'
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Content-based mappings for specific techniques
+-- Equivalence Partitioning
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @ep_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%equivalence%' OR LOWER(q.question) LIKE '%partition%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Boundary Value Analysis
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @bva_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%boundary%' OR LOWER(q.question) LIKE '%bva%' OR LOWER(q.question) LIKE '%biên%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Decision Table
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @dt_id, 4, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%decision table%' OR LOWER(q.question) LIKE '%bảng quyết định%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- State Transition
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @stt_id, 4, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%state transition%' OR LOWER(q.question) LIKE '%trạng thái%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Statement/Decision Coverage
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @statement_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%statement coverage%' OR LOWER(q.question) LIKE '%độ bao phủ%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @decision_id, 4, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%decision coverage%' OR LOWER(q.question) LIKE '%branch coverage%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Testing Principles content mapping
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @principles_id, 2, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%principle%' OR LOWER(q.question) LIKE '%nguyên tắc%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Defect Management
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @defect_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%defect%' OR LOWER(q.question) LIKE '%bug%' OR LOWER(q.question) LIKE '%lỗi%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Risk-based Testing
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @risk_id, 4, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%risk%' OR LOWER(q.question) LIKE '%rủi ro%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Test Planning
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT q.id, @planning_id, 3, 0.80, FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND c.category_name LIKE 'ISTQB%'
+AND (LOWER(q.question) LIKE '%test plan%' OR LOWER(q.question) LIKE '%kế hoạch%')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;

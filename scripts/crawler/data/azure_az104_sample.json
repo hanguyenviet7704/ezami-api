@@ -1,0 +1,187 @@
+{
+  "certification": "AZURE_AZ104",
+  "source": "Original content based on Azure documentation",
+  "total": 15,
+  "questions": [
+    {
+      "title": "AZURE_VM_001",
+      "question": "Which Azure VM series is optimized for memory-intensive workloads like SAP HANA?",
+      "question_type": "single",
+      "answers": [
+        {"text": "D-series", "correct": false},
+        {"text": "E-series", "correct": true},
+        {"text": "F-series", "correct": false},
+        {"text": "B-series", "correct": false}
+      ],
+      "explanation": "E-series VMs are optimized for memory-intensive applications with high memory-to-CPU ratio."
+    },
+    {
+      "title": "AZURE_STORAGE_001",
+      "question": "Which Azure storage redundancy option replicates data across availability zones in the same region?",
+      "question_type": "single",
+      "answers": [
+        {"text": "LRS (Locally Redundant Storage)", "correct": false},
+        {"text": "ZRS (Zone-Redundant Storage)", "correct": true},
+        {"text": "GRS (Geo-Redundant Storage)", "correct": false},
+        {"text": "GZRS (Geo-Zone-Redundant Storage)", "correct": false}
+      ],
+      "explanation": "ZRS replicates data synchronously across three availability zones in the primary region."
+    },
+    {
+      "title": "AZURE_NETWORK_001",
+      "question": "You need to connect two VNets in different regions. What should you use?",
+      "question_type": "single",
+      "answers": [
+        {"text": "VNet Peering", "correct": true},
+        {"text": "VPN Gateway", "correct": false},
+        {"text": "ExpressRoute", "correct": false},
+        {"text": "Service Endpoint", "correct": false}
+      ],
+      "explanation": "Global VNet Peering connects VNets across different Azure regions with low latency."
+    },
+    {
+      "title": "AZURE_IDENTITY_001",
+      "question": "Which Azure AD feature allows automatic password reset for users?",
+      "question_type": "single",
+      "answers": [
+        {"text": "MFA", "correct": false},
+        {"text": "Self-Service Password Reset (SSPR)", "correct": true},
+        {"text": "Conditional Access", "correct": false},
+        {"text": "Privileged Identity Management", "correct": false}
+      ],
+      "explanation": "SSPR enables users to reset their passwords without helpdesk intervention."
+    },
+    {
+      "title": "AZURE_MONITORING_001",
+      "question": "Which Azure service collects metrics and logs from Azure resources?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Application Insights", "correct": false},
+        {"text": "Azure Monitor", "correct": true},
+        {"text": "Log Analytics", "correct": false},
+        {"text": "Azure Advisor", "correct": false}
+      ],
+      "explanation": "Azure Monitor is the comprehensive monitoring service that collects metrics and logs."
+    },
+    {
+      "title": "AZURE_BACKUP_001",
+      "question": "What is the maximum retention period for Azure VM backups?",
+      "question_type": "single",
+      "answers": [
+        {"text": "7 days", "correct": false},
+        {"text": "30 days", "correct": false},
+        {"text": "1 year", "correct": false},
+        {"text": "9999 days", "correct": true}
+      ],
+      "explanation": "Azure Backup supports retention up to 9999 days (approximately 27 years)."
+    },
+    {
+      "title": "AZURE_AKS_001",
+      "question": "Which Azure service provides managed Kubernetes clusters?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Azure Container Instances", "correct": false},
+        {"text": "Azure Kubernetes Service (AKS)", "correct": true},
+        {"text": "Azure Container Registry", "correct": false},
+        {"text": "Azure Functions", "correct": false}
+      ],
+      "explanation": "AKS is a fully managed Kubernetes service that simplifies deployment and management."
+    },
+    {
+      "title": "AZURE_APPSERVICE_001",
+      "question": "Which App Service plan tier supports auto-scaling?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Free (F1)", "correct": false},
+        {"text": "Shared (D1)", "correct": false},
+        {"text": "Basic (B1)", "correct": false},
+        {"text": "Standard (S1) and above", "correct": true}
+      ],
+      "explanation": "Auto-scaling is available in Standard, Premium, and Isolated tiers."
+    },
+    {
+      "title": "AZURE_SECURITY_001",
+      "question": "Which Azure service provides DDoS protection for public IP addresses?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Azure Firewall", "correct": false},
+        {"text": "Network Security Groups", "correct": false},
+        {"text": "Azure DDoS Protection", "correct": true},
+        {"text": "Application Gateway WAF", "correct": false}
+      ],
+      "explanation": "Azure DDoS Protection provides always-on monitoring and automatic attack mitigation."
+    },
+    {
+      "title": "AZURE_LOADBALANCER_001",
+      "question": "Which load balancer supports SSL offloading and URL-based routing?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Azure Load Balancer", "correct": false},
+        {"text": "Application Gateway", "correct": true},
+        {"text": "Traffic Manager", "correct": false},
+        {"text": "Front Door", "correct": false}
+      ],
+      "explanation": "Application Gateway is a Layer 7 load balancer with SSL/TLS termination and path-based routing."
+    },
+    {
+      "title": "AZURE_RBAC_001",
+      "question": "At what scope can you assign Azure RBAC roles? (Choose THREE)",
+      "question_type": "multiple",
+      "answers": [
+        {"text": "Management Group", "correct": true},
+        {"text": "Subscription", "correct": true},
+        {"text": "Resource Group", "correct": true},
+        {"text": "Region", "correct": false}
+      ],
+      "explanation": "RBAC can be assigned at management group, subscription, resource group, and individual resource level."
+    },
+    {
+      "title": "AZURE_VNET_001",
+      "question": "Which Azure networking feature connects on-premises networks to Azure via private connection?",
+      "question_type": "single",
+      "answers": [
+        {"text": "VNet Peering", "correct": false},
+        {"text": "Site-to-Site VPN", "correct": false},
+        {"text": "ExpressRoute", "correct": true},
+        {"text": "Point-to-Site VPN", "correct": false}
+      ],
+      "explanation": "ExpressRoute provides private, dedicated connection between on-premises and Azure datacenters."
+    },
+    {
+      "title": "AZURE_DISK_001",
+      "question": "Which Azure disk type provides the highest IOPS for production workloads?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Standard HDD", "correct": false},
+        {"text": "Standard SSD", "correct": false},
+        {"text": "Premium SSD", "correct": false},
+        {"text": "Ultra Disk", "correct": true}
+      ],
+      "explanation": "Ultra Disk provides sub-millisecond latency and up to 160,000 IOPS for demanding workloads."
+    },
+    {
+      "title": "AZURE_POLICY_001",
+      "question": "Which Azure service enforces organizational standards and assesses compliance?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Azure Policy", "correct": true},
+        {"text": "Azure Blueprints", "correct": false},
+        {"text": "RBAC", "correct": false},
+        {"text": "Azure Advisor", "correct": false}
+      ],
+      "explanation": "Azure Policy creates, assigns, and manages policies to enforce rules and compliance."
+    },
+    {
+      "title": "AZURE_TAGS_001",
+      "question": "What is the maximum number of tags you can apply to an Azure resource?",
+      "question_type": "single",
+      "answers": [
+        {"text": "10", "correct": false},
+        {"text": "15", "correct": false},
+        {"text": "25", "correct": false},
+        {"text": "50", "correct": true}
+      ],
+      "explanation": "Each Azure resource supports up to 50 tags for organization and cost tracking."
+    }
+  ]
+}

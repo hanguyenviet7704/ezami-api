@@ -1,0 +1,215 @@
+-- Question-Skill Mappings Seed Data
+-- Maps questions to skills based on category and title patterns
+
+-- =====================================================
+-- PSM I Question Mappings (category PSMI, titles start with PSM1_ or PSMI_)
+-- =====================================================
+
+-- First, map all PSM questions to the main PSM_SCRUM_THEORY skill as primary
+-- This ensures all PSM questions have at least one skill mapping
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_SCRUM_THEORY'),
+    3,
+    1.00,
+    TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- Map PSM questions about Sprint to PSM_SPRINT skill
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_SPRINT'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%sprint%' OR q.title LIKE '%sprint%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Scrum Master to PSM_SCRUM_MASTER skill
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_SCRUM_MASTER'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%scrum master%' OR q.title LIKE '%scrum master%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Product Owner to PSM_PRODUCT_OWNER skill
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_PRODUCT_OWNER'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%product owner%' OR q.title LIKE '%product owner%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Product Backlog to PSM_PRODUCT_BACKLOG skill
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_PRODUCT_BACKLOG'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%product backlog%' OR q.title LIKE '%backlog%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Daily Scrum to PSM_DAILY_SCRUM skill
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_DAILY_SCRUM'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%daily scrum%' OR q.question LIKE '%daily standup%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Sprint Review to PSM_SPRINT_REVIEW skill
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_SPRINT_REVIEW'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%sprint review%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Sprint Retrospective to PSM_SPRINT_RETRO skill
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_SPRINT_RETRO'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%retrospective%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Definition of Done to PSM_DEFINITION_OF_DONE skill
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_DEFINITION_OF_DONE'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%definition of done%' OR q.question LIKE '%DoD%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Increment to PSM_INCREMENT skill
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_INCREMENT'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%increment%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Scrum Values
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_SCRUM_VALUES'),
+    2,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%scrum value%' OR q.question LIKE '%commitment%'
+     OR q.question LIKE '%focus%' OR q.question LIKE '%openness%'
+     OR q.question LIKE '%respect%' OR q.question LIKE '%courage%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- Map PSM questions about Empiricism
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_EMPIRICISM'),
+    3,
+    0.80,
+    FALSE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSMI' OR c.category_name = 'PSM2')
+AND (q.question LIKE '%empiricism%' OR q.question LIKE '%transparency%'
+     OR q.question LIKE '%inspection%' OR q.question LIKE '%adaptation%')
+ON DUPLICATE KEY UPDATE weight = 0.80;
+
+-- =====================================================
+-- PSPO (Product Owner) Question Mappings
+-- =====================================================
+
+INSERT INTO eil_question_skills (question_id, skill_id, difficulty, weight, is_primary)
+SELECT
+    q.id,
+    (SELECT id FROM eil_skills WHERE code = 'PSM_PRODUCT_OWNER'),
+    3,
+    1.00,
+    TRUE
+FROM wp_learndash_pro_quiz_question q
+JOIN wp_learndash_pro_quiz_category c ON q.category_id = c.category_id
+WHERE q.online = 1
+AND (c.category_name = 'PSPOI' OR c.category_name = 'PSPO2')
+ON DUPLICATE KEY UPDATE difficulty = difficulty;
+
+-- =====================================================
+-- Summary: View mapping counts
+-- =====================================================
+-- SELECT skill.code, skill.name, COUNT(qs.id) as question_count
+-- FROM eil_skills skill
+-- LEFT JOIN eil_question_skills qs ON skill.id = qs.skill_id
+-- GROUP BY skill.id
+-- ORDER BY question_count DESC;

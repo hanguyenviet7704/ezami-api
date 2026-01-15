@@ -1,0 +1,92 @@
+-- Business Analysis (BA) Skills Seed Data
+-- Seeds IIBA BABOK knowledge areas and certification levels
+
+-- Insert Category Level Skills (Level 1)
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, level, weight, is_active, priority) VALUES
+('BA_PLANNING', 'BA Planning & Monitoring', 'Lập kế hoạch & Giám sát BA', 'Business analysis planning and monitoring', 'Lập kế hoạch và giám sát phân tích kinh doanh', 'BA', 1, 1.00, TRUE, 1),
+('BA_ELICITATION', 'Elicitation & Collaboration', 'Thu thập & Hợp tác', 'Requirements elicitation and stakeholder collaboration', 'Thu thập yêu cầu và hợp tác với các bên liên quan', 'BA', 1, 1.00, TRUE, 2),
+('BA_REQUIREMENTS', 'Requirements Lifecycle', 'Vòng đời Yêu cầu', 'Requirements lifecycle management', 'Quản lý vòng đời yêu cầu', 'BA', 1, 1.00, TRUE, 3),
+('BA_STRATEGY', 'Strategy Analysis', 'Phân tích Chiến lược', 'Strategy analysis activities', 'Hoạt động phân tích chiến lược', 'BA', 1, 1.00, TRUE, 4),
+('BA_DESIGN', 'Requirements Analysis & Design', 'Phân tích & Thiết kế YC', 'Requirements analysis and design definition', 'Phân tích yêu cầu và định nghĩa thiết kế', 'BA', 1, 1.00, TRUE, 5),
+('BA_EVALUATION', 'Solution Evaluation', 'Đánh giá Giải pháp', 'Solution evaluation activities', 'Hoạt động đánh giá giải pháp', 'BA', 1, 1.00, TRUE, 6);
+
+-- Get parent IDs
+SET @planning_id = (SELECT id FROM eil_skills WHERE code = 'BA_PLANNING');
+SET @elicit_id = (SELECT id FROM eil_skills WHERE code = 'BA_ELICITATION');
+SET @req_id = (SELECT id FROM eil_skills WHERE code = 'BA_REQUIREMENTS');
+SET @strategy_id = (SELECT id FROM eil_skills WHERE code = 'BA_STRATEGY');
+SET @design_id = (SELECT id FROM eil_skills WHERE code = 'BA_DESIGN');
+SET @eval_id = (SELECT id FROM eil_skills WHERE code = 'BA_EVALUATION');
+
+-- Insert Level 2 - BA Planning & Monitoring
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, is_active, priority) VALUES
+('BA_APPROACH', 'Plan BA Approach', 'Lập kế hoạch tiếp cận BA', 'Define the BA approach', 'Xác định cách tiếp cận BA', 'BA', 'PLANNING', 2, @planning_id, 1.00, TRUE, 1),
+('BA_STAKEHOLDER', 'Plan Stakeholder Engagement', 'Lập KH tương tác Stakeholder', 'Plan stakeholder engagement', 'Lập kế hoạch tương tác với các bên liên quan', 'BA', 'PLANNING', 2, @planning_id, 1.00, TRUE, 2),
+('BA_GOVERNANCE', 'Plan BA Governance', 'Lập KH quản trị BA', 'Plan business analysis governance', 'Lập kế hoạch quản trị phân tích kinh doanh', 'BA', 'PLANNING', 2, @planning_id, 1.00, TRUE, 3),
+('BA_INFO_MGMT', 'Plan BA Information Management', 'Lập KH quản lý thông tin BA', 'Plan BA information management', 'Lập kế hoạch quản lý thông tin BA', 'BA', 'PLANNING', 2, @planning_id, 1.00, TRUE, 4),
+('BA_PERFORMANCE', 'Identify BA Performance', 'Xác định hiệu suất BA', 'Identify BA performance improvements', 'Xác định cải thiện hiệu suất BA', 'BA', 'PLANNING', 2, @planning_id, 1.00, TRUE, 5);
+
+-- Insert Level 2 - Elicitation & Collaboration
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, is_active, priority) VALUES
+('BA_PREPARE_ELICIT', 'Prepare for Elicitation', 'Chuẩn bị thu thập', 'Prepare for elicitation activities', 'Chuẩn bị cho hoạt động thu thập', 'BA', 'ELICITATION', 2, @elicit_id, 1.00, TRUE, 1),
+('BA_CONDUCT_ELICIT', 'Conduct Elicitation', 'Thực hiện thu thập', 'Conduct elicitation activities', 'Thực hiện hoạt động thu thập', 'BA', 'ELICITATION', 2, @elicit_id, 1.00, TRUE, 2),
+('BA_CONFIRM_ELICIT', 'Confirm Elicitation Results', 'Xác nhận kết quả thu thập', 'Confirm elicitation results', 'Xác nhận kết quả thu thập', 'BA', 'ELICITATION', 2, @elicit_id, 1.00, TRUE, 3),
+('BA_COMMUNICATE', 'Communicate BA Information', 'Truyền đạt thông tin BA', 'Communicate BA information', 'Truyền đạt thông tin phân tích kinh doanh', 'BA', 'ELICITATION', 2, @elicit_id, 1.00, TRUE, 4),
+('BA_MANAGE_STAKEHOLDER', 'Manage Stakeholder Collaboration', 'Quản lý hợp tác Stakeholder', 'Manage stakeholder collaboration', 'Quản lý hợp tác với các bên liên quan', 'BA', 'ELICITATION', 2, @elicit_id, 1.00, TRUE, 5);
+
+-- Insert Level 2 - Requirements Lifecycle Management
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, is_active, priority) VALUES
+('BA_TRACE_REQ', 'Trace Requirements', 'Truy vết yêu cầu', 'Trace requirements', 'Truy vết yêu cầu', 'BA', 'REQUIREMENTS', 2, @req_id, 1.00, TRUE, 1),
+('BA_MAINTAIN_REQ', 'Maintain Requirements', 'Duy trì yêu cầu', 'Maintain requirements', 'Duy trì yêu cầu', 'BA', 'REQUIREMENTS', 2, @req_id, 1.00, TRUE, 2),
+('BA_PRIORITIZE_REQ', 'Prioritize Requirements', 'Ưu tiên yêu cầu', 'Prioritize requirements', 'Ưu tiên yêu cầu', 'BA', 'REQUIREMENTS', 2, @req_id, 1.00, TRUE, 3),
+('BA_ASSESS_CHANGES', 'Assess Requirements Changes', 'Đánh giá thay đổi YC', 'Assess requirements changes', 'Đánh giá các thay đổi yêu cầu', 'BA', 'REQUIREMENTS', 2, @req_id, 1.00, TRUE, 4),
+('BA_APPROVE_REQ', 'Approve Requirements', 'Phê duyệt yêu cầu', 'Approve requirements', 'Phê duyệt yêu cầu', 'BA', 'REQUIREMENTS', 2, @req_id, 1.00, TRUE, 5);
+
+-- Insert Level 2 - Strategy Analysis
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, is_active, priority) VALUES
+('BA_CURRENT_STATE', 'Analyze Current State', 'Phân tích trạng thái hiện tại', 'Analyze current state', 'Phân tích trạng thái hiện tại', 'BA', 'STRATEGY', 2, @strategy_id, 1.00, TRUE, 1),
+('BA_FUTURE_STATE', 'Define Future State', 'Xác định trạng thái tương lai', 'Define future state', 'Xác định trạng thái tương lai', 'BA', 'STRATEGY', 2, @strategy_id, 1.00, TRUE, 2),
+('BA_ASSESS_RISKS', 'Assess Risks', 'Đánh giá rủi ro', 'Assess risks', 'Đánh giá rủi ro', 'BA', 'STRATEGY', 2, @strategy_id, 1.00, TRUE, 3),
+('BA_DEFINE_STRATEGY', 'Define Change Strategy', 'Xác định chiến lược thay đổi', 'Define change strategy', 'Xác định chiến lược thay đổi', 'BA', 'STRATEGY', 2, @strategy_id, 1.00, TRUE, 4);
+
+-- Insert Level 2 - Requirements Analysis & Design Definition
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, is_active, priority) VALUES
+('BA_SPECIFY_REQ', 'Specify and Model Requirements', 'Đặc tả và mô hình hóa YC', 'Specify and model requirements', 'Đặc tả và mô hình hóa yêu cầu', 'BA', 'DESIGN', 2, @design_id, 1.00, TRUE, 1),
+('BA_VERIFY_REQ', 'Verify Requirements', 'Xác minh yêu cầu', 'Verify requirements', 'Xác minh yêu cầu', 'BA', 'DESIGN', 2, @design_id, 1.00, TRUE, 2),
+('BA_VALIDATE_REQ', 'Validate Requirements', 'Kiểm chứng yêu cầu', 'Validate requirements', 'Kiểm chứng yêu cầu', 'BA', 'DESIGN', 2, @design_id, 1.00, TRUE, 3),
+('BA_DEFINE_ARCH', 'Define Requirements Architecture', 'Xác định kiến trúc YC', 'Define requirements architecture', 'Xác định kiến trúc yêu cầu', 'BA', 'DESIGN', 2, @design_id, 1.00, TRUE, 4),
+('BA_DEFINE_OPTIONS', 'Define Design Options', 'Xác định tùy chọn thiết kế', 'Define design options', 'Xác định các tùy chọn thiết kế', 'BA', 'DESIGN', 2, @design_id, 1.00, TRUE, 5),
+('BA_ANALYZE_VALUE', 'Analyze Potential Value', 'Phân tích giá trị tiềm năng', 'Analyze potential value and recommend solution', 'Phân tích giá trị tiềm năng và đề xuất giải pháp', 'BA', 'DESIGN', 2, @design_id, 1.00, TRUE, 6);
+
+-- Insert Level 2 - Solution Evaluation
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, is_active, priority) VALUES
+('BA_MEASURE_SOLUTION', 'Measure Solution Performance', 'Đo lường hiệu suất giải pháp', 'Measure solution performance', 'Đo lường hiệu suất giải pháp', 'BA', 'EVALUATION', 2, @eval_id, 1.00, TRUE, 1),
+('BA_ANALYZE_MEASURES', 'Analyze Performance Measures', 'Phân tích chỉ số hiệu suất', 'Analyze performance measures', 'Phân tích các chỉ số hiệu suất', 'BA', 'EVALUATION', 2, @eval_id, 1.00, TRUE, 2),
+('BA_ASSESS_LIMITS', 'Assess Solution Limitations', 'Đánh giá hạn chế giải pháp', 'Assess solution limitations', 'Đánh giá các hạn chế của giải pháp', 'BA', 'EVALUATION', 2, @eval_id, 1.00, TRUE, 3),
+('BA_ASSESS_ENTERPRISE', 'Assess Enterprise Limitations', 'Đánh giá hạn chế DN', 'Assess enterprise limitations', 'Đánh giá các hạn chế của doanh nghiệp', 'BA', 'EVALUATION', 2, @eval_id, 1.00, TRUE, 4),
+('BA_RECOMMEND_ACTIONS', 'Recommend Actions', 'Đề xuất hành động', 'Recommend actions to increase solution value', 'Đề xuất các hành động để tăng giá trị giải pháp', 'BA', 'EVALUATION', 2, @eval_id, 1.00, TRUE, 5);
+
+-- Get Level 2 IDs for Level 3 (Elicitation Techniques)
+SET @conduct_id = (SELECT id FROM eil_skills WHERE code = 'BA_CONDUCT_ELICIT');
+
+-- Insert Level 3 - Elicitation Techniques
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, difficulty_range_min, difficulty_range_max, is_active, priority) VALUES
+('BA_INTERVIEW', 'Interviews', 'Phỏng vấn', 'Interview techniques', 'Kỹ thuật phỏng vấn', 'BA', 'ELICITATION', 3, @conduct_id, 1.00, 1, 3, TRUE, 1),
+('BA_WORKSHOP', 'Workshops', 'Hội thảo', 'Facilitated workshop techniques', 'Kỹ thuật tổ chức hội thảo', 'BA', 'ELICITATION', 3, @conduct_id, 1.00, 2, 4, TRUE, 2),
+('BA_OBSERVATION', 'Observation', 'Quan sát', 'Observation techniques', 'Kỹ thuật quan sát', 'BA', 'ELICITATION', 3, @conduct_id, 1.00, 1, 3, TRUE, 3),
+('BA_SURVEY', 'Surveys/Questionnaires', 'Khảo sát/Bảng câu hỏi', 'Survey and questionnaire techniques', 'Kỹ thuật khảo sát và bảng câu hỏi', 'BA', 'ELICITATION', 3, @conduct_id, 1.00, 1, 3, TRUE, 4),
+('BA_BRAINSTORM', 'Brainstorming', 'Động não', 'Brainstorming techniques', 'Kỹ thuật động não', 'BA', 'ELICITATION', 3, @conduct_id, 1.00, 1, 3, TRUE, 5),
+('BA_PROTOTYPE', 'Prototyping', 'Tạo mẫu', 'Prototyping techniques', 'Kỹ thuật tạo mẫu', 'BA', 'ELICITATION', 3, @conduct_id, 1.00, 2, 4, TRUE, 6),
+('BA_DOC_ANALYSIS', 'Document Analysis', 'Phân tích tài liệu', 'Document analysis techniques', 'Kỹ thuật phân tích tài liệu', 'BA', 'ELICITATION', 3, @conduct_id, 1.00, 1, 3, TRUE, 7);
+
+-- Get Level 2 IDs for Level 3 (Modeling Techniques)
+SET @specify_id = (SELECT id FROM eil_skills WHERE code = 'BA_SPECIFY_REQ');
+
+-- Insert Level 3 - Modeling Techniques
+INSERT INTO eil_skills (code, name, name_vi, description, description_vi, category, subcategory, level, parent_id, weight, difficulty_range_min, difficulty_range_max, is_active, priority) VALUES
+('BA_USE_CASE', 'Use Cases & Scenarios', 'Use Case & Kịch bản', 'Use case and scenario modeling', 'Mô hình hóa use case và kịch bản', 'BA', 'DESIGN', 3, @specify_id, 1.00, 2, 4, TRUE, 1),
+('BA_USER_STORY', 'User Stories', 'User Story', 'User story techniques', 'Kỹ thuật user story', 'BA', 'DESIGN', 3, @specify_id, 1.00, 1, 3, TRUE, 2),
+('BA_PROCESS_MODEL', 'Process Modeling', 'Mô hình hóa quy trình', 'Process modeling techniques', 'Kỹ thuật mô hình hóa quy trình', 'BA', 'DESIGN', 3, @specify_id, 1.00, 2, 4, TRUE, 3),
+('BA_DATA_MODEL', 'Data Modeling', 'Mô hình hóa dữ liệu', 'Data modeling techniques', 'Kỹ thuật mô hình hóa dữ liệu', 'BA', 'DESIGN', 3, @specify_id, 1.00, 3, 5, TRUE, 4),
+('BA_STATE_MODEL', 'State Diagrams', 'Biểu đồ trạng thái', 'State diagram modeling', 'Mô hình hóa biểu đồ trạng thái', 'BA', 'DESIGN', 3, @specify_id, 1.00, 3, 5, TRUE, 5),
+('BA_DECISION_MODEL', 'Decision Modeling', 'Mô hình quyết định', 'Decision modeling techniques', 'Kỹ thuật mô hình hóa quyết định', 'BA', 'DESIGN', 3, @specify_id, 1.00, 3, 5, TRUE, 6);

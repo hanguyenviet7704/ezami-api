@@ -1,0 +1,4 @@
+title,question,answer1,answer2,answer3,answer4,correct_answers,explanation,skill_code
+AWS_SAA_Q1,"You need to create a highly available web application. Which AWS service should you use?",Amazon EC2,Amazon S3,Elastic Load Balancing,Amazon CloudFront,"1,3","ELB distributes traffic and EC2 provides compute. Both are needed for HA web apps.",AWS_COMPUTE_EC2
+AWS_SAA_Q2,"What is the maximum size of an S3 object?",5 MB,5 GB,500 GB,5 TB,4,"S3 supports objects up to 5 TB in size using multipart upload.",AWS_STORAGE_S3
+K8S_CKA_Q1,"Which command creates a deployment named nginx with 3 replicas?",kubectl run nginx --replicas=3,kubectl create deploy nginx --replicas=3,kubectl create deployment nginx --image=nginx --replicas=3,kubectl apply -f deployment.yaml,3,"kubectl create deployment allows specifying replicas directly.",K8S_WORKLOADS

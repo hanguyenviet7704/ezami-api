@@ -1,0 +1,708 @@
+{
+  "certification": "KUBERNETES_CKA",
+  "total_templates": 25,
+  "instructions": "Replace all [TEMPLATE] and [Replace...] text with actual content",
+  "official_source": "https://kubernetes.io/docs/home/",
+  "questions": [
+    {
+      "title": "KUBERNETES_CKA_D1_Q1",
+      "question": "[TEMPLATE] Question about: Cluster Architecture, Installation & Configuration (25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Cluster Architecture, Installation & Configuration (25%)]",
+      "domain": "Cluster Architecture, Installation & Configuration (25%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_1"
+    },
+    {
+      "title": "KUBERNETES_CKA_D1_Q2",
+      "question": "[TEMPLATE] Question about: Cluster Architecture, Installation & Configuration (25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Cluster Architecture, Installation & Configuration (25%)]",
+      "domain": "Cluster Architecture, Installation & Configuration (25%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_1"
+    },
+    {
+      "title": "KUBERNETES_CKA_D1_Q3",
+      "question": "[TEMPLATE] Question about: Cluster Architecture, Installation & Configuration (25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Cluster Architecture, Installation & Configuration (25%)]",
+      "domain": "Cluster Architecture, Installation & Configuration (25%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_1"
+    },
+    {
+      "title": "KUBERNETES_CKA_D1_Q4",
+      "question": "[TEMPLATE] Question about: Cluster Architecture, Installation & Configuration (25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Cluster Architecture, Installation & Configuration (25%)]",
+      "domain": "Cluster Architecture, Installation & Configuration (25%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_1"
+    },
+    {
+      "title": "KUBERNETES_CKA_D1_Q5",
+      "question": "[TEMPLATE] Question about: Cluster Architecture, Installation & Configuration (25%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Cluster Architecture, Installation & Configuration (25%)]",
+      "domain": "Cluster Architecture, Installation & Configuration (25%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_1"
+    },
+    {
+      "title": "KUBERNETES_CKA_D2_Q1",
+      "question": "[TEMPLATE] Question about: Workloads & Scheduling (15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Workloads & Scheduling (15%)]",
+      "domain": "Workloads & Scheduling (15%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_2"
+    },
+    {
+      "title": "KUBERNETES_CKA_D2_Q2",
+      "question": "[TEMPLATE] Question about: Workloads & Scheduling (15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Workloads & Scheduling (15%)]",
+      "domain": "Workloads & Scheduling (15%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_2"
+    },
+    {
+      "title": "KUBERNETES_CKA_D2_Q3",
+      "question": "[TEMPLATE] Question about: Workloads & Scheduling (15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Workloads & Scheduling (15%)]",
+      "domain": "Workloads & Scheduling (15%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_2"
+    },
+    {
+      "title": "KUBERNETES_CKA_D2_Q4",
+      "question": "[TEMPLATE] Question about: Workloads & Scheduling (15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Workloads & Scheduling (15%)]",
+      "domain": "Workloads & Scheduling (15%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_2"
+    },
+    {
+      "title": "KUBERNETES_CKA_D2_Q5",
+      "question": "[TEMPLATE] Question about: Workloads & Scheduling (15%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Workloads & Scheduling (15%)]",
+      "domain": "Workloads & Scheduling (15%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_2"
+    },
+    {
+      "title": "KUBERNETES_CKA_D3_Q1",
+      "question": "[TEMPLATE] Question about: Services & Networking (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Services & Networking (20%)]",
+      "domain": "Services & Networking (20%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_3"
+    },
+    {
+      "title": "KUBERNETES_CKA_D3_Q2",
+      "question": "[TEMPLATE] Question about: Services & Networking (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Services & Networking (20%)]",
+      "domain": "Services & Networking (20%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_3"
+    },
+    {
+      "title": "KUBERNETES_CKA_D3_Q3",
+      "question": "[TEMPLATE] Question about: Services & Networking (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Services & Networking (20%)]",
+      "domain": "Services & Networking (20%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_3"
+    },
+    {
+      "title": "KUBERNETES_CKA_D3_Q4",
+      "question": "[TEMPLATE] Question about: Services & Networking (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Services & Networking (20%)]",
+      "domain": "Services & Networking (20%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_3"
+    },
+    {
+      "title": "KUBERNETES_CKA_D3_Q5",
+      "question": "[TEMPLATE] Question about: Services & Networking (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Services & Networking (20%)]",
+      "domain": "Services & Networking (20%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_3"
+    },
+    {
+      "title": "KUBERNETES_CKA_D4_Q1",
+      "question": "[TEMPLATE] Question about: Storage (10%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Storage (10%)]",
+      "domain": "Storage (10%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_4"
+    },
+    {
+      "title": "KUBERNETES_CKA_D4_Q2",
+      "question": "[TEMPLATE] Question about: Storage (10%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Storage (10%)]",
+      "domain": "Storage (10%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_4"
+    },
+    {
+      "title": "KUBERNETES_CKA_D4_Q3",
+      "question": "[TEMPLATE] Question about: Storage (10%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Storage (10%)]",
+      "domain": "Storage (10%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_4"
+    },
+    {
+      "title": "KUBERNETES_CKA_D4_Q4",
+      "question": "[TEMPLATE] Question about: Storage (10%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Storage (10%)]",
+      "domain": "Storage (10%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_4"
+    },
+    {
+      "title": "KUBERNETES_CKA_D4_Q5",
+      "question": "[TEMPLATE] Question about: Storage (10%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Storage (10%)]",
+      "domain": "Storage (10%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_4"
+    },
+    {
+      "title": "KUBERNETES_CKA_D5_Q1",
+      "question": "[TEMPLATE] Question about: Troubleshooting (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Troubleshooting (30%)]",
+      "domain": "Troubleshooting (30%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_5"
+    },
+    {
+      "title": "KUBERNETES_CKA_D5_Q2",
+      "question": "[TEMPLATE] Question about: Troubleshooting (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Troubleshooting (30%)]",
+      "domain": "Troubleshooting (30%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_5"
+    },
+    {
+      "title": "KUBERNETES_CKA_D5_Q3",
+      "question": "[TEMPLATE] Question about: Troubleshooting (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Troubleshooting (30%)]",
+      "domain": "Troubleshooting (30%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_5"
+    },
+    {
+      "title": "KUBERNETES_CKA_D5_Q4",
+      "question": "[TEMPLATE] Question about: Troubleshooting (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Troubleshooting (30%)]",
+      "domain": "Troubleshooting (30%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_5"
+    },
+    {
+      "title": "KUBERNETES_CKA_D5_Q5",
+      "question": "[TEMPLATE] Question about: Troubleshooting (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Troubleshooting (30%)]",
+      "domain": "Troubleshooting (30%)",
+      "cert_code": "KUBERNETES_CKA",
+      "status": "template",
+      "skill_code": "KUBERNETES_CKA_DOMAIN_5"
+    }
+  ]
+}

@@ -1,0 +1,568 @@
+{
+  "certification": "AWS_SAA_C03",
+  "total_templates": 20,
+  "instructions": "Replace all [TEMPLATE] and [Replace...] text with actual content",
+  "official_source": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+  "questions": [
+    {
+      "title": "AWS_SAA_C03_D1_Q1",
+      "question": "[TEMPLATE] Question about: Design Resilient Architectures (26%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Resilient Architectures (26%)]",
+      "domain": "Design Resilient Architectures (26%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_1"
+    },
+    {
+      "title": "AWS_SAA_C03_D1_Q2",
+      "question": "[TEMPLATE] Question about: Design Resilient Architectures (26%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Resilient Architectures (26%)]",
+      "domain": "Design Resilient Architectures (26%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_1"
+    },
+    {
+      "title": "AWS_SAA_C03_D1_Q3",
+      "question": "[TEMPLATE] Question about: Design Resilient Architectures (26%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Resilient Architectures (26%)]",
+      "domain": "Design Resilient Architectures (26%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_1"
+    },
+    {
+      "title": "AWS_SAA_C03_D1_Q4",
+      "question": "[TEMPLATE] Question about: Design Resilient Architectures (26%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Resilient Architectures (26%)]",
+      "domain": "Design Resilient Architectures (26%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_1"
+    },
+    {
+      "title": "AWS_SAA_C03_D1_Q5",
+      "question": "[TEMPLATE] Question about: Design Resilient Architectures (26%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Resilient Architectures (26%)]",
+      "domain": "Design Resilient Architectures (26%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_1"
+    },
+    {
+      "title": "AWS_SAA_C03_D2_Q1",
+      "question": "[TEMPLATE] Question about: Design High-Performing Architectures (24%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design High-Performing Architectures (24%)]",
+      "domain": "Design High-Performing Architectures (24%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_2"
+    },
+    {
+      "title": "AWS_SAA_C03_D2_Q2",
+      "question": "[TEMPLATE] Question about: Design High-Performing Architectures (24%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design High-Performing Architectures (24%)]",
+      "domain": "Design High-Performing Architectures (24%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_2"
+    },
+    {
+      "title": "AWS_SAA_C03_D2_Q3",
+      "question": "[TEMPLATE] Question about: Design High-Performing Architectures (24%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design High-Performing Architectures (24%)]",
+      "domain": "Design High-Performing Architectures (24%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_2"
+    },
+    {
+      "title": "AWS_SAA_C03_D2_Q4",
+      "question": "[TEMPLATE] Question about: Design High-Performing Architectures (24%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design High-Performing Architectures (24%)]",
+      "domain": "Design High-Performing Architectures (24%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_2"
+    },
+    {
+      "title": "AWS_SAA_C03_D2_Q5",
+      "question": "[TEMPLATE] Question about: Design High-Performing Architectures (24%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design High-Performing Architectures (24%)]",
+      "domain": "Design High-Performing Architectures (24%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_2"
+    },
+    {
+      "title": "AWS_SAA_C03_D3_Q1",
+      "question": "[TEMPLATE] Question about: Design Secure Applications and Architectures (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Secure Applications and Architectures (30%)]",
+      "domain": "Design Secure Applications and Architectures (30%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_3"
+    },
+    {
+      "title": "AWS_SAA_C03_D3_Q2",
+      "question": "[TEMPLATE] Question about: Design Secure Applications and Architectures (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Secure Applications and Architectures (30%)]",
+      "domain": "Design Secure Applications and Architectures (30%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_3"
+    },
+    {
+      "title": "AWS_SAA_C03_D3_Q3",
+      "question": "[TEMPLATE] Question about: Design Secure Applications and Architectures (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Secure Applications and Architectures (30%)]",
+      "domain": "Design Secure Applications and Architectures (30%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_3"
+    },
+    {
+      "title": "AWS_SAA_C03_D3_Q4",
+      "question": "[TEMPLATE] Question about: Design Secure Applications and Architectures (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Secure Applications and Architectures (30%)]",
+      "domain": "Design Secure Applications and Architectures (30%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_3"
+    },
+    {
+      "title": "AWS_SAA_C03_D3_Q5",
+      "question": "[TEMPLATE] Question about: Design Secure Applications and Architectures (30%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Secure Applications and Architectures (30%)]",
+      "domain": "Design Secure Applications and Architectures (30%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_3"
+    },
+    {
+      "title": "AWS_SAA_C03_D4_Q1",
+      "question": "[TEMPLATE] Question about: Design Cost-Optimized Architectures (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Cost-Optimized Architectures (20%)]",
+      "domain": "Design Cost-Optimized Architectures (20%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_4"
+    },
+    {
+      "title": "AWS_SAA_C03_D4_Q2",
+      "question": "[TEMPLATE] Question about: Design Cost-Optimized Architectures (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Cost-Optimized Architectures (20%)]",
+      "domain": "Design Cost-Optimized Architectures (20%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_4"
+    },
+    {
+      "title": "AWS_SAA_C03_D4_Q3",
+      "question": "[TEMPLATE] Question about: Design Cost-Optimized Architectures (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Cost-Optimized Architectures (20%)]",
+      "domain": "Design Cost-Optimized Architectures (20%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_4"
+    },
+    {
+      "title": "AWS_SAA_C03_D4_Q4",
+      "question": "[TEMPLATE] Question about: Design Cost-Optimized Architectures (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Cost-Optimized Architectures (20%)]",
+      "domain": "Design Cost-Optimized Architectures (20%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_4"
+    },
+    {
+      "title": "AWS_SAA_C03_D4_Q5",
+      "question": "[TEMPLATE] Question about: Design Cost-Optimized Architectures (20%)",
+      "question_type": "single",
+      "answers": [
+        {
+          "text": "[Option A - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option B - Replace with actual answer]",
+          "correct": true
+        },
+        {
+          "text": "[Option C - Replace with actual answer]",
+          "correct": false
+        },
+        {
+          "text": "[Option D - Replace with actual answer]",
+          "correct": false
+        }
+      ],
+      "explanation": "[Add explanation for Design Cost-Optimized Architectures (20%)]",
+      "domain": "Design Cost-Optimized Architectures (20%)",
+      "cert_code": "AWS_SAA_C03",
+      "status": "template",
+      "skill_code": "AWS_SAA_C03_DOMAIN_4"
+    }
+  ]
+}

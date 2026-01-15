@@ -1,0 +1,151 @@
+{
+  "certification": "DOCKER_DCA",
+  "source": "Original content based on Docker documentation",
+  "total": 12,
+  "questions": [
+    {
+      "title": "DOCKER_IMAGE_001",
+      "question": "Which command builds a Docker image from a Dockerfile in the current directory?",
+      "question_type": "single",
+      "answers": [
+        {"text": "docker create .", "correct": false},
+        {"text": "docker build .", "correct": true},
+        {"text": "docker make .", "correct": false},
+        {"text": "docker compile .", "correct": false}
+      ],
+      "explanation": "docker build . builds an image from Dockerfile in the current directory."
+    },
+    {
+      "title": "DOCKER_CONTAINER_001",
+      "question": "Which flag runs a container in detached mode?",
+      "question_type": "single",
+      "answers": [
+        {"text": "-d", "correct": true},
+        {"text": "-b", "correct": false},
+        {"text": "--background", "correct": false},
+        {"text": "-detach", "correct": false}
+      ],
+      "explanation": "-d or --detach flag runs container in background and prints container ID."
+    },
+    {
+      "title": "DOCKER_VOLUME_001",
+      "question": "Which Docker storage type persists data after container removal?",
+      "question_type": "single",
+      "answers": [
+        {"text": "tmpfs mounts", "correct": false},
+        {"text": "Volumes", "correct": true},
+        {"text": "Container writable layer", "correct": false},
+        {"text": "Memory storage", "correct": false}
+      ],
+      "explanation": "Volumes are stored in Docker-managed directory and persist after container deletion."
+    },
+    {
+      "title": "DOCKER_NETWORK_001",
+      "question": "What is the default network driver for Docker containers?",
+      "question_type": "single",
+      "answers": [
+        {"text": "host", "correct": false},
+        {"text": "bridge", "correct": true},
+        {"text": "overlay", "correct": false},
+        {"text": "none", "correct": false}
+      ],
+      "explanation": "bridge is the default network driver for standalone containers."
+    },
+    {
+      "title": "DOCKER_COMPOSE_001",
+      "question": "Which Docker Compose command starts services in detached mode?",
+      "question_type": "single",
+      "answers": [
+        {"text": "docker-compose start", "correct": false},
+        {"text": "docker-compose up -d", "correct": true},
+        {"text": "docker-compose run -d", "correct": false},
+        {"text": "docker-compose create", "correct": false}
+      ],
+      "explanation": "docker-compose up -d creates and starts containers in detached mode."
+    },
+    {
+      "title": "DOCKER_REGISTRY_001",
+      "question": "Which command pushes an image to Docker Hub?",
+      "question_type": "single",
+      "answers": [
+        {"text": "docker push username/image:tag", "correct": true},
+        {"text": "docker upload username/image:tag", "correct": false},
+        {"text": "docker send username/image:tag", "correct": false},
+        {"text": "docker publish username/image:tag", "correct": false}
+      ],
+      "explanation": "docker push uploads an image to a registry like Docker Hub."
+    },
+    {
+      "title": "DOCKER_LOGS_001",
+      "question": "Which command shows the last 50 lines of logs from container myapp?",
+      "question_type": "single",
+      "answers": [
+        {"text": "docker logs myapp --tail 50", "correct": true},
+        {"text": "docker logs myapp -n 50", "correct": false},
+        {"text": "docker logs myapp --last 50", "correct": false},
+        {"text": "docker logs myapp -l 50", "correct": false}
+      ],
+      "explanation": "docker logs with --tail flag limits output to specified number of lines from the end."
+    },
+    {
+      "title": "DOCKER_EXEC_001",
+      "question": "How do you execute an interactive bash shell in running container myapp?",
+      "question_type": "single",
+      "answers": [
+        {"text": "docker exec -it myapp bash", "correct": true},
+        {"text": "docker run -it myapp bash", "correct": false},
+        {"text": "docker attach myapp bash", "correct": false},
+        {"text": "docker shell myapp bash", "correct": false}
+      ],
+      "explanation": "docker exec -it runs a command in a running container with interactive TTY."
+    },
+    {
+      "title": "DOCKER_HEALTHCHECK_001",
+      "question": "In a Dockerfile, which instruction defines a health check?",
+      "question_type": "single",
+      "answers": [
+        {"text": "CHECK", "correct": false},
+        {"text": "HEALTHCHECK", "correct": true},
+        {"text": "PROBE", "correct": false},
+        {"text": "MONITOR", "correct": false}
+      ],
+      "explanation": "HEALTHCHECK instruction tells Docker how to test if container is still working."
+    },
+    {
+      "title": "DOCKER_MULTISTAGE_001",
+      "question": "What is the benefit of multi-stage builds in Docker?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Faster builds", "correct": false},
+        {"text": "Smaller final image size", "correct": true},
+        {"text": "Better security", "correct": false},
+        {"text": "More features", "correct": false}
+      ],
+      "explanation": "Multi-stage builds allow copying only necessary artifacts, resulting in smaller production images."
+    },
+    {
+      "title": "DOCKER_SWARM_001",
+      "question": "Which command initializes a new Docker Swarm?",
+      "question_type": "single",
+      "answers": [
+        {"text": "docker swarm create", "correct": false},
+        {"text": "docker swarm init", "correct": true},
+        {"text": "docker swarm start", "correct": false},
+        {"text": "docker swarm new", "correct": false}
+      ],
+      "explanation": "docker swarm init initializes a swarm and makes the current node a manager."
+    },
+    {
+      "title": "DOCKER_PRUNE_001",
+      "question": "Which command removes all unused containers, networks, and images?",
+      "question_type": "single",
+      "answers": [
+        {"text": "docker clean", "correct": false},
+        {"text": "docker system prune -a", "correct": true},
+        {"text": "docker remove --all", "correct": false},
+        {"text": "docker cleanup", "correct": false}
+      ],
+      "explanation": "docker system prune -a removes all unused containers, networks, images, and volumes."
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.18'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'java'
+}
+
+group = 'com.hth'
+version = '1.2.0'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webflux' // for WebClient
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-jersey'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+    implementation "jakarta.annotation:jakarta.annotation-api:1.3.5"
+    implementation 'com.google.api-client:google-api-client:2.0.0'
+    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.34.1'
+    implementation 'com.google.apis:google-api-services-gmail:v1-rev20220404-2.0.0'
+    implementation 'com.sun.mail:jakarta.mail:2.0.1'
+    implementation 'jakarta.activation:jakarta.activation-api:2.1.2'
+    implementation 'org.eclipse.angus:angus-activation:2.0.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'commons-codec:commons-codec:1.15'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+    implementation 'me.paulschwarz:spring-dotenv:4.0.0'
+    implementation 'net.ttddyy:datasource-proxy:1.9'
+    implementation 'org.jsoup:jsoup:1.15.3'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    compileOnly 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4'
+
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'com.google.firebase:firebase-admin:9.2.0'
+
+    implementation 'com.cloudinary:cloudinary-http5:2.0.0'
+    implementation 'com.cloudinary:cloudinary-taglib:2.0.0'
+    implementation 'io.github.cdimascio:dotenv-java:2.2.4'
+
+    implementation 'com.google.zxing:core:3.5.3'
+    implementation 'com.google.zxing:javase:3.5.3'
+    implementation 'software.amazon.awssdk:s3:2.20.26'
+    implementation 'software.amazon.awssdk:apache-client:2.20.26'
+
+    // Flyway for database migrations
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-mysql'
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'com.h2database:h2'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

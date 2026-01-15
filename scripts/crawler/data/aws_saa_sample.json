@@ -1,0 +1,138 @@
+{
+  "certification": "AWS_SAA_C03",
+  "source": "Generated from AWS official documentation",
+  "license": "Educational Use - Original Content",
+  "total": 10,
+  "questions": [
+    {
+      "title": "AWS_SAA_EC2_001",
+      "question": "You need to launch EC2 instances that can be stopped and restarted without losing data. The instances will run batch processing jobs. Which EC2 instance purchasing option is MOST cost-effective?",
+      "question_type": "single",
+      "answers": [
+        {"text": "On-Demand Instances", "correct": false},
+        {"text": "Reserved Instances", "correct": false},
+        {"text": "Spot Instances", "correct": true},
+        {"text": "Dedicated Hosts", "correct": false}
+      ],
+      "explanation": "Spot Instances offer up to 90% discount and are ideal for fault-tolerant, flexible batch jobs that can be interrupted.",
+      "skill_code": "AWS_EC2"
+    },
+    {
+      "title": "AWS_SAA_S3_001",
+      "question": "Which S3 storage class is MOST cost-effective for data that is accessed less than once a year but must be retrieved within milliseconds when needed?",
+      "question_type": "single",
+      "answers": [
+        {"text": "S3 Standard", "correct": false},
+        {"text": "S3 Intelligent-Tiering", "correct": false},
+        {"text": "S3 Glacier Instant Retrieval", "correct": true},
+        {"text": "S3 Glacier Flexible Retrieval", "correct": false}
+      ],
+      "explanation": "S3 Glacier Instant Retrieval provides millisecond access for rarely accessed data at lower cost than S3 Standard.",
+      "skill_code": "AWS_S3"
+    },
+    {
+      "title": "AWS_SAA_VPC_001",
+      "question": "You need to allow EC2 instances in a private subnet to access the internet for software updates, but prevent inbound internet access. What should you implement?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Internet Gateway", "correct": false},
+        {"text": "NAT Gateway", "correct": true},
+        {"text": "VPC Peering", "correct": false},
+        {"text": "VPN Connection", "correct": false}
+      ],
+      "explanation": "NAT Gateway allows outbound internet access from private subnets while blocking inbound connections.",
+      "skill_code": "AWS_VPC"
+    },
+    {
+      "title": "AWS_SAA_RDS_001",
+      "question": "Which RDS features provide high availability? (Choose TWO)",
+      "question_type": "multiple",
+      "answers": [
+        {"text": "Multi-AZ deployment", "correct": true},
+        {"text": "Read Replicas", "correct": true},
+        {"text": "Automated backups", "correct": false},
+        {"text": "Encryption at rest", "correct": false}
+      ],
+      "explanation": "Multi-AZ provides synchronous replication for HA. Read Replicas provide async replication and can be promoted for DR.",
+      "skill_code": "AWS_RDS"
+    },
+    {
+      "title": "AWS_SAA_ELB_001",
+      "question": "Your application requires routing based on HTTP headers and path patterns. Which load balancer should you use?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Classic Load Balancer", "correct": false},
+        {"text": "Application Load Balancer", "correct": true},
+        {"text": "Network Load Balancer", "correct": false},
+        {"text": "Gateway Load Balancer", "correct": false}
+      ],
+      "explanation": "ALB supports advanced routing based on HTTP headers, methods, query strings, and path patterns.",
+      "skill_code": "AWS_ELB"
+    },
+    {
+      "title": "AWS_SAA_SECURITY_001",
+      "question": "You need to give an EC2 instance permissions to access S3 buckets. What is the MOST secure approach?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Embed AWS credentials in application code", "correct": false},
+        {"text": "Store credentials in EC2 user data", "correct": false},
+        {"text": "Attach an IAM role to the EC2 instance", "correct": true},
+        {"text": "Use AWS access keys in environment variables", "correct": false}
+      ],
+      "explanation": "IAM roles provide temporary credentials automatically rotated by AWS, eliminating the need to manage long-term credentials.",
+      "skill_code": "AWS_IAM"
+    },
+    {
+      "title": "AWS_SAA_LAMBDA_001",
+      "question": "Your Lambda function execution time varies from 100ms to 5 minutes. How should you optimize costs?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Use maximum memory allocation", "correct": false},
+        {"text": "Enable Reserved Concurrency", "correct": false},
+        {"text": "Set appropriate timeout and memory based on profiling", "correct": true},
+        {"text": "Always use minimum memory (128 MB)", "correct": false}
+      ],
+      "explanation": "Right-sizing memory and timeout based on actual usage optimizes cost. Lambda bills per GB-second.",
+      "skill_code": "AWS_LAMBDA"
+    },
+    {
+      "title": "AWS_SAA_CLOUDFRONT_001",
+      "question": "You want to distribute content globally with low latency. Which AWS services work together? (Choose TWO)",
+      "question_type": "multiple",
+      "answers": [
+        {"text": "Amazon CloudFront", "correct": true},
+        {"text": "Amazon S3", "correct": true},
+        {"text": "Amazon EFS", "correct": false},
+        {"text": "Amazon EBS", "correct": false}
+      ],
+      "explanation": "CloudFront is a CDN that caches content from origins like S3, reducing latency for global users.",
+      "skill_code": "AWS_CLOUDFRONT"
+    },
+    {
+      "title": "AWS_SAA_DDB_001",
+      "question": "You need a NoSQL database that automatically scales and provides single-digit millisecond latency. Which service should you use?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Amazon RDS", "correct": false},
+        {"text": "Amazon DynamoDB", "correct": true},
+        {"text": "Amazon ElastiCache", "correct": false},
+        {"text": "Amazon Redshift", "correct": false}
+      ],
+      "explanation": "DynamoDB is a fully managed NoSQL database with automatic scaling and consistent single-digit millisecond latency.",
+      "skill_code": "AWS_DYNAMODB"
+    },
+    {
+      "title": "AWS_SAA_MONITORING_001",
+      "question": "Which AWS service should you use to collect and track metrics, collect log files, and set alarms?",
+      "question_type": "single",
+      "answers": [
+        {"text": "AWS CloudTrail", "correct": false},
+        {"text": "Amazon CloudWatch", "correct": true},
+        {"text": "AWS Config", "correct": false},
+        {"text": "AWS X-Ray", "correct": false}
+      ],
+      "explanation": "CloudWatch is the primary monitoring service for AWS resources, providing metrics, logs, and alarms.",
+      "skill_code": "AWS_CLOUDWATCH"
+    }
+  ]
+}

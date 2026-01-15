@@ -1,0 +1,134 @@
+-- =====================================================
+-- V15: Add new certificate categories and standardize naming
+-- This migration is idempotent - safe to run multiple times
+-- =====================================================
+
+-- 1. Update existing categories to standardized naming (only if old name exists)
+UPDATE wp_learndash_pro_quiz_category SET category_name = 'PSM_I' WHERE category_name = 'PSMI';
+UPDATE wp_learndash_pro_quiz_category SET category_name = 'PSPO_I' WHERE category_name = 'PSPOI';
+UPDATE wp_learndash_pro_quiz_category SET category_name = 'PSM_II' WHERE category_name = 'PSM2';
+UPDATE wp_learndash_pro_quiz_category SET category_name = 'PSPO_II' WHERE category_name = 'PSPO2';
+UPDATE wp_learndash_pro_quiz_category SET category_name = 'ISTQB_CTFL_K1' WHERE category_name = 'ISTQB_CTLF_K1';
+UPDATE wp_learndash_pro_quiz_category SET category_name = 'ISTQB_CTFL_K2' WHERE category_name = 'ISTQB_CTLF_K2';
+UPDATE wp_learndash_pro_quiz_category SET category_name = 'ISTQB_CTFL_K3' WHERE category_name = 'ISTQB_CTLF_K3';
+
+-- 2. Add new categories using INSERT IGNORE (skip if already exists)
+-- Developer certificates
+INSERT IGNORE INTO wp_learndash_pro_quiz_category (category_name) VALUES
+('DEV_GOLANG'), ('DEV_SYSTEM_DESIGN'), ('DEV_SQL_DATABASE'), ('JAVA_OCP_17'),
+('DEV_DEVOPS'), ('DEV_FRONTEND'), ('DEV_NODEJS'), ('DEV_REACT'),
+('DEV_PYTHON'), ('DEV_BACKEND'), ('DEV_API_DESIGN'), ('DEV_JAVASCRIPT_TS'),
+('DEV_SOFTWARE_ARCH');
+
+-- Cloud/DevOps certificates
+INSERT IGNORE INTO wp_learndash_pro_quiz_category (category_name) VALUES
+('AWS_SOLUTIONS_ARCHITECT'), ('AWS_SAA_C03'), ('AWS_SAP_C02'), ('AWS_DVA_C02'), ('AWS_DOP_C02'),
+('GCP_ACE'), ('GCP_PROFESSIONAL'),
+('AZURE_AZ104'), ('AZURE_ADMINISTRATOR'),
+('DOCKER_DCA'), ('KUBERNETES_CKA'), ('KUBERNETES_CKAD'), ('KUBERNETES_ADMINISTRATOR'),
+('HASHICORP_TERRAFORM');
+
+-- Testing/QA certificates
+INSERT IGNORE INTO wp_learndash_pro_quiz_category (category_name) VALUES
+('ISTQB_FOUNDATION_V4_0'), ('ISTQB_AI_TESTING'), ('ISTQB_AGILE_TESTER');
+
+-- Scrum/Agile certificates
+INSERT IGNORE INTO wp_learndash_pro_quiz_category (category_name) VALUES
+('AGILE_SCRUM_MASTER'), ('PMI_PMP');
+
+-- Security certificates
+INSERT IGNORE INTO wp_learndash_pro_quiz_category (category_name) VALUES
+('COMPTIA_SECURITY_PLUS'), ('ISC2_CISSP'), ('VMWARE_SPRING_PRO');
+
+-- Business Analysis Foundation
+INSERT IGNORE INTO wp_learndash_pro_quiz_category (category_name) VALUES
+('BA_FOUNDATION');
+
+-- =====================================================
+-- Create mapping table for certificate -> category relationship
+-- =====================================================
+CREATE TABLE IF NOT EXISTS wp_certificate_category_mapping (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    certificate_code VARCHAR(50) NOT NULL,
+    certificate_name VARCHAR(200) NOT NULL,
+    category_id INT UNSIGNED,
+    category_group VARCHAR(50),
+    display_order INT DEFAULT 0,
+    is_active TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_cert_code (certificate_code),
+    KEY idx_category_group (category_group)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Insert certificate mappings (using INSERT IGNORE to handle duplicates)
+INSERT IGNORE INTO wp_certificate_category_mapping (certificate_code, certificate_name, category_group, display_order) VALUES
+-- Scrum/Agile Group
+('PSM_I', 'Professional Scrum Master I', 'SCRUM_AGILE', 1),
+('PSM_II', 'Professional Scrum Master II', 'SCRUM_AGILE', 2),
+('PSPO_I', 'Professional Scrum Product Owner I', 'SCRUM_AGILE', 3),
+('PSPO_II', 'Professional Scrum Product Owner II', 'SCRUM_AGILE', 4),
+('PSK', 'Professional Scrum with Kanban', 'SCRUM_AGILE', 5),
+('AGILE_SCRUM_MASTER', 'Agile Scrum Master Certification', 'SCRUM_AGILE', 6),
+('PMI_PMP', 'PMI Project Management Professional', 'SCRUM_AGILE', 7),
+
+-- ISTQB/Testing Group
+('ISTQB_CTFL', 'ISTQB Certified Tester Foundation Level', 'TESTING_QA', 1),
+('ISTQB_FOUNDATION_V4_0', 'ISTQB Foundation Level v4.0', 'TESTING_QA', 2),
+('ISTQB_TA', 'ISTQB Test Analyst', 'TESTING_QA', 3),
+('ISTQB_TM', 'ISTQB Test Manager', 'TESTING_QA', 4),
+('CTAL_TTA', 'ISTQB Advanced Technical Test Analyst', 'TESTING_QA', 5),
+('ISTQB_AI_TESTING', 'ISTQB AI Testing', 'TESTING_QA', 6),
+('ISTQB_AGILE_TESTER', 'ISTQB Agile Tester Extension', 'TESTING_QA', 7),
+
+-- Business Analysis Group
+('ECBA', 'Entry Certificate in Business Analysis', 'BUSINESS_ANALYSIS', 1),
+('CCBA', 'Certification of Capability in Business Analysis', 'BUSINESS_ANALYSIS', 2),
+('CBAP', 'Certified Business Analysis Professional', 'BUSINESS_ANALYSIS', 3),
+('BA_FOUNDATION', 'Business Analyst Foundation', 'BUSINESS_ANALYSIS', 4),
+
+-- AWS Cloud Group
+('AWS_SOLUTIONS_ARCHITECT', 'AWS Solutions Architect', 'CLOUD_AWS', 1),
+('AWS_SAA_C03', 'AWS Solutions Architect Associate (SAA-C03)', 'CLOUD_AWS', 2),
+('AWS_SAP_C02', 'AWS Solutions Architect Professional (SAP-C02)', 'CLOUD_AWS', 3),
+('AWS_DVA_C02', 'AWS Developer Associate (DVA-C02)', 'CLOUD_AWS', 4),
+('AWS_DOP_C02', 'AWS DevOps Engineer Professional (DOP-C02)', 'CLOUD_AWS', 5),
+
+-- GCP Cloud Group
+('GCP_ACE', 'Google Cloud Associate Cloud Engineer', 'CLOUD_GCP', 1),
+('GCP_PROFESSIONAL', 'Google Cloud Professional', 'CLOUD_GCP', 2),
+
+-- Azure Cloud Group
+('AZURE_AZ104', 'Microsoft Azure Administrator (AZ-104)', 'CLOUD_AZURE', 1),
+('AZURE_ADMINISTRATOR', 'Microsoft Azure Administrator', 'CLOUD_AZURE', 2),
+
+-- Container/Kubernetes Group
+('DOCKER_DCA', 'Docker Certified Associate', 'CONTAINER_K8S', 1),
+('KUBERNETES_CKA', 'Certified Kubernetes Administrator', 'CONTAINER_K8S', 2),
+('KUBERNETES_CKAD', 'Certified Kubernetes Application Developer', 'CONTAINER_K8S', 3),
+('KUBERNETES_ADMINISTRATOR', 'Kubernetes Administrator', 'CONTAINER_K8S', 4),
+('HASHICORP_TERRAFORM', 'HashiCorp Terraform Associate', 'CONTAINER_K8S', 5),
+
+-- Developer Group
+('DEV_GOLANG', 'Go/Golang Developer', 'DEVELOPER', 1),
+('DEV_SYSTEM_DESIGN', 'System Design', 'DEVELOPER', 2),
+('DEV_SQL_DATABASE', 'SQL & Database', 'DEVELOPER', 3),
+('JAVA_OCP_17', 'Java OCP 17 Certification', 'DEVELOPER', 4),
+('DEV_DEVOPS', 'DevOps Engineering', 'DEVELOPER', 5),
+('DEV_FRONTEND', 'Frontend Development', 'DEVELOPER', 6),
+('DEV_NODEJS', 'Node.js Development', 'DEVELOPER', 7),
+('DEV_REACT', 'React Development', 'DEVELOPER', 8),
+('DEV_PYTHON', 'Python Development', 'DEVELOPER', 9),
+('DEV_BACKEND', 'Backend Development', 'DEVELOPER', 10),
+('DEV_API_DESIGN', 'API Design', 'DEVELOPER', 11),
+('DEV_JAVASCRIPT_TS', 'JavaScript/TypeScript', 'DEVELOPER', 12),
+('DEV_SOFTWARE_ARCH', 'Software Architecture', 'DEVELOPER', 13),
+
+-- Security Group
+('COMPTIA_SECURITY_PLUS', 'CompTIA Security+', 'SECURITY', 1),
+('ISC2_CISSP', 'ISC2 CISSP', 'SECURITY', 2),
+('VMWARE_SPRING_PRO', 'VMware Spring Professional', 'SECURITY', 3);
+
+-- Update category_id based on existing categories
+UPDATE wp_certificate_category_mapping ccm
+JOIN wp_learndash_pro_quiz_category cat ON ccm.certificate_code = cat.category_name
+SET ccm.category_id = cat.category_id;

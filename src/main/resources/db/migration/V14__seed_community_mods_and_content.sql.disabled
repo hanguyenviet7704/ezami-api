@@ -1,0 +1,712 @@
+-- Create Moderator accounts and community content for each certification
+-- Password: Ezami@2024 (hashed with WordPress phpass)
+
+-- =========================================
+-- 1. CREATE MODERATOR ACCOUNTS
+-- =========================================
+
+-- PSM Moderator (Password: Ezami@2024)
+INSERT INTO wp_users (user_login, user_pass, user_nicename, user_email, user_url, user_registered, user_status, display_name, app_code)
+VALUES ('mod_psm', '$wp$2y$10$Vh..sGskACeKONs4UOxMGOK9AybzfCadxsLz.COcCQhkHp/dE2vbW', 'mod-psm', 'mod.psm@ezami.vn', '', NOW(), 0, 'PSM Mentor', 'ezami');
+SET @psm_mod_id = LAST_INSERT_ID();
+
+-- ISTQB Moderator (Password: Ezami@2024)
+INSERT INTO wp_users (user_login, user_pass, user_nicename, user_email, user_url, user_registered, user_status, display_name, app_code)
+VALUES ('mod_istqb', '$wp$2y$10$Vh..sGskACeKONs4UOxMGOK9AybzfCadxsLz.COcCQhkHp/dE2vbW', 'mod-istqb', 'mod.istqb@ezami.vn', '', NOW(), 0, 'ISTQB Mentor', 'ezami');
+SET @istqb_mod_id = LAST_INSERT_ID();
+
+-- BA Moderator (Password: Ezami@2024)
+INSERT INTO wp_users (user_login, user_pass, user_nicename, user_email, user_url, user_registered, user_status, display_name, app_code)
+VALUES ('mod_ba', '$wp$2y$10$Vh..sGskACeKONs4UOxMGOK9AybzfCadxsLz.COcCQhkHp/dE2vbW', 'mod-ba', 'mod.ba@ezami.vn', '', NOW(), 0, 'BA Mentor', 'ezami');
+SET @ba_mod_id = LAST_INSERT_ID();
+
+-- Set user capabilities (editor role with moderator abilities)
+INSERT INTO wp_usermeta (user_id, meta_key, meta_value) VALUES
+(@psm_mod_id, 'wp_capabilities', 'a:1:{s:6:"editor";b:1;}'),
+(@psm_mod_id, 'wp_user_level', '7'),
+(@psm_mod_id, 'nickname', 'PSM Mentor'),
+(@psm_mod_id, 'first_name', 'PSM'),
+(@psm_mod_id, 'last_name', 'Mentor'),
+(@psm_mod_id, 'description', 'Certified PSM III with 10+ years Agile experience. Here to help you master Scrum!'),
+
+(@istqb_mod_id, 'wp_capabilities', 'a:1:{s:6:"editor";b:1;}'),
+(@istqb_mod_id, 'wp_user_level', '7'),
+(@istqb_mod_id, 'nickname', 'ISTQB Mentor'),
+(@istqb_mod_id, 'first_name', 'ISTQB'),
+(@istqb_mod_id, 'last_name', 'Mentor'),
+(@istqb_mod_id, 'description', 'ISTQB Full Advanced certified. Passionate about software quality and testing excellence.'),
+
+(@ba_mod_id, 'wp_capabilities', 'a:1:{s:6:"editor";b:1;}'),
+(@ba_mod_id, 'wp_user_level', '7'),
+(@ba_mod_id, 'nickname', 'BA Mentor'),
+(@ba_mod_id, 'first_name', 'BA'),
+(@ba_mod_id, 'last_name', 'Mentor'),
+(@ba_mod_id, 'description', 'CBAP certified with expertise in BABOK. Ready to guide your BA journey!');
+
+-- =========================================
+-- 2. CREATE COMMUNITY SPACES
+-- =========================================
+
+-- Get parent space group id
+SET @parent_id = (SELECT id FROM wp_fcom_spaces WHERE slug = 'get-started' LIMIT 1);
+
+-- PSM Community Space
+INSERT INTO wp_fcom_spaces (created_by, parent_id, title, slug, description, type, privacy, status, serial, created_at, updated_at)
+VALUES (@psm_mod_id, @parent_id, 'PSM - Scrum Master', 'psm-scrum-master',
+'Cộng đồng dành cho những ai đang theo đuổi chứng chỉ Professional Scrum Master (PSM I, II, III). Chia sẻ kiến thức, kinh nghiệm thi và hỗ trợ lẫn nhau!',
+'space', 'public', 'active', 2, NOW(), NOW());
+SET @psm_space_id = LAST_INSERT_ID();
+
+-- ISTQB Community Space
+INSERT INTO wp_fcom_spaces (created_by, parent_id, title, slug, description, type, privacy, status, serial, created_at, updated_at)
+VALUES (@istqb_mod_id, @parent_id, 'ISTQB - Software Testing', 'istqb-software-testing',
+'Cộng đồng cho Tester chuyên nghiệp! Cùng nhau chinh phục ISTQB Foundation, Advanced và Expert. Chia sẻ tips, tricks và kinh nghiệm thực tế.',
+'space', 'public', 'active', 3, NOW(), NOW());
+SET @istqb_space_id = LAST_INSERT_ID();
+
+-- BA Community Space
+INSERT INTO wp_fcom_spaces (created_by, parent_id, title, slug, description, type, privacy, status, serial, created_at, updated_at)
+VALUES (@ba_mod_id, @parent_id, 'BA - Business Analysis', 'ba-business-analysis',
+'Cộng đồng Business Analyst chuyên nghiệp. Chinh phục ECBA, CCBA, CBAP cùng nhau! Thảo luận BABOK, case studies và career development.',
+'space', 'public', 'active', 4, NOW(), NOW());
+SET @ba_space_id = LAST_INSERT_ID();
+
+-- Add mods as space admins
+INSERT INTO wp_fcom_space_user (space_id, user_id, role, status, created_at, updated_at) VALUES
+(@psm_space_id, @psm_mod_id, 'admin', 'active', NOW(), NOW()),
+(@istqb_space_id, @istqb_mod_id, 'admin', 'active', NOW(), NOW()),
+(@ba_space_id, @ba_mod_id, 'admin', 'active', NOW(), NOW());
+
+-- =========================================
+-- 3. CREATE WELCOME POSTS - PSM
+-- =========================================
+
+-- PSM Welcome Post
+INSERT INTO wp_fcom_posts (user_id, title, slug, message, message_rendered, type, content_type, space_id, privacy, status, is_sticky, priority, created_at, updated_at)
+VALUES (@psm_mod_id, '🎯 Chào mừng đến với Cộng đồng PSM!', 'welcome-psm-community',
+'<div class="welcome-post">
+<h2>👋 Xin chào các Scrum Master tương lai!</h2>
+
+<p>Chào mừng bạn đến với cộng đồng <strong>Professional Scrum Master</strong> của Ezami! Đây là nơi chúng ta cùng nhau:</p>
+
+<h3>📚 Học tập & Ôn luyện</h3>
+<ul>
+<li>Thảo luận Scrum Guide 2020</li>
+<li>Giải thích các khái niệm: Sprint, Product Backlog, Sprint Backlog, Increment</li>
+<li>Phân biệt vai trò: Scrum Master vs Product Owner vs Developers</li>
+<li>Luyện tập câu hỏi PSM I, II</li>
+</ul>
+
+<h3>💡 Chia sẻ Kinh nghiệm</h3>
+<ul>
+<li>Tips đậu PSM I từ lần thi đầu tiên</li>
+<li>Các lỗi thường gặp khi làm bài thi</li>
+<li>Tài liệu học tập hay</li>
+</ul>
+
+<h3>🤝 Hỗ trợ lẫn nhau</h3>
+<ul>
+<li>Giải đáp thắc mắc về Scrum</li>
+<li>Review và góp ý cho nhau</li>
+<li>Tạo nhóm học tập</li>
+</ul>
+
+<h3>📌 Quy tắc cộng đồng</h3>
+<ol>
+<li>Tôn trọng mọi thành viên</li>
+<li>Không spam hoặc quảng cáo</li>
+<li>Chia sẻ kiến thức đúng với Scrum Guide</li>
+<li>Đặt câu hỏi rõ ràng, cụ thể</li>
+</ol>
+
+<p><strong>🚀 Bắt đầu ngay:</strong> Hãy giới thiệu bản thân và mục tiêu của bạn trong phần comment!</p>
+
+<p>Chúc các bạn sớm đạt được chứng chỉ PSM! 💪</p>
+</div>',
+'<div class="welcome-post">
+<h2>👋 Xin chào các Scrum Master tương lai!</h2>
+
+<p>Chào mừng bạn đến với cộng đồng <strong>Professional Scrum Master</strong> của Ezami! Đây là nơi chúng ta cùng nhau:</p>
+
+<h3>📚 Học tập & Ôn luyện</h3>
+<ul>
+<li>Thảo luận Scrum Guide 2020</li>
+<li>Giải thích các khái niệm: Sprint, Product Backlog, Sprint Backlog, Increment</li>
+<li>Phân biệt vai trò: Scrum Master vs Product Owner vs Developers</li>
+<li>Luyện tập câu hỏi PSM I, II</li>
+</ul>
+
+<h3>💡 Chia sẻ Kinh nghiệm</h3>
+<ul>
+<li>Tips đậu PSM I từ lần thi đầu tiên</li>
+<li>Các lỗi thường gặp khi làm bài thi</li>
+<li>Tài liệu học tập hay</li>
+</ul>
+
+<h3>🤝 Hỗ trợ lẫn nhau</h3>
+<ul>
+<li>Giải đáp thắc mắc về Scrum</li>
+<li>Review và góp ý cho nhau</li>
+<li>Tạo nhóm học tập</li>
+</ul>
+
+<h3>📌 Quy tắc cộng đồng</h3>
+<ol>
+<li>Tôn trọng mọi thành viên</li>
+<li>Không spam hoặc quảng cáo</li>
+<li>Chia sẻ kiến thức đúng với Scrum Guide</li>
+<li>Đặt câu hỏi rõ ràng, cụ thể</li>
+</ol>
+
+<p><strong>🚀 Bắt đầu ngay:</strong> Hãy giới thiệu bản thân và mục tiêu của bạn trong phần comment!</p>
+
+<p>Chúc các bạn sớm đạt được chứng chỉ PSM! 💪</p>
+</div>',
+'text', 'text', @psm_space_id, 'public', 'published', 1, 100, NOW(), NOW());
+
+-- PSM Study Tips Post
+INSERT INTO wp_fcom_posts (user_id, title, slug, message, message_rendered, type, content_type, space_id, privacy, status, is_sticky, priority, created_at, updated_at)
+VALUES (@psm_mod_id, '📖 Lộ trình học PSM I trong 2 tuần', 'psm-study-roadmap-2-weeks',
+'<div class="study-guide">
+<h2>🗓️ Lộ trình 14 ngày chinh phục PSM I</h2>
+
+<h3>Tuần 1: Nền tảng Scrum</h3>
+
+<p><strong>Ngày 1-2: Đọc Scrum Guide</strong></p>
+<ul>
+<li>Đọc kỹ Scrum Guide 2020 (ít nhất 3 lần)</li>
+<li>Ghi chú các điểm quan trọng</li>
+<li>Highlight những thay đổi so với phiên bản cũ</li>
+</ul>
+
+<p><strong>Ngày 3-4: Scrum Theory & Values</strong></p>
+<ul>
+<li>Empiricism: Transparency, Inspection, Adaptation</li>
+<li>5 Scrum Values: Commitment, Focus, Openness, Respect, Courage</li>
+<li>Làm 50 câu hỏi trên Ezami</li>
+</ul>
+
+<p><strong>Ngày 5-7: Scrum Team & Events</strong></p>
+<ul>
+<li>Vai trò: Scrum Master, Product Owner, Developers</li>
+<li>Events: Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective</li>
+<li>Làm 100 câu hỏi trên Ezami</li>
+</ul>
+
+<h3>Tuần 2: Đào sâu & Luyện đề</h3>
+
+<p><strong>Ngày 8-9: Artifacts & Commitments</strong></p>
+<ul>
+<li>Product Backlog → Product Goal</li>
+<li>Sprint Backlog → Sprint Goal</li>
+<li>Increment → Definition of Done</li>
+</ul>
+
+<p><strong>Ngày 10-11: Case Studies</strong></p>
+<ul>
+<li>Đọc các tình huống thực tế</li>
+<li>Phân tích cách áp dụng Scrum</li>
+</ul>
+
+<p><strong>Ngày 12-14: Luyện đề tổng hợp</strong></p>
+<ul>
+<li>Làm ít nhất 3 bộ đề mô phỏng</li>
+<li>Review lại các câu sai</li>
+<li>Đạt >90% mới nên đi thi</li>
+</ul>
+
+<h3>💡 Tips quan trọng</h3>
+<ol>
+<li>Scrum Guide là nguồn chân lý duy nhất</li>
+<li>Đọc kỹ từng câu hỏi - có thể có "trap words"</li>
+<li>Thời gian thi: 60 phút cho 80 câu → 45 giây/câu</li>
+<li>Điểm đậu: 85%</li>
+</ol>
+
+<p>Chúc các bạn thành công! 🎯</p>
+</div>',
+'<div class="study-guide">
+<h2>🗓️ Lộ trình 14 ngày chinh phục PSM I</h2>
+
+<h3>Tuần 1: Nền tảng Scrum</h3>
+
+<p><strong>Ngày 1-2: Đọc Scrum Guide</strong></p>
+<ul>
+<li>Đọc kỹ Scrum Guide 2020 (ít nhất 3 lần)</li>
+<li>Ghi chú các điểm quan trọng</li>
+<li>Highlight những thay đổi so với phiên bản cũ</li>
+</ul>
+
+<p><strong>Ngày 3-4: Scrum Theory & Values</strong></p>
+<ul>
+<li>Empiricism: Transparency, Inspection, Adaptation</li>
+<li>5 Scrum Values: Commitment, Focus, Openness, Respect, Courage</li>
+<li>Làm 50 câu hỏi trên Ezami</li>
+</ul>
+
+<p><strong>Ngày 5-7: Scrum Team & Events</strong></p>
+<ul>
+<li>Vai trò: Scrum Master, Product Owner, Developers</li>
+<li>Events: Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective</li>
+<li>Làm 100 câu hỏi trên Ezami</li>
+</ul>
+
+<h3>Tuần 2: Đào sâu & Luyện đề</h3>
+
+<p><strong>Ngày 8-9: Artifacts & Commitments</strong></p>
+<ul>
+<li>Product Backlog → Product Goal</li>
+<li>Sprint Backlog → Sprint Goal</li>
+<li>Increment → Definition of Done</li>
+</ul>
+
+<p><strong>Ngày 10-11: Case Studies</strong></p>
+<ul>
+<li>Đọc các tình huống thực tế</li>
+<li>Phân tích cách áp dụng Scrum</li>
+</ul>
+
+<p><strong>Ngày 12-14: Luyện đề tổng hợp</strong></p>
+<ul>
+<li>Làm ít nhất 3 bộ đề mô phỏng</li>
+<li>Review lại các câu sai</li>
+<li>Đạt >90% mới nên đi thi</li>
+</ul>
+
+<h3>💡 Tips quan trọng</h3>
+<ol>
+<li>Scrum Guide là nguồn chân lý duy nhất</li>
+<li>Đọc kỹ từng câu hỏi - có thể có "trap words"</li>
+<li>Thời gian thi: 60 phút cho 80 câu → 45 giây/câu</li>
+<li>Điểm đậu: 85%</li>
+</ol>
+
+<p>Chúc các bạn thành công! 🎯</p>
+</div>',
+'text', 'text', @psm_space_id, 'public', 'published', 1, 90, NOW(), NOW());
+
+-- =========================================
+-- 4. CREATE WELCOME POSTS - ISTQB
+-- =========================================
+
+-- ISTQB Welcome Post
+INSERT INTO wp_fcom_posts (user_id, title, slug, message, message_rendered, type, content_type, space_id, privacy, status, is_sticky, priority, created_at, updated_at)
+VALUES (@istqb_mod_id, '🧪 Chào mừng đến với Cộng đồng ISTQB!', 'welcome-istqb-community',
+'<div class="welcome-post">
+<h2>👋 Xin chào các Tester chuyên nghiệp!</h2>
+
+<p>Chào mừng bạn đến với cộng đồng <strong>ISTQB - Software Testing</strong> của Ezami! Nơi hội tụ những người đam mê chất lượng phần mềm.</p>
+
+<h3>🎯 Các chứng chỉ ISTQB</h3>
+<ul>
+<li><strong>CTFL</strong> - Certified Tester Foundation Level</li>
+<li><strong>CTAL-TA</strong> - Test Analyst</li>
+<li><strong>CTAL-TM</strong> - Test Manager</li>
+<li><strong>CTAL-TAE</strong> - Test Automation Engineer</li>
+</ul>
+
+<h3>📚 Nội dung thảo luận</h3>
+<ul>
+<li>Testing Fundamentals & Principles</li>
+<li>Test Design Techniques (EP, BVA, Decision Table, State Transition)</li>
+<li>Test Management & Planning</li>
+<li>Static Testing & Reviews</li>
+<li>Test Tools & Automation</li>
+</ul>
+
+<h3>💡 Chia sẻ tại đây</h3>
+<ul>
+<li>Kinh nghiệm thi ISTQB</li>
+<li>Tài liệu và Syllabus cập nhật</li>
+<li>Case studies thực tế</li>
+<li>Career path của Tester</li>
+</ul>
+
+<h3>📌 Quy tắc cộng đồng</h3>
+<ol>
+<li>Tôn trọng mọi thành viên</li>
+<li>Không chia sẻ đề thi thật</li>
+<li>Trích nguồn khi chia sẻ tài liệu</li>
+<li>Hỏi đáp dựa trên ISTQB Syllabus</li>
+</ol>
+
+<p><strong>🔬 Bắt đầu ngay:</strong> Bạn đang chuẩn bị cho level nào? Comment bên dưới nhé!</p>
+
+<p>Quality is everyone''s responsibility! 🏆</p>
+</div>',
+'<div class="welcome-post">
+<h2>👋 Xin chào các Tester chuyên nghiệp!</h2>
+
+<p>Chào mừng bạn đến với cộng đồng <strong>ISTQB - Software Testing</strong> của Ezami! Nơi hội tụ những người đam mê chất lượng phần mềm.</p>
+
+<h3>🎯 Các chứng chỉ ISTQB</h3>
+<ul>
+<li><strong>CTFL</strong> - Certified Tester Foundation Level</li>
+<li><strong>CTAL-TA</strong> - Test Analyst</li>
+<li><strong>CTAL-TM</strong> - Test Manager</li>
+<li><strong>CTAL-TAE</strong> - Test Automation Engineer</li>
+</ul>
+
+<h3>📚 Nội dung thảo luận</h3>
+<ul>
+<li>Testing Fundamentals & Principles</li>
+<li>Test Design Techniques (EP, BVA, Decision Table, State Transition)</li>
+<li>Test Management & Planning</li>
+<li>Static Testing & Reviews</li>
+<li>Test Tools & Automation</li>
+</ul>
+
+<h3>💡 Chia sẻ tại đây</h3>
+<ul>
+<li>Kinh nghiệm thi ISTQB</li>
+<li>Tài liệu và Syllabus cập nhật</li>
+<li>Case studies thực tế</li>
+<li>Career path của Tester</li>
+</ul>
+
+<h3>📌 Quy tắc cộng đồng</h3>
+<ol>
+<li>Tôn trọng mọi thành viên</li>
+<li>Không chia sẻ đề thi thật</li>
+<li>Trích nguồn khi chia sẻ tài liệu</li>
+<li>Hỏi đáp dựa trên ISTQB Syllabus</li>
+</ol>
+
+<p><strong>🔬 Bắt đầu ngay:</strong> Bạn đang chuẩn bị cho level nào? Comment bên dưới nhé!</p>
+
+<p>Quality is everyone''s responsibility! 🏆</p>
+</div>',
+'text', 'text', @istqb_space_id, 'public', 'published', 1, 100, NOW(), NOW());
+
+-- ISTQB 7 Principles Post
+INSERT INTO wp_fcom_posts (user_id, title, slug, message, message_rendered, type, content_type, space_id, privacy, status, is_sticky, priority, created_at, updated_at)
+VALUES (@istqb_mod_id, '📋 7 Nguyên tắc Testing - Phải thuộc lòng!', 'istqb-7-testing-principles',
+'<div class="knowledge-post">
+<h2>🔑 7 Nguyên tắc Testing theo ISTQB</h2>
+
+<p>Đây là kiến thức <strong>BẮT BUỘC</strong> phải nắm vững khi thi CTFL!</p>
+
+<h3>1️⃣ Testing shows the presence of defects, not their absence</h3>
+<p><em>Kiểm thử chỉ ra sự hiện diện của lỗi, không chứng minh phần mềm không có lỗi.</em></p>
+<p>→ Dù test bao nhiêu, vẫn có thể còn bug ẩn.</p>
+
+<h3>2️⃣ Exhaustive testing is impossible</h3>
+<p><em>Kiểm thử toàn diện là bất khả thi.</em></p>
+<p>→ Không thể test tất cả combinations. Phải ưu tiên dựa trên risk.</p>
+
+<h3>3️⃣ Early testing saves time and money</h3>
+<p><em>Kiểm thử sớm tiết kiệm thời gian và chi phí.</em></p>
+<p>→ Bug phát hiện ở requirement rẻ hơn 100x so với production.</p>
+
+<h3>4️⃣ Defects cluster together</h3>
+<p><em>Lỗi có xu hướng tập trung.</em></p>
+<p>→ 80% bug thường nằm trong 20% modules (Pareto principle).</p>
+
+<h3>5️⃣ Beware of the pesticide paradox</h3>
+<p><em>Cẩn thận với nghịch lý thuốc trừ sâu.</em></p>
+<p>→ Test cases cũ không còn hiệu quả. Phải update và thêm test mới.</p>
+
+<h3>6️⃣ Testing is context dependent</h3>
+<p><em>Kiểm thử phụ thuộc vào ngữ cảnh.</em></p>
+<p>→ Test e-commerce khác với test medical software.</p>
+
+<h3>7️⃣ Absence-of-errors is a fallacy</h3>
+<p><em>Không có lỗi không có nghĩa là thành công.</em></p>
+<p>→ Phần mềm không bug nhưng không đáp ứng yêu cầu = thất bại.</p>
+
+<hr>
+
+<h3>💡 Mẹo nhớ: "STEPED-A"</h3>
+<ul>
+<li><strong>S</strong>hows presence</li>
+<li><strong>T</strong>esting exhaustive impossible</li>
+<li><strong>E</strong>arly testing</li>
+<li><strong>P</strong>esticide paradox</li>
+<li><strong>E</strong>rrors cluster</li>
+<li><strong>D</strong>ependent on context</li>
+<li><strong>A</strong>bsence-of-errors fallacy</li>
+</ul>
+
+<p>Đã nhớ chưa? Comment thử xem bạn thuộc được bao nhiêu! 📝</p>
+</div>',
+'<div class="knowledge-post">
+<h2>🔑 7 Nguyên tắc Testing theo ISTQB</h2>
+
+<p>Đây là kiến thức <strong>BẮT BUỘC</strong> phải nắm vững khi thi CTFL!</p>
+
+<h3>1️⃣ Testing shows the presence of defects, not their absence</h3>
+<p><em>Kiểm thử chỉ ra sự hiện diện của lỗi, không chứng minh phần mềm không có lỗi.</em></p>
+<p>→ Dù test bao nhiêu, vẫn có thể còn bug ẩn.</p>
+
+<h3>2️⃣ Exhaustive testing is impossible</h3>
+<p><em>Kiểm thử toàn diện là bất khả thi.</em></p>
+<p>→ Không thể test tất cả combinations. Phải ưu tiên dựa trên risk.</p>
+
+<h3>3️⃣ Early testing saves time and money</h3>
+<p><em>Kiểm thử sớm tiết kiệm thời gian và chi phí.</em></p>
+<p>→ Bug phát hiện ở requirement rẻ hơn 100x so với production.</p>
+
+<h3>4️⃣ Defects cluster together</h3>
+<p><em>Lỗi có xu hướng tập trung.</em></p>
+<p>→ 80% bug thường nằm trong 20% modules (Pareto principle).</p>
+
+<h3>5️⃣ Beware of the pesticide paradox</h3>
+<p><em>Cẩn thận với nghịch lý thuốc trừ sâu.</em></p>
+<p>→ Test cases cũ không còn hiệu quả. Phải update và thêm test mới.</p>
+
+<h3>6️⃣ Testing is context dependent</h3>
+<p><em>Kiểm thử phụ thuộc vào ngữ cảnh.</em></p>
+<p>→ Test e-commerce khác với test medical software.</p>
+
+<h3>7️⃣ Absence-of-errors is a fallacy</h3>
+<p><em>Không có lỗi không có nghĩa là thành công.</em></p>
+<p>→ Phần mềm không bug nhưng không đáp ứng yêu cầu = thất bại.</p>
+
+<hr>
+
+<h3>💡 Mẹo nhớ: "STEPED-A"</h3>
+<ul>
+<li><strong>S</strong>hows presence</li>
+<li><strong>T</strong>esting exhaustive impossible</li>
+<li><strong>E</strong>arly testing</li>
+<li><strong>P</strong>esticide paradox</li>
+<li><strong>E</strong>rrors cluster</li>
+<li><strong>D</strong>ependent on context</li>
+<li><strong>A</strong>bsence-of-errors fallacy</li>
+</ul>
+
+<p>Đã nhớ chưa? Comment thử xem bạn thuộc được bao nhiêu! 📝</p>
+</div>',
+'text', 'text', @istqb_space_id, 'public', 'published', 1, 90, NOW(), NOW());
+
+-- =========================================
+-- 5. CREATE WELCOME POSTS - BA
+-- =========================================
+
+-- BA Welcome Post
+INSERT INTO wp_fcom_posts (user_id, title, slug, message, message_rendered, type, content_type, space_id, privacy, status, is_sticky, priority, created_at, updated_at)
+VALUES (@ba_mod_id, '📊 Chào mừng đến với Cộng đồng BA!', 'welcome-ba-community',
+'<div class="welcome-post">
+<h2>👋 Xin chào các Business Analyst!</h2>
+
+<p>Chào mừng bạn đến với cộng đồng <strong>Business Analysis</strong> của Ezami! Nơi chia sẻ kiến thức BABOK và hành trình chinh phục chứng chỉ IIBA.</p>
+
+<h3>🎓 Các chứng chỉ IIBA</h3>
+<ul>
+<li><strong>ECBA</strong> - Entry Certificate in Business Analysis (cho người mới)</li>
+<li><strong>CCBA</strong> - Certification of Capability in BA (2-3 năm kinh nghiệm)</li>
+<li><strong>CBAP</strong> - Certified Business Analysis Professional (5+ năm kinh nghiệm)</li>
+</ul>
+
+<h3>📚 6 Knowledge Areas (BABOK)</h3>
+<ol>
+<li>BA Planning & Monitoring</li>
+<li>Elicitation & Collaboration</li>
+<li>Requirements Lifecycle Management</li>
+<li>Strategy Analysis</li>
+<li>Requirements Analysis & Design Definition</li>
+<li>Solution Evaluation</li>
+</ol>
+
+<h3>💡 Nội dung thảo luận</h3>
+<ul>
+<li>Techniques: Use Cases, User Stories, Process Modeling</li>
+<li>Stakeholder Management</li>
+<li>Requirements Traceability</li>
+<li>Business Case Development</li>
+<li>Agile BA practices</li>
+</ul>
+
+<h3>📌 Quy tắc cộng đồng</h3>
+<ol>
+<li>Tôn trọng mọi thành viên</li>
+<li>Chia sẻ dựa trên BABOK Guide</li>
+<li>Khuyến khích case studies thực tế</li>
+<li>Hỗ trợ nhau trong hành trình học tập</li>
+</ol>
+
+<p><strong>💼 Bắt đầu ngay:</strong> Bạn đang ở level nào? ECBA, CCBA hay CBAP? Comment chia sẻ nhé!</p>
+
+<p>The BA journey starts here! 🚀</p>
+</div>',
+'<div class="welcome-post">
+<h2>👋 Xin chào các Business Analyst!</h2>
+
+<p>Chào mừng bạn đến với cộng đồng <strong>Business Analysis</strong> của Ezami! Nơi chia sẻ kiến thức BABOK và hành trình chinh phục chứng chỉ IIBA.</p>
+
+<h3>🎓 Các chứng chỉ IIBA</h3>
+<ul>
+<li><strong>ECBA</strong> - Entry Certificate in Business Analysis (cho người mới)</li>
+<li><strong>CCBA</strong> - Certification of Capability in BA (2-3 năm kinh nghiệm)</li>
+<li><strong>CBAP</strong> - Certified Business Analysis Professional (5+ năm kinh nghiệm)</li>
+</ul>
+
+<h3>📚 6 Knowledge Areas (BABOK)</h3>
+<ol>
+<li>BA Planning & Monitoring</li>
+<li>Elicitation & Collaboration</li>
+<li>Requirements Lifecycle Management</li>
+<li>Strategy Analysis</li>
+<li>Requirements Analysis & Design Definition</li>
+<li>Solution Evaluation</li>
+</ol>
+
+<h3>💡 Nội dung thảo luận</h3>
+<ul>
+<li>Techniques: Use Cases, User Stories, Process Modeling</li>
+<li>Stakeholder Management</li>
+<li>Requirements Traceability</li>
+<li>Business Case Development</li>
+<li>Agile BA practices</li>
+</ul>
+
+<h3>📌 Quy tắc cộng đồng</h3>
+<ol>
+<li>Tôn trọng mọi thành viên</li>
+<li>Chia sẻ dựa trên BABOK Guide</li>
+<li>Khuyến khích case studies thực tế</li>
+<li>Hỗ trợ nhau trong hành trình học tập</li>
+</ol>
+
+<p><strong>💼 Bắt đầu ngay:</strong> Bạn đang ở level nào? ECBA, CCBA hay CBAP? Comment chia sẻ nhé!</p>
+
+<p>The BA journey starts here! 🚀</p>
+</div>',
+'text', 'text', @ba_space_id, 'public', 'published', 1, 100, NOW(), NOW());
+
+-- BA Techniques Post
+INSERT INTO wp_fcom_posts (user_id, title, slug, message, message_rendered, type, content_type, space_id, privacy, status, is_sticky, priority, created_at, updated_at)
+VALUES (@ba_mod_id, '🛠️ 50 Techniques của BABOK - Tổng hợp', 'babok-50-techniques-overview',
+'<div class="knowledge-post">
+<h2>📖 50 Techniques trong BABOK v3</h2>
+
+<p>BABOK định nghĩa 50 techniques được sử dụng trong Business Analysis. Dưới đây là phân loại theo mục đích sử dụng:</p>
+
+<h3>📝 Elicitation Techniques (Thu thập yêu cầu)</h3>
+<ul>
+<li><strong>Interviews</strong> - Phỏng vấn 1-1 hoặc nhóm</li>
+<li><strong>Workshops</strong> - Hội thảo tập trung</li>
+<li><strong>Observation</strong> - Quan sát người dùng làm việc</li>
+<li><strong>Surveys/Questionnaires</strong> - Khảo sát</li>
+<li><strong>Brainstorming</strong> - Động não</li>
+<li><strong>Document Analysis</strong> - Phân tích tài liệu</li>
+<li><strong>Focus Groups</strong> - Nhóm tập trung</li>
+<li><strong>Prototyping</strong> - Tạo mẫu</li>
+</ul>
+
+<h3>📊 Analysis Techniques (Phân tích)</h3>
+<ul>
+<li><strong>SWOT Analysis</strong> - Strengths, Weaknesses, Opportunities, Threats</li>
+<li><strong>Root Cause Analysis</strong> - Phân tích nguyên nhân gốc</li>
+<li><strong>Gap Analysis</strong> - Phân tích khoảng cách AS-IS vs TO-BE</li>
+<li><strong>MOST Analysis</strong> - Mission, Objectives, Strategy, Tactics</li>
+<li><strong>PESTLE Analysis</strong> - Political, Economic, Social, Tech, Legal, Environmental</li>
+<li><strong>MoSCoW Prioritization</strong> - Must, Should, Could, Won''t</li>
+</ul>
+
+<h3>📐 Modeling Techniques (Mô hình hóa)</h3>
+<ul>
+<li><strong>Use Cases & Use Case Diagrams</strong></li>
+<li><strong>User Stories</strong> - As a [role], I want [feature], so that [benefit]</li>
+<li><strong>Process Modeling (BPMN)</strong></li>
+<li><strong>Data Modeling (ERD)</strong></li>
+<li><strong>State Diagrams</strong></li>
+<li><strong>Sequence Diagrams</strong></li>
+<li><strong>Data Flow Diagrams (DFD)</strong></li>
+<li><strong>Decision Tables</strong></li>
+<li><strong>Decision Trees</strong></li>
+</ul>
+
+<h3>✅ Validation Techniques (Xác nhận)</h3>
+<ul>
+<li><strong>Reviews</strong> - Peer review, Walkthrough, Inspection</li>
+<li><strong>Acceptance Criteria</strong></li>
+<li><strong>Definition of Done/Ready</strong></li>
+</ul>
+
+<h3>📈 Metrics & Estimation</h3>
+<ul>
+<li><strong>Estimation Techniques</strong> - Planning Poker, T-Shirt Sizing</li>
+<li><strong>Metrics and KPIs</strong></li>
+<li><strong>Benchmarking</strong></li>
+</ul>
+
+<hr>
+
+<h3>💡 Tips cho kỳ thi</h3>
+<ol>
+<li>Không cần nhớ hết 50 techniques</li>
+<li>Tập trung vào techniques phổ biến nhất</li>
+<li>Hiểu KHI NÀO dùng technique nào</li>
+<li>Biết ưu/nhược điểm của từng technique</li>
+</ol>
+
+<p>Bạn thường dùng technique nào nhiều nhất? Chia sẻ nhé! 💬</p>
+</div>',
+'<div class="knowledge-post">
+<h2>📖 50 Techniques trong BABOK v3</h2>
+
+<p>BABOK định nghĩa 50 techniques được sử dụng trong Business Analysis. Dưới đây là phân loại theo mục đích sử dụng:</p>
+
+<h3>📝 Elicitation Techniques (Thu thập yêu cầu)</h3>
+<ul>
+<li><strong>Interviews</strong> - Phỏng vấn 1-1 hoặc nhóm</li>
+<li><strong>Workshops</strong> - Hội thảo tập trung</li>
+<li><strong>Observation</strong> - Quan sát người dùng làm việc</li>
+<li><strong>Surveys/Questionnaires</strong> - Khảo sát</li>
+<li><strong>Brainstorming</strong> - Động não</li>
+<li><strong>Document Analysis</strong> - Phân tích tài liệu</li>
+<li><strong>Focus Groups</strong> - Nhóm tập trung</li>
+<li><strong>Prototyping</strong> - Tạo mẫu</li>
+</ul>
+
+<h3>📊 Analysis Techniques (Phân tích)</h3>
+<ul>
+<li><strong>SWOT Analysis</strong> - Strengths, Weaknesses, Opportunities, Threats</li>
+<li><strong>Root Cause Analysis</strong> - Phân tích nguyên nhân gốc</li>
+<li><strong>Gap Analysis</strong> - Phân tích khoảng cách AS-IS vs TO-BE</li>
+<li><strong>MOST Analysis</strong> - Mission, Objectives, Strategy, Tactics</li>
+<li><strong>PESTLE Analysis</strong> - Political, Economic, Social, Tech, Legal, Environmental</li>
+<li><strong>MoSCoW Prioritization</strong> - Must, Should, Could, Won''t</li>
+</ul>
+
+<h3>📐 Modeling Techniques (Mô hình hóa)</h3>
+<ul>
+<li><strong>Use Cases & Use Case Diagrams</strong></li>
+<li><strong>User Stories</strong> - As a [role], I want [feature], so that [benefit]</li>
+<li><strong>Process Modeling (BPMN)</strong></li>
+<li><strong>Data Modeling (ERD)</strong></li>
+<li><strong>State Diagrams</strong></li>
+<li><strong>Sequence Diagrams</strong></li>
+<li><strong>Data Flow Diagrams (DFD)</strong></li>
+<li><strong>Decision Tables</strong></li>
+<li><strong>Decision Trees</strong></li>
+</ul>
+
+<h3>✅ Validation Techniques (Xác nhận)</h3>
+<ul>
+<li><strong>Reviews</strong> - Peer review, Walkthrough, Inspection</li>
+<li><strong>Acceptance Criteria</strong></li>
+<li><strong>Definition of Done/Ready</strong></li>
+</ul>
+
+<h3>📈 Metrics & Estimation</h3>
+<ul>
+<li><strong>Estimation Techniques</strong> - Planning Poker, T-Shirt Sizing</li>
+<li><strong>Metrics and KPIs</strong></li>
+<li><strong>Benchmarking</strong></li>
+</ul>
+
+<hr>
+
+<h3>💡 Tips cho kỳ thi</h3>
+<ol>
+<li>Không cần nhớ hết 50 techniques</li>
+<li>Tập trung vào techniques phổ biến nhất</li>
+<li>Hiểu KHI NÀO dùng technique nào</li>
+<li>Biết ưu/nhược điểm của từng technique</li>
+</ol>
+
+<p>Bạn thường dùng technique nào nhiều nhất? Chia sẻ nhé! 💬</p>
+</div>',
+'text', 'text', @ba_space_id, 'public', 'published', 1, 90, NOW(), NOW());

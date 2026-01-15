@@ -1,0 +1,150 @@
+package com.hth.udecareer.mapper;
+
+import com.hth.udecareer.entities.Affiliate;
+import com.hth.udecareer.model.request.AffiliatePaymentUpdateRequest;
+import com.hth.udecareer.model.request.AffiliateRegisterRequest;
+import com.hth.udecareer.model.request.AffiliateUpdateRequest;
+import com.hth.udecareer.model.response.AffiliateRegisterResponse;
+import com.hth.udecareer.model.response.AffiliateResponse;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+
+@Mapper(componentModel = "spring")
+public interface AffiliateMapper {
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "userId", ignore = true)
+    @Mapping(target = "affiliateCode", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "email", ignore = true)
+    @Mapping(target = "paymentMethod", ignore = true)
+    @Mapping(target = "paypalEmail", ignore = true)
+    @Mapping(target = "bankAccountName", ignore = true)
+    @Mapping(target = "bankSwiftCode", ignore = true)
+    @Mapping(target = "stripeAccountId", ignore = true)
+    @Mapping(target = "termsAccepted", ignore = true)
+    @Mapping(target = "termsAcceptedAt", ignore = true)
+    @Mapping(target = "rejectionReason", ignore = true)
+    @Mapping(target = "notes", ignore = true)
+    @Mapping(target = "totalCommissions", ignore = true)
+    @Mapping(target = "paidCommissions", ignore = true)
+    @Mapping(target = "unpaidCommissions", ignore = true)
+    @Mapping(target = "totalReferrals", ignore = true)
+    @Mapping(target = "totalVisits", ignore = true)
+    @Mapping(target = "totalConversions", ignore = true)
+    @Mapping(target = "conversionRate", ignore = true)
+    @Mapping(target = "lastActivityAt", ignore = true)
+    @Mapping(target = "registeredAt", ignore = true)
+    @Mapping(target = "approvedAt", ignore = true)
+    @Mapping(target = "approvedBy", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    Affiliate toAffiliate(AffiliateRegisterRequest request);
+
+    @Mapping(target = "affiliateCode", source = "affiliateCode")
+    @Mapping(target = "rejectReason", source = "rejectionReason")
+    AffiliateRegisterResponse toAffiliateRegisterResponse(Affiliate entity);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "affiliateCode", source = "affiliateCode")
+    @Mapping(target = "rejectReason", source = "rejectionReason")
+    AffiliateResponse toAffiliateResponse(Affiliate entity);
+
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "userId", ignore = true)
+    @Mapping(target = "affiliateCode", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "email", ignore = true)
+    @Mapping(target = "paymentMethod", ignore = true)
+    @Mapping(target = "paypalEmail", ignore = true)
+    @Mapping(target = "bankAccountName", ignore = true)
+    @Mapping(target = "bankSwiftCode", ignore = true)
+    @Mapping(target = "stripeAccountId", ignore = true)
+    @Mapping(target = "termsAccepted", ignore = true)
+    @Mapping(target = "termsAcceptedAt", ignore = true)
+    @Mapping(target = "rejectionReason", ignore = true)
+    @Mapping(target = "notes", ignore = true)
+    @Mapping(target = "totalCommissions", ignore = true)
+    @Mapping(target = "paidCommissions", ignore = true)
+    @Mapping(target = "unpaidCommissions", ignore = true)
+    @Mapping(target = "totalReferrals", ignore = true)
+    @Mapping(target = "totalVisits", ignore = true)
+    @Mapping(target = "totalConversions", ignore = true)
+    @Mapping(target = "conversionRate", ignore = true)
+    @Mapping(target = "lastActivityAt", ignore = true)
+    @Mapping(target = "registeredAt", ignore = true)
+    @Mapping(target = "approvedAt", ignore = true)
+    @Mapping(target = "approvedBy", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    void updateAffiliateFromRequest(@MappingTarget Affiliate entity, AffiliateRegisterRequest request);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "userId", ignore = true)
+    @Mapping(target = "affiliateCode", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "email", ignore = true)
+    @Mapping(target = "paymentMethod", ignore = true)
+    @Mapping(target = "paypalEmail", ignore = true)
+    @Mapping(target = "bankAccountName", ignore = true)
+    @Mapping(target = "bankSwiftCode", ignore = true)
+    @Mapping(target = "stripeAccountId", ignore = true)
+    @Mapping(target = "termsAccepted", ignore = true)
+    @Mapping(target = "termsAcceptedAt", ignore = true)
+    @Mapping(target = "rejectionReason", ignore = true)
+    @Mapping(target = "notes", ignore = true)
+    @Mapping(target = "totalCommissions", ignore = true)
+    @Mapping(target = "paidCommissions", ignore = true)
+    @Mapping(target = "unpaidCommissions", ignore = true)
+    @Mapping(target = "totalReferrals", ignore = true)
+    @Mapping(target = "totalVisits", ignore = true)
+    @Mapping(target = "totalConversions", ignore = true)
+    @Mapping(target = "conversionRate", ignore = true)
+    @Mapping(target = "lastActivityAt", ignore = true)
+    @Mapping(target = "registeredAt", ignore = true)
+    @Mapping(target = "approvedAt", ignore = true)
+    @Mapping(target = "approvedBy", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    void updateAffiliateFromUpdateRequest(@MappingTarget Affiliate entity, AffiliateUpdateRequest request);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "userId", ignore = true)
+    @Mapping(target = "affiliateCode", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "email", ignore = true)
+    @Mapping(target = "firstName", ignore = true)
+    @Mapping(target = "lastName", ignore = true)
+    @Mapping(target = "website", ignore = true)
+    @Mapping(target = "promotionMethod", ignore = true)
+    @Mapping(target = "paymentMethod", ignore = true)
+    @Mapping(target = "paypalEmail", ignore = true)
+    @Mapping(target = "bankAccountName", ignore = true)
+    @Mapping(target = "bankSwiftCode", ignore = true)
+    @Mapping(target = "stripeAccountId", ignore = true)
+    @Mapping(target = "termsAccepted", ignore = true)
+    @Mapping(target = "termsAcceptedAt", ignore = true)
+    @Mapping(target = "rejectionReason", ignore = true)
+    @Mapping(target = "notes", ignore = true)
+    @Mapping(target = "totalCommissions", ignore = true)
+    @Mapping(target = "paidCommissions", ignore = true)
+    @Mapping(target = "unpaidCommissions", ignore = true)
+    @Mapping(target = "totalReferrals", ignore = true)
+    @Mapping(target = "totalVisits", ignore = true)
+    @Mapping(target = "totalConversions", ignore = true)
+    @Mapping(target = "conversionRate", ignore = true)
+    @Mapping(target = "lastActivityAt", ignore = true)
+    @Mapping(target = "registeredAt", ignore = true)
+    @Mapping(target = "approvedAt", ignore = true)
+    @Mapping(target = "approvedBy", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    void updateAffiliatePaymentFromRequest(@MappingTarget Affiliate entity, AffiliatePaymentUpdateRequest request);
+}

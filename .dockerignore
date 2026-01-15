@@ -1,0 +1,41 @@
+# Build artifacts
+build/
+.gradle/
+gradle-wrapper.jar
+
+# IDE files
+.idea/
+*.iml
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Docker files (không cần copy vào image)
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+docs/
+
+# Test files (nếu không cần)
+src/test/
+
+# Environment files
+.env
+*.env

@@ -1,0 +1,125 @@
+-- V9: Add Performance Indexes for EIL Tables
+-- Purpose: Optimize query performance for adaptive diagnostic and practice systems
+-- Author: Claude Code
+-- Date: 2025-12-27
+
+-- ============================================
+-- DIAGNOSTIC TABLES INDEXES
+-- ============================================
+
+-- Index for finding user's active/completed diagnostics
+CREATE INDEX idx_diagnostic_attempts_user_status
+    ON eil_diagnostic_attempts(user_id, status);
+
+-- Index for session lookup (most common query)
+CREATE INDEX idx_diagnostic_attempts_session
+    ON eil_diagnostic_attempts(session_id);
+
+-- Index for finding answers by attempt (used in results calculation)
+CREATE INDEX idx_diagnostic_answers_attempt
+    ON eil_diagnostic_answers(diagnostic_attempt_id);
+
+-- Index for checking if question already answered
+CREATE INDEX idx_diagnostic_answers_attempt_question
+    ON eil_diagnostic_answers(diagnostic_attempt_id, question_id);
+
+-- Index for counting correct answers (used in confidence calculation)
+CREATE INDEX idx_diagnostic_answers_attempt_correct
+    ON eil_diagnostic_answers(diagnostic_attempt_id, is_correct);
+
+-- ============================================
+-- PRACTICE TABLES INDEXES
+-- ============================================
+
+-- Index for finding user's active practice sessions
+CREATE INDEX idx_practice_sessions_user_status
+    ON eil_practice_sessions(user_id, status);
+
+-- Index for session lookup
+CREATE INDEX idx_practice_sessions_session
+    ON eil_practice_sessions(session_id);
+
+-- Index for practice results by session
+CREATE INDEX idx_practice_results_session
+    ON eil_practice_results(session_id);
+
+-- Index for practice attempts by session
+CREATE INDEX idx_practice_attempts_session
+    ON eil_practice_attempts(session_id);
+
+-- ============================================
+-- SKILL & MASTERY INDEXES
+-- ============================================
+
+-- Index for skill lookup (frequently joined)
+CREATE INDEX idx_skills_active
+    ON eil_skills(is_active);
+
+-- Index for skills by category (used in filtering)
+CREATE INDEX idx_skills_category
+    ON eil_skills(category, is_active);
+
+-- Index for question-skill mapping (N+1 query optimization)
+CREATE INDEX idx_question_skills_question
+    ON eil_question_skills(question_id);
+
+-- Composite index for skill with primary flag
+CREATE INDEX idx_question_skills_question_primary
+    ON eil_question_skills(question_id, is_primary);
+
+-- Index for finding questions by skill (reverse lookup)
+CREATE INDEX idx_question_skills_skill
+    ON eil_question_skills(skill_id);
+
+-- Index for user's skill mastery lookup
+CREATE INDEX idx_skill_mastery_user
+    ON eil_skill_mastery(user_id);
+
+-- Index for finding weak skills (commonly filtered by mastery_level)
+CREATE INDEX idx_skill_mastery_user_level
+    ON eil_skill_mastery(user_id, mastery_level);
+
+-- ============================================
+-- READINESS & AI TABLES INDEXES
+-- ============================================
+
+-- Index for latest readiness snapshot
+CREATE INDEX idx_readiness_user_date
+    ON eil_readiness_snapshots(user_id, snapshot_date DESC);
+
+-- Index for AI explanations by question
+CREATE INDEX idx_explanations_question
+    ON eil_explanations(question_id);
+
+-- Index for AI feedback by explanation
+CREATE INDEX idx_ai_feedback_explanation
+    ON eil_ai_feedback(explanation_id);
+
+-- ============================================
+-- COMPOSITE INDEXES FOR COMPLEX QUERIES
+-- ============================================
+
+-- For finding active sessions with specific test type
+CREATE INDEX idx_diagnostic_attempts_user_status_type
+    ON eil_diagnostic_attempts(user_id, status, test_type);
+
+-- For diagnostic history queries (completed, ordered by date)
+-- Note: MySQL doesn't support partial indexes with `WHERE`, so this index is unfiltered.
+CREATE INDEX idx_diagnostic_attempts_user_completed_date
+    ON eil_diagnostic_attempts(user_id, status, created_at DESC);
+
+-- ============================================
+-- VERIFICATION QUERIES
+-- ============================================
+
+-- Verify indexes created
+SELECT
+    TABLE_NAME,
+    INDEX_NAME,
+    COLUMN_NAME,
+    SEQ_IN_INDEX
+FROM information_schema.STATISTICS
+WHERE TABLE_SCHEMA = DATABASE()
+  AND TABLE_NAME LIKE 'eil_%'
+  AND INDEX_NAME LIKE 'idx_%'
+ORDER BY TABLE_NAME, INDEX_NAME, SEQ_IN_INDEX;

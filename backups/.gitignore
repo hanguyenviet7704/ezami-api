@@ -1,0 +1,8 @@
+# Ignore large SQL backup files (keep only README)
+*.sql
+*.sql.gz
+*.dump
+
+# Keep README and scripts
+!README.md
+!*.sh

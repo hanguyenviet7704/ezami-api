@@ -1,0 +1,187 @@
+{
+  "certification": "KUBERNETES_CKA",
+  "source": "Original content based on Kubernetes documentation",
+  "total": 15,
+  "questions": [
+    {
+      "title": "K8S_POD_001",
+      "question": "Which command creates a pod named nginx using the nginx:alpine image?",
+      "question_type": "single",
+      "answers": [
+        {"text": "kubectl create pod nginx --image=nginx:alpine", "correct": false},
+        {"text": "kubectl run nginx --image=nginx:alpine", "correct": true},
+        {"text": "kubectl apply pod nginx --image=nginx:alpine", "correct": false},
+        {"text": "kubectl start nginx --image=nginx:alpine", "correct": false}
+      ],
+      "explanation": "kubectl run is the command to create and run a pod with specified image."
+    },
+    {
+      "title": "K8S_DEPLOYMENT_001",
+      "question": "How do you scale a deployment named web to 5 replicas?",
+      "question_type": "single",
+      "answers": [
+        {"text": "kubectl scale deployment web --replicas=5", "correct": true},
+        {"text": "kubectl resize deployment web --replicas=5", "correct": false},
+        {"text": "kubectl set replicas deployment web 5", "correct": false},
+        {"text": "kubectl update deployment web --replicas=5", "correct": false}
+      ],
+      "explanation": "kubectl scale is used to update the number of replicas for a deployment."
+    },
+    {
+      "title": "K8S_SERVICE_001",
+      "question": "Which service type exposes a service on each node's IP at a static port?",
+      "question_type": "single",
+      "answers": [
+        {"text": "ClusterIP", "correct": false},
+        {"text": "NodePort", "correct": true},
+        {"text": "LoadBalancer", "correct": false},
+        {"text": "ExternalName", "correct": false}
+      ],
+      "explanation": "NodePort exposes the service on a static port (30000-32767) on each node's IP."
+    },
+    {
+      "title": "K8S_NAMESPACE_001",
+      "question": "Which command lists all pods in all namespaces?",
+      "question_type": "single",
+      "answers": [
+        {"text": "kubectl get pods", "correct": false},
+        {"text": "kubectl get pods --all", "correct": false},
+        {"text": "kubectl get pods --all-namespaces", "correct": true},
+        {"text": "kubectl get pods -n *", "correct": false}
+      ],
+      "explanation": "The --all-namespaces (or -A) flag lists resources across all namespaces."
+    },
+    {
+      "title": "K8S_CONFIGMAP_001",
+      "question": "Which Kubernetes object stores non-confidential configuration data in key-value pairs?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Secret", "correct": false},
+        {"text": "ConfigMap", "correct": true},
+        {"text": "PersistentVolume", "correct": false},
+        {"text": "ServiceAccount", "correct": false}
+      ],
+      "explanation": "ConfigMap stores configuration data that can be consumed by pods as environment variables or volume mounts."
+    },
+    {
+      "title": "K8S_SECRET_001",
+      "question": "How do you create a secret named db-secret from literal values?",
+      "question_type": "single",
+      "answers": [
+        {"text": "kubectl create secret generic db-secret --from-literal=password=mypass", "correct": true},
+        {"text": "kubectl apply secret db-secret --password=mypass", "correct": false},
+        {"text": "kubectl secret create db-secret password=mypass", "correct": false},
+        {"text": "kubectl new secret db-secret --data password=mypass", "correct": false}
+      ],
+      "explanation": "kubectl create secret generic with --from-literal flag creates secrets from command line values."
+    },
+    {
+      "title": "K8S_LABEL_001",
+      "question": "Which command shows pods with label app=frontend?",
+      "question_type": "single",
+      "answers": [
+        {"text": "kubectl get pods --label app=frontend", "correct": false},
+        {"text": "kubectl get pods -l app=frontend", "correct": true},
+        {"text": "kubectl get pods --filter app=frontend", "correct": false},
+        {"text": "kubectl get pods --selector app=frontend", "correct": false}
+      ],
+      "explanation": "-l or --selector flag filters resources by label selector."
+    },
+    {
+      "title": "K8S_ROLLING_001",
+      "question": "What is the default update strategy for Deployments?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Recreate", "correct": false},
+        {"text": "RollingUpdate", "correct": true},
+        {"text": "BlueGreen", "correct": false},
+        {"text": "Canary", "correct": false}
+      ],
+      "explanation": "RollingUpdate is the default strategy, gradually replacing old pods with new ones."
+    },
+    {
+      "title": "K8S_PV_001",
+      "question": "Which access mode allows a volume to be mounted as read-write by multiple nodes?",
+      "question_type": "single",
+      "answers": [
+        {"text": "ReadWriteOnce (RWO)", "correct": false},
+        {"text": "ReadOnlyMany (ROX)", "correct": false},
+        {"text": "ReadWriteMany (RWX)", "correct": true},
+        {"text": "ReadWriteOncePod (RWOP)", "correct": false}
+      ],
+      "explanation": "ReadWriteMany allows the volume to be mounted as read-write by multiple nodes simultaneously."
+    },
+    {
+      "title": "K8S_INGRESS_001",
+      "question": "Which Kubernetes resource provides HTTP/HTTPS routing to services based on hostname and path?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Service", "correct": false},
+        {"text": "Ingress", "correct": true},
+        {"text": "NetworkPolicy", "correct": false},
+        {"text": "Route", "correct": false}
+      ],
+      "explanation": "Ingress manages external HTTP/HTTPS access to services with host and path-based routing rules."
+    },
+    {
+      "title": "K8S_RBAC_001",
+      "question": "Which command creates a service account named myapp?",
+      "question_type": "single",
+      "answers": [
+        {"text": "kubectl create sa myapp", "correct": true},
+        {"text": "kubectl new serviceaccount myapp", "correct": false},
+        {"text": "kubectl apply serviceaccount myapp", "correct": false},
+        {"text": "kubectl add sa myapp", "correct": false}
+      ],
+      "explanation": "kubectl create serviceaccount (or sa shorthand) creates a new service account."
+    },
+    {
+      "title": "K8S_DRAIN_001",
+      "question": "Before performing node maintenance, which command safely evicts all pods from a node?",
+      "question_type": "single",
+      "answers": [
+        {"text": "kubectl delete node <node-name>", "correct": false},
+        {"text": "kubectl drain <node-name>", "correct": true},
+        {"text": "kubectl evict <node-name>", "correct": false},
+        {"text": "kubectl remove <node-name>", "correct": false}
+      ],
+      "explanation": "kubectl drain safely evicts pods and marks the node as unschedulable."
+    },
+    {
+      "title": "K8S_TAINT_001",
+      "question": "Which command adds a taint to prevent pods from being scheduled on node1?",
+      "question_type": "single",
+      "answers": [
+        {"text": "kubectl taint nodes node1 key=value:NoSchedule", "correct": true},
+        {"text": "kubectl label nodes node1 taint=NoSchedule", "correct": false},
+        {"text": "kubectl annotate nodes node1 taint:NoSchedule", "correct": false},
+        {"text": "kubectl patch node node1 --taint NoSchedule", "correct": false}
+      ],
+      "explanation": "kubectl taint with NoSchedule effect prevents new pods from being scheduled on the node."
+    },
+    {
+      "title": "K8S_LOGS_001",
+      "question": "How do you view logs from a container named app in pod mypod?",
+      "question_type": "single",
+      "answers": [
+        {"text": "kubectl logs mypod -c app", "correct": true},
+        {"text": "kubectl log mypod app", "correct": false},
+        {"text": "kubectl logs mypod/app", "correct": false},
+        {"text": "kubectl get logs mypod --container=app", "correct": false}
+      ],
+      "explanation": "kubectl logs with -c flag specifies which container's logs to view in a multi-container pod."
+    },
+    {
+      "title": "K8S_RESOURCEQUOTA_001",
+      "question": "Which Kubernetes object limits resource consumption in a namespace?",
+      "question_type": "single",
+      "answers": [
+        {"text": "LimitRange", "correct": false},
+        {"text": "ResourceQuota", "correct": true},
+        {"text": "NetworkPolicy", "correct": false},
+        {"text": "PodSecurityPolicy", "correct": false}
+      ],
+      "explanation": "ResourceQuota limits aggregate resource consumption (CPU, memory, storage) per namespace."
+    }
+  ]
+}

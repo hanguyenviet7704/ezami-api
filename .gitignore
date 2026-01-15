@@ -1,0 +1,21 @@
+/build
+.gradle
+workspace.xml
+.idea/
+gmail/
+bin
+.vscode
+.docker-compose.yml
+
+/uploads/
+
+# Environment files (sensitive credentials)
+.env
+.env.local
+.env.production
+.env.staging
+*.env
+
+# Keep example files
+!.env.example
+!.env.production.example

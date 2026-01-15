@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông báo Real-time</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ef4444;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.connected {
+            background: #10b981;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .status-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .notifications {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .notifications-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .notification-item {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification-item.new {
+            background: #eff6ff;
+            border-left-color: #3b82f6;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .notification-message {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .notification-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .notification-type {
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .notification-type.PAYMENT_SUCCESS {
+            background: #10b981;
+        }
+
+        .notification-type.PAYMENT_FAILED {
+            background: #ef4444;
+        }
+
+        .notification-type.SYSTEM_INFO {
+            background: #3b82f6;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #9ca3af;
+            padding: 40px 20px;
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .user-input {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .input-group label {
+            color: #333;
+            font-weight: 500;
+            min-width: 80px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-connect {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-connect:hover {
+            background: #5568d3;
+        }
+
+        .btn-connect:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- User Input -->
+        <div class="user-input">
+            <div class="input-group">
+                <label for="userId">User ID:</label>
+                <input type="number" id="userId" placeholder="Nhập user ID của bạn" value="16378">
+            </div>
+            <button id="testBtn" class="btn-connect" style="background: #f59e0b; margin-bottom: 5px;">Test WebSocket Endpoint</button>
+            <button id="connectBtn" class="btn-connect">Kết nối WebSocket</button>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>🔔 Thông báo Real-time</h1>
+            <div class="status">
+                <div class="status-dot" id="statusDot"></div>
+                <span class="status-text" id="statusText">Chưa kết nối</span>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="notifications">
+            <div class="notifications-header">
+                Danh sách thông báo
+            </div>
+            <div id="notificationsList">
+                <div class="empty-state">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                    </svg>
+                    <p>Chưa có thông báo nào</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let stompClient = null;
+        let userId = null;
+
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const notificationsList = document.getElementById('notificationsList');
+        const userIdInput = document.getElementById('userId');
+        const connectBtn = document.getElementById('connectBtn');
+
+        // Connect WebSocket
+        function connect() {
+            userId = userIdInput.value.trim();
+
+            if (!userId) {
+                alert('Vui lòng nhập User ID');
+                return;
+            }
+
+            // Check if STOMP library is loaded
+            if (typeof Stomp === 'undefined') {
+                statusText.textContent = 'Đang tải STOMP library...';
+                connectBtn.disabled = false;
+                connectBtn.textContent = 'Thử lại';
+                alert('STOMP library chưa được tải. Vui lòng đợi một chút và thử lại.');
+                return;
+            }
+
+            connectBtn.disabled = true;
+            connectBtn.textContent = 'Đang kết nối...';
+            statusText.textContent = 'Đang kết nối...';
+
+            // Auto-detect WebSocket URL based on current location
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const host = window.location.host;
+            const wsUrl = `${protocol}//${host}/ws`;
+
+            console.log('🔗 Connecting to WebSocket:', wsUrl);
+            console.log('🔗 STOMP library status:', typeof Stomp !== 'undefined' ? 'loaded' : 'not loaded');
+
+            const socket = new WebSocket(wsUrl);
+
+            // Add detailed event handlers for debugging
+            socket.onopen = function(event) {
+                console.log('🔌 WebSocket connection opened:', event);
+            };
+
+            socket.onerror = function(error) {
+                console.error('🚨 WebSocket connection error:', error);
+                console.error('URL attempted:', wsUrl);
+                statusDot.classList.remove('connected');
+                statusText.textContent = `Lỗi kết nối: ${wsUrl}`;
+                connectBtn.disabled = false;
+                connectBtn.textContent = 'Kết nối lại';
+            };
+
+            socket.onclose = function(event) {
+                console.log('🔌 WebSocket connection closed:', event.code, event.reason);
+                statusDot.classList.remove('connected');
+                statusText.textContent = `Đã đóng kết nối (${event.code})`;
+                connectBtn.disabled = false;
+                connectBtn.textContent = 'Kết nối lại';
+            };
+
+            stompClient = Stomp.over(socket);
+
+            // Enable STOMP debug for troubleshooting
+            stompClient.debug = function(str) {
+                console.log('STOMP DEBUG:', str);
+            };
+
+            console.log('📞 Attempting STOMP connection...');
+
+            stompClient.connect({},
+                function(frame) {
+                    console.log('✅ STOMP connected successfully:', frame);
+
+                    statusDot.classList.add('connected');
+                    statusText.textContent = `Đã kết nối (User ID: ${userId})`;
+                    connectBtn.textContent = 'Đã kết nối';
+
+                    // Subscribe to user's notification channel
+                    try {
+                        const subscription = stompClient.subscribe(`/topic/notifications/${userId}`, function(message) {
+                            console.log('📩 Received notification:', message.body);
+                            const notification = JSON.parse(message.body);
+                            addNotification(notification);
+                            showBrowserNotification(notification);
+                        });
+
+                        console.log('📺 Successfully subscribed to /topic/notifications/' + userId);
+
+                    } catch (subscribeError) {
+                        console.error('❌ Subscription error:', subscribeError);
+                        statusText.textContent = 'Lỗi đăng ký channel';
+                    }
+                },
+                function(error) {
+                    console.error('❌ STOMP connection error:', error);
+                    console.error('Error type:', typeof error);
+                    console.error('Error details:', error);
+
+                    let errorMessage = 'Unknown';
+                    let detailedError = '';
+
+                    if (typeof error === 'string') {
+                        errorMessage = error;
+                        detailedError = error;
+                    } else if (error && typeof error === 'object') {
+                        if (error.command) {
+                            errorMessage = error.command;
+                            detailedError = `Command: ${error.command}`;
+                        }
+                        if (error.message) {
+                            errorMessage = error.message;
+                            detailedError += ` Message: ${error.message}`;
+                        }
+                        if (error.headers) {
+                            detailedError += ` Headers: ${JSON.stringify(error.headers)}`;
+                        }
+                        if (error.body) {
+                            detailedError += ` Body: ${error.body}`;
+                        }
+
+                        // If still no useful error info
+                        if (errorMessage === 'Unknown' && !error.command && !error.message) {
+                            errorMessage = 'Connection failed';
+                            detailedError = 'STOMP handshake failed - server may not support STOMP protocol';
+                        }
+                    }
+
+                    console.error('Detailed error:', detailedError);
+
+                    statusDot.classList.remove('connected');
+                    statusText.textContent = `STOMP Error: ${errorMessage}`;
+                    connectBtn.disabled = false;
+                    connectBtn.textContent = 'Kết nối lại';
+
+                    // Try to close WebSocket properly
+                    if (socket && socket.readyState === WebSocket.OPEN) {
+                        console.log('Closing WebSocket due to STOMP error');
+                        socket.close();
+                    }
+                }
+            );
+        }
+
+        // Add notification to list
+        function addNotification(notification) {
+            // Remove empty state if exists
+            const emptyState = notificationsList.querySelector('.empty-state');
+            if (emptyState) {
+                emptyState.remove();
+            }
+
+            const notificationDiv = document.createElement('div');
+            notificationDiv.className = 'notification-item new';
+            notificationDiv.innerHTML = `
+                <div class="notification-title">${notification.title}</div>
+                <div class="notification-message">${notification.message}</div>
+                <div class="notification-meta">
+                    <span class="notification-type ${notification.type}">${notification.type}</span>
+                    <span>${new Date().toLocaleString('vi-VN')}</span>
+                </div>
+            `;
+
+            // Insert at the beginning
+            notificationsList.insertBefore(notificationDiv, notificationsList.firstChild);
+
+            // Remove 'new' class after animation
+            setTimeout(() => {
+                notificationDiv.classList.remove('new');
+            }, 3000);
+        }
+
+        // Show browser notification
+        function showBrowserNotification(notification) {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification(notification.title, {
+                    body: notification.message,
+                    icon: '/favicon.ico',
+                    badge: '/favicon.ico'
+                });
+            }
+        }
+
+        // Test WebSocket endpoint availability
+        function testEndpoint() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const host = window.location.host;
+            const wsUrl = `${protocol}//${host}/ws-notifications`;
+
+            console.log('🔍 Testing WebSocket endpoint:', wsUrl);
+            statusText.textContent = 'Đang test endpoint...';
+
+            const testSocket = new WebSocket(wsUrl);
+
+            testSocket.onopen = function(event) {
+                console.log('✅ WebSocket endpoint available');
+                statusText.textContent = '✅ Endpoint hoạt động - Có thể kết nối';
+                testSocket.close();
+            };
+
+            testSocket.onerror = function(error) {
+                console.error('❌ WebSocket endpoint error:', error);
+                statusText.textContent = '❌ Endpoint không khả dụng';
+            };
+
+            testSocket.onclose = function(event) {
+                console.log('📊 Test completed. Close code:', event.code);
+                if (event.code === 1000) {
+                    statusText.textContent = '✅ Test thành công - Sẵn sàng kết nối';
+                }
+            };
+        }
+
+        // Request notification permission
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+
+        // Get button references
+        const testBtn = document.getElementById('testBtn');
+
+        // Event handlers
+        testBtn.addEventListener('click', testEndpoint);
+        connectBtn.addEventListener('click', connect);
+
+        // Auto-connect if userId is present
+        window.addEventListener('load', () => {
+            console.log('🌐 Page loaded. Environment info:');
+            console.log('- Protocol:', window.location.protocol);
+            console.log('- Host:', window.location.host);
+            console.log('- Full URL:', window.location.href);
+
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.host}/ws`;
+            console.log('- WebSocket URL would be:', wsUrl);
+
+            // Check STOMP library status
+            setTimeout(() => {
+                if (typeof Stomp !== 'undefined') {
+                    console.log('✅ STOMP library loaded successfully');
+                    statusText.textContent = 'Sẵn sàng kết nối WebSocket';
+                } else {
+                    console.log('⚠️ STOMP library not loaded yet');
+                    statusText.textContent = 'Đang tải STOMP library...';
+                }
+            }, 1000);
+        });
+
+        // Load STOMP library with better error handling
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js';
+
+        script.onload = function() {
+            console.log('✅ STOMP library loaded from CDN');
+            statusText.textContent = 'STOMP library đã tải - sẵn sàng kết nối';
+        };
+
+        script.onerror = function(error) {
+            console.error('❌ Failed to load STOMP library from CDN:', error);
+            statusText.textContent = 'Lỗi tải STOMP library từ CDN';
+
+            // Try loading from a different CDN as fallback
+            const fallbackScript = document.createElement('script');
+            fallbackScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js';
+
+            fallbackScript.onload = function() {
+                console.log('✅ STOMP library loaded from fallback CDN');
+                statusText.textContent = 'STOMP library đã tải (fallback) - sẵn sàng kết nối';
+            };
+
+            fallbackScript.onerror = function() {
+                console.error('❌ Failed to load STOMP library from fallback CDN');
+                statusText.textContent = '❌ Không thể tải STOMP library - kiểm tra kết nối internet';
+            };
+
+            document.head.appendChild(fallbackScript);
+        };
+
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
+

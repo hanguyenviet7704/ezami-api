@@ -1,0 +1,135 @@
+spring:
+  datasource:
+    wordpress:
+      driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
+      url: ${DB_URL}
+      username: ${DB_USER}
+      password: ${DB_PASS}
+
+  jpa:
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        format_sql: false
+        jdbc:
+          time_zone: Asia/Ho_Chi_Minh
+
+  # Jackson timezone configuration for Vietnam time
+  jackson:
+    time-zone: Asia/Ho_Chi_Minh
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  redis:
+    host: ${SPRING_REDIS_HOST:localhost}
+    port: ${SPRING_REDIS_PORT:6379}
+    password: ${SPRING_REDIS_PASSWORD:}
+    database: 0
+    timeout: 2000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+
+  # Cache Configuration
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000 # 10 minutes
+      cache-null-values: false
+
+  # WebSocket Configuration
+  websocket:
+    servlet:
+      allowed-origins: ${WEBSOCKET_ALLOWED_ORIGINS:https://ezami.io,https://v2.ezami.io,https://api-v2.ezami.io}
+
+server:
+  port: ${SERVER_PORT:8080}
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 2048
+  servlet:
+    session:
+      tracking-modes: cookie
+
+jwt:
+  secret: ${JWT_SECRET:change-me-in-production}
+  cookie:
+    name: ${JWT_COOKIE_NAME:accessToken}
+    max-age: ${JWT_COOKIE_MAX_AGE:604800}  # 7 days in seconds
+    secure: ${JWT_COOKIE_SECURE:true}      # true for HTTPS (required for SameSite=None)
+    http-only: ${JWT_COOKIE_HTTP_ONLY:true}  # Prevent JavaScript access (XSS protection)
+    same-site: ${JWT_COOKIE_SAME_SITE:None}   # None for cross-origin (required with Secure=true)
+
+cors:
+  allowed-origins:
+    - ${CORS_ALLOWED_ORIGINS:https://ezami-api-production.up.railway.app}
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+    - PATCH
+  allowed-headers:
+    - Authorization
+    - Content-Type
+    - X-Requested-With
+    - Accept
+    - Origin
+    - Access-Control-Request-Method
+    - Access-Control-Request-Headers
+  exposed-headers:
+    - Authorization
+    - Content-Type
+    - X-Requested-With
+    - Set-Cookie
+  allow-credentials: true
+  max-age: 3600
+  allow-private-network: false
+
+google:
+  oauth2:
+    client-id: ${GOOGLE_CLIENT_ID:}
+    client-secret: ${GOOGLE_CLIENT_SECRET:}
+    redirect-uri: ${GOOGLE_REDIRECT_URI:}
+    mobile-success-url: ${GOOGLE_REDIRECT_MOBILE_SUCCESS_URL:}
+    web-success-url: ${GOOGLE_REDIRECT_WEB_SUCCESS_URL:}
+
+revenueCat:
+  apiBaseUrl: ${REVENUECAT_API_BASE_URL:}
+  secretApiKey: ${REVENUECAT_SECRET_API_KEY:}
+  webhookSecret: ${REVENUECAT_WEBHOOK_SECRET:change-me}
+  endpoints:
+    subscribers: ${REVENUECAT_SUBSCRIBERS_ENDPOINT:}
+
+mail:
+  smtp:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    from: ${MAIL_FROM:admin@ezami.io}
+    from.name: ${MAIL_FROM_NAME:Ezami}
+# Swagger/OpenAPI Configuration
+swagger:
+  server:
+    url: ${SWAGGER_SERVER_URL:https://api-v2.ezami.io}
+
+# SpringDoc OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    try-it-out-enabled: true
+  packages-to-scan: com.hth.udecareer.controllers
+  paths-to-match: /**
+  show-actuator: false

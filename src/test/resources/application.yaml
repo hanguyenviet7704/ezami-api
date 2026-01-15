@@ -1,0 +1,88 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  flyway:
+    enabled: false
+
+app:
+  firebase:
+    config-base64: e30= # Base64 for {}
+  domain: http://localhost:8080
+  asset-domain: http://localhost:8080
+  qr:
+    payment:
+      bank-code: MB
+      bank-account: 123456789
+      ttl-seconds: 300
+  affiliate:
+    base-url: http://localhost:8080
+
+jwt:
+  secret: testSecretKeyForIntegrationTestingOnly1234567890
+  cookie:
+    name: accessToken
+    max-age: 604800
+    secure: false
+    http-only: true
+    same-site: Lax
+
+google:
+  oauth2:
+    client-id: test-client-id
+    client-secret: test-client-secret
+    redirect-uri: http://localhost:8080/login/oauth2/code/google
+    mobile-success-url: http://localhost:3000/success
+    web-success-url: http://localhost:8080/success
+
+revenueCat:
+  apiBaseUrl: http://localhost:8080
+  secretApiKey: test-secret
+  endpoints:
+    subscribers: /subscribers
+
+vnpay:
+  tmn-code: TEST
+  hash-secret: TEST
+  api-url: http://localhost:8080/vnpay
+  return-url: http://localhost:8080/return
+  ipn-url: http://localhost:8080/ipn
+
+cors:
+  allowed-origins:
+    - "http://localhost:3000"
+  allowed-methods:
+    - "GET"
+    - "POST"
+    - "PUT"
+    - "DELETE"
+    - "OPTIONS"
+  allowed-headers:
+    - "Authorization"
+    - "Content-Type"
+    - "X-Requested-With"
+  exposed-headers:
+    - "Authorization"
+  allow-credentials: true
+  max-age: 3600
+
+mail:
+  smtp:
+    host: localhost
+    port: 2525
+    username: test
+    password: test
+    from: test@example.com
+    from.name: Test Sender
+
+file:
+  upload-dir: uploads

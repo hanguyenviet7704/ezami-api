@@ -1,0 +1,187 @@
+{
+  "certification": "AWS_DVA_C02",
+  "source": "Original content based on AWS Developer documentation",
+  "total": 15,
+  "questions": [
+    {
+      "title": "AWS_DVA_LAMBDA_001",
+      "question": "You are developing a Lambda function that processes S3 events. Which environment variable contains the AWS request ID?",
+      "question_type": "single",
+      "answers": [
+        {"text": "AWS_EXECUTION_ENV", "correct": false},
+        {"text": "AWS_REQUEST_ID", "correct": true},
+        {"text": "AWS_LAMBDA_FUNCTION_NAME", "correct": false},
+        {"text": "_HANDLER", "correct": false}
+      ],
+      "explanation": "AWS_REQUEST_ID contains the unique request ID for each Lambda invocation."
+    },
+    {
+      "title": "AWS_DVA_DYNAMODB_001",
+      "question": "Which DynamoDB operation allows you to update an item only if a specific condition is met?",
+      "question_type": "single",
+      "answers": [
+        {"text": "PutItem", "correct": false},
+        {"text": "UpdateItem with ConditionExpression", "correct": true},
+        {"text": "BatchWriteItem", "correct": false},
+        {"text": "TransactWriteItems", "correct": false}
+      ],
+      "explanation": "UpdateItem with ConditionExpression enables conditional updates based on attribute values."
+    },
+    {
+      "title": "AWS_DVA_API_GATEWAY_001",
+      "question": "You need to implement request throttling in API Gateway. Which feature should you configure?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Usage Plans", "correct": true},
+        {"text": "Resource Policies", "correct": false},
+        {"text": "Lambda Authorizers", "correct": false},
+        {"text": "CORS Settings", "correct": false}
+      ],
+      "explanation": "Usage Plans allow you to set throttle limits and quotas for API consumers."
+    },
+    {
+      "title": "AWS_DVA_CODEDEPLOY_001",
+      "question": "Which deployment type in CodeDeploy shifts traffic gradually from old to new version?",
+      "question_type": "single",
+      "answers": [
+        {"text": "All-at-once", "correct": false},
+        {"text": "Blue/Green", "correct": false},
+        {"text": "Canary", "correct": true},
+        {"text": "Rolling", "correct": false}
+      ],
+      "explanation": "Canary deployment gradually shifts traffic (e.g., 10% then 100%) allowing monitoring before full rollout."
+    },
+    {
+      "title": "AWS_DVA_SQS_001",
+      "question": "What is the maximum message retention period for SQS standard queue?",
+      "question_type": "single",
+      "answers": [
+        {"text": "1 hour", "correct": false},
+        {"text": "1 day", "correct": false},
+        {"text": "4 days", "correct": false},
+        {"text": "14 days", "correct": true}
+      ],
+      "explanation": "SQS can retain messages for up to 14 days with configurable retention period."
+    },
+    {
+      "title": "AWS_DVA_XRAY_001",
+      "question": "Which AWS service provides distributed tracing for debugging microservices?",
+      "question_type": "single",
+      "answers": [
+        {"text": "CloudWatch Logs", "correct": false},
+        {"text": "AWS X-Ray", "correct": true},
+        {"text": "CloudTrail", "correct": false},
+        {"text": "AWS Config", "correct": false}
+      ],
+      "explanation": "X-Ray provides end-to-end tracing of requests across distributed applications."
+    },
+    {
+      "title": "AWS_DVA_COGNITO_001",
+      "question": "Which Cognito feature allows users to sign in with Google or Facebook?",
+      "question_type": "single",
+      "answers": [
+        {"text": "User Pools", "correct": false},
+        {"text": "Identity Pools", "correct": false},
+        {"text": "User Pools with Federated Identities", "correct": true},
+        {"text": "STS AssumeRole", "correct": false}
+      ],
+      "explanation": "User Pools support federation with social identity providers like Google, Facebook, Amazon."
+    },
+    {
+      "title": "AWS_DVA_STEPFUNCTIONS_001",
+      "question": "You need to orchestrate multiple Lambda functions with error handling. Which service should you use?",
+      "question_type": "single",
+      "answers": [
+        {"text": "AWS Step Functions", "correct": true},
+        {"text": "EventBridge", "correct": false},
+        {"text": "SQS", "correct": false},
+        {"text": "SNS", "correct": false}
+      ],
+      "explanation": "Step Functions coordinate multiple AWS services into serverless workflows with built-in error handling and retry logic."
+    },
+    {
+      "title": "AWS_DVA_SECRETS_001",
+      "question": "Which service should you use to store and rotate database credentials automatically?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Systems Manager Parameter Store", "correct": false},
+        {"text": "AWS Secrets Manager", "correct": true},
+        {"text": "KMS", "correct": false},
+        {"text": "S3 with encryption", "correct": false}
+      ],
+      "explanation": "Secrets Manager provides automatic rotation of database credentials and secrets."
+    },
+    {
+      "title": "AWS_DVA_CLOUDFORMATION_001",
+      "question": "In CloudFormation, what happens if a stack update fails?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Stack is left in UPDATE_FAILED state", "correct": false},
+        {"text": "Stack automatically rolls back to previous state", "correct": true},
+        {"text": "Stack is deleted", "correct": false},
+        {"text": "Manual intervention required", "correct": false}
+      ],
+      "explanation": "CloudFormation automatically rolls back to the previous stable state if an update fails."
+    },
+    {
+      "title": "AWS_DVA_EVENTBRIDGE_001",
+      "question": "Which AWS service allows you to route events from AWS services to Lambda functions based on rules?",
+      "question_type": "single",
+      "answers": [
+        {"text": "SNS", "correct": false},
+        {"text": "SQS", "correct": false},
+        {"text": "EventBridge", "correct": true},
+        {"text": "Step Functions", "correct": false}
+      ],
+      "explanation": "EventBridge routes events from AWS services, SaaS apps, and custom applications to targets based on rules."
+    },
+    {
+      "title": "AWS_DVA_KINESIS_001",
+      "question": "You need to process real-time streaming data with sub-second latency. Which service should you use?",
+      "question_type": "single",
+      "answers": [
+        {"text": "SQS", "correct": false},
+        {"text": "Kinesis Data Streams", "correct": true},
+        {"text": "S3", "correct": false},
+        {"text": "RDS", "correct": false}
+      ],
+      "explanation": "Kinesis Data Streams enables real-time processing of streaming data with sub-second latency."
+    },
+    {
+      "title": "AWS_DVA_ELASTICACHE_001",
+      "question": "Which ElastiCache engine supports data structures like sorted sets and hashes?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Memcached", "correct": false},
+        {"text": "Redis", "correct": true},
+        {"text": "Both", "correct": false},
+        {"text": "Neither", "correct": false}
+      ],
+      "explanation": "Redis supports advanced data structures including strings, hashes, lists, sets, and sorted sets."
+    },
+    {
+      "title": "AWS_DVA_IAM_001",
+      "question": "Which IAM policy type defines maximum permissions that an identity-based policy can grant?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Identity-based policy", "correct": false},
+        {"text": "Resource-based policy", "correct": false},
+        {"text": "Permissions boundary", "correct": true},
+        {"text": "Service control policy", "correct": false}
+      ],
+      "explanation": "Permissions boundaries set the maximum permissions that identity-based policies can grant to an entity."
+    },
+    {
+      "title": "AWS_DVA_CODEPIPELINE_001",
+      "question": "Which CodePipeline action type runs automated tests?",
+      "question_type": "single",
+      "answers": [
+        {"text": "Source", "correct": false},
+        {"text": "Build", "correct": false},
+        {"text": "Test", "correct": true},
+        {"text": "Deploy", "correct": false}
+      ],
+      "explanation": "The Test action runs automated tests using services like CodeBuild or third-party tools."
+    }
+  ]
+}

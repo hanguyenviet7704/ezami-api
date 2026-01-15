@@ -1,0 +1,534 @@
+{
+  "certifications": [
+    {
+      "certification_id": "PSM_I",
+      "name": "Professional Scrum Master I",
+      "description": "Based on Scrum Guide 2020",
+      "skills": [
+        {
+          "code": "PSM_SCRUM_THEORY",
+          "name": "Scrum Theory",
+          "description": "Understanding the foundational theory behind Scrum framework",
+          "children": [
+            {
+              "code": "PSM_EMPIRICISM",
+              "name": "Empiricism",
+              "description": "Understanding empirical process control theory",
+              "children": [
+                {"code": "PSM_TRANSPARENCY", "name": "Transparency", "description": "Process and work visible to performers and receivers"},
+                {"code": "PSM_INSPECTION", "name": "Inspection", "description": "Frequent inspection of artifacts and progress"},
+                {"code": "PSM_ADAPTATION", "name": "Adaptation", "description": "Adjusting process when deviating from limits"}
+              ]
+            },
+            {"code": "PSM_LEAN_THINKING", "name": "Lean Thinking", "description": "Reduce waste and focus on essentials"}
+          ]
+        },
+        {
+          "code": "PSM_SCRUM_VALUES",
+          "name": "Scrum Values",
+          "description": "The five Scrum values",
+          "children": [
+            {"code": "PSM_COMMITMENT", "name": "Commitment", "description": "Team commits to goals and supporting each other"},
+            {"code": "PSM_FOCUS", "name": "Focus", "description": "Focus on Sprint work for best progress"},
+            {"code": "PSM_OPENNESS", "name": "Openness", "description": "Open about work and challenges"},
+            {"code": "PSM_RESPECT", "name": "Respect", "description": "Respect each other as capable people"},
+            {"code": "PSM_COURAGE", "name": "Courage", "description": "Courage to do right thing and work on tough problems"}
+          ]
+        },
+        {
+          "code": "PSM_SCRUM_TEAM",
+          "name": "Scrum Team",
+          "description": "Composition and responsibilities",
+          "children": [
+            {
+              "code": "PSM_DEVELOPERS",
+              "name": "Developers",
+              "description": "Role of Developers",
+              "children": [
+                {"code": "PSM_DEV_SPRINT_BACKLOG", "name": "Creating Sprint Backlog", "description": "Create plan for Sprint"},
+                {"code": "PSM_DEV_QUALITY", "name": "Definition of Done", "description": "Instill quality by adhering to DoD"},
+                {"code": "PSM_DEV_DAILY_ADAPT", "name": "Daily Adaptation", "description": "Adapt plan each day toward Sprint Goal"},
+                {"code": "PSM_DEV_ACCOUNTABILITY", "name": "Mutual Accountability", "description": "Hold each other accountable"}
+              ]
+            },
+            {
+              "code": "PSM_PRODUCT_OWNER",
+              "name": "Product Owner",
+              "description": "Role of Product Owner",
+              "children": [
+                {"code": "PSM_PO_GOAL", "name": "Product Goal", "description": "Developing and communicating Product Goal"},
+                {"code": "PSM_PO_PBI", "name": "Product Backlog Items", "description": "Creating and communicating PBIs"},
+                {"code": "PSM_PO_ORDERING", "name": "Backlog Ordering", "description": "Ordering Product Backlog Items"},
+                {"code": "PSM_PO_TRANSPARENCY", "name": "Backlog Transparency", "description": "Ensuring transparency and understanding"}
+              ]
+            },
+            {
+              "code": "PSM_SCRUM_MASTER",
+              "name": "Scrum Master",
+              "description": "Role of Scrum Master",
+              "children": [
+                {"code": "PSM_SM_COACHING", "name": "Coaching Team", "description": "Coaching in self-management and cross-functionality"},
+                {"code": "PSM_SM_FOCUS", "name": "Focus on Increments", "description": "Helping focus on high-value Increments"},
+                {"code": "PSM_SM_IMPEDIMENTS", "name": "Removing Impediments", "description": "Removing impediments to progress"},
+                {"code": "PSM_SM_EVENTS", "name": "Scrum Events", "description": "Ensuring events are positive and productive"},
+                {"code": "PSM_SM_SERVANT", "name": "Servant Leadership", "description": "Serving team and organization"}
+              ]
+            },
+            {"code": "PSM_SELF_MANAGING", "name": "Self-Managing Teams", "description": "Team decides who, how, what to work on"},
+            {"code": "PSM_CROSS_FUNCTIONAL", "name": "Cross-Functionality", "description": "All skills needed to create value"}
+          ]
+        },
+        {
+          "code": "PSM_SCRUM_EVENTS",
+          "name": "Scrum Events",
+          "description": "The five Scrum events",
+          "children": [
+            {
+              "code": "PSM_SPRINT",
+              "name": "Sprint",
+              "description": "Container for all events",
+              "children": [
+                {"code": "PSM_SPRINT_LENGTH", "name": "Sprint Length", "description": "One month or less for consistency"},
+                {"code": "PSM_SPRINT_GOAL", "name": "Sprint Goal", "description": "Single objective for Sprint"},
+                {"code": "PSM_SPRINT_SCOPE", "name": "Sprint Scope", "description": "Scope may be clarified with PO"}
+              ]
+            },
+            {
+              "code": "PSM_SPRINT_PLANNING",
+              "name": "Sprint Planning",
+              "description": "Initiates Sprint by laying out work",
+              "children": [
+                {"code": "PSM_PLANNING_WHY", "name": "Why Valuable", "description": "Propose how Sprint increases value"},
+                {"code": "PSM_PLANNING_WHAT", "name": "What to Do", "description": "Select items from Product Backlog"},
+                {"code": "PSM_PLANNING_HOW", "name": "How to Do", "description": "Decompose items into smaller work"}
+              ]
+            },
+            {
+              "code": "PSM_DAILY_SCRUM",
+              "name": "Daily Scrum",
+              "description": "15-minute event for Developers",
+              "children": [
+                {"code": "PSM_DAILY_PURPOSE", "name": "Daily Purpose", "description": "Inspect progress toward Sprint Goal"},
+                {"code": "PSM_DAILY_PLAN", "name": "Daily Planning", "description": "Adapt Sprint Backlog as necessary"}
+              ]
+            },
+            {
+              "code": "PSM_SPRINT_REVIEW",
+              "name": "Sprint Review",
+              "description": "Inspect outcome and determine adaptations",
+              "children": [
+                {"code": "PSM_REVIEW_INSPECT", "name": "Inspect Increment", "description": "Present results to stakeholders"},
+                {"code": "PSM_REVIEW_ADAPT", "name": "Adapt Backlog", "description": "Adjust Product Backlog"}
+              ]
+            },
+            {
+              "code": "PSM_SPRINT_RETRO",
+              "name": "Sprint Retrospective",
+              "description": "Plan ways to increase quality and effectiveness",
+              "children": [
+                {"code": "PSM_RETRO_INSPECT", "name": "Inspect Sprint", "description": "Inspect individuals, interactions, processes, tools"},
+                {"code": "PSM_RETRO_IMPROVE", "name": "Identify Improvements", "description": "Identify most impactful improvements"}
+              ]
+            }
+          ]
+        },
+        {
+          "code": "PSM_SCRUM_ARTIFACTS",
+          "name": "Scrum Artifacts",
+          "description": "Represent work or value",
+          "children": [
+            {
+              "code": "PSM_PRODUCT_BACKLOG",
+              "name": "Product Backlog",
+              "description": "Emergent, ordered list of what is needed",
+              "children": [
+                {"code": "PSM_PB_REFINEMENT", "name": "Backlog Refinement", "description": "Breaking down and defining items"},
+                {"code": "PSM_PB_PRODUCT_GOAL", "name": "Product Goal Commitment", "description": "Long-term objective for product"}
+              ]
+            },
+            {
+              "code": "PSM_SPRINT_BACKLOG",
+              "name": "Sprint Backlog",
+              "description": "Sprint Goal + selected PBIs + delivery plan",
+              "children": [
+                {"code": "PSM_SB_GOAL", "name": "Sprint Goal Commitment", "description": "Single objective for Sprint"},
+                {"code": "PSM_SB_PLAN", "name": "Sprint Plan", "description": "Plan for delivering Increment"}
+              ]
+            },
+            {
+              "code": "PSM_INCREMENT",
+              "name": "Increment",
+              "description": "Concrete stepping stone toward Product Goal",
+              "children": [
+                {"code": "PSM_INC_USABLE", "name": "Usable Increment", "description": "Must be usable and meet DoD"},
+                {"code": "PSM_INC_DOD", "name": "Definition of Done", "description": "Formal description of Increment state"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "certification_id": "PSM_II",
+      "name": "Professional Scrum Master II",
+      "description": "Advanced Scrum Master skills",
+      "skills": [
+        {
+          "code": "PSM2_FACILITATION",
+          "name": "Facilitation",
+          "description": "Advanced facilitation techniques",
+          "children": [
+            {"code": "PSM2_CONFLICT_RES", "name": "Conflict Resolution", "description": "Resolve team conflicts effectively"},
+            {"code": "PSM2_DECISION_MAKING", "name": "Decision Making", "description": "Facilitate team decision making"},
+            {"code": "PSM2_MEETING_FACIL", "name": "Meeting Facilitation", "description": "Facilitate productive meetings"}
+          ]
+        },
+        {
+          "code": "PSM2_COACHING",
+          "name": "Coaching",
+          "description": "Coaching individuals and teams",
+          "children": [
+            {"code": "PSM2_INDIVIDUAL_COACH", "name": "Individual Coaching", "description": "Coach individual team members"},
+            {"code": "PSM2_TEAM_COACH", "name": "Team Coaching", "description": "Coach entire Scrum Team"},
+            {"code": "PSM2_ORG_COACH", "name": "Organization Coaching", "description": "Coach stakeholders and organization"}
+          ]
+        },
+        {
+          "code": "PSM2_LEADERSHIP",
+          "name": "Leadership",
+          "description": "Servant leadership skills",
+          "children": [
+            {"code": "PSM2_SERVANT_LEADER", "name": "Servant Leadership", "description": "Lead by serving others"},
+            {"code": "PSM2_INFLUENCE", "name": "Influence Without Authority", "description": "Influence without formal authority"},
+            {"code": "PSM2_CHANGE_AGENT", "name": "Change Agent", "description": "Drive organizational change"}
+          ]
+        },
+        {
+          "code": "PSM2_ORG_DESIGN",
+          "name": "Organization Design",
+          "description": "Organizational structure for agility",
+          "children": [
+            {"code": "PSM2_SCALING", "name": "Scaling Scrum", "description": "Scale Scrum across teams"},
+            {"code": "PSM2_IMPEDIMENT_ORG", "name": "Organizational Impediments", "description": "Address organizational impediments"},
+            {"code": "PSM2_CULTURE", "name": "Culture Change", "description": "Foster agile culture"}
+          ]
+        }
+      ]
+    },
+    {
+      "certification_id": "PSPO_I",
+      "name": "Professional Scrum Product Owner I",
+      "description": "Product Owner fundamentals",
+      "skills": [
+        {
+          "code": "PSPO_AGILE_PO",
+          "name": "Agile Product Management",
+          "description": "Agile approach to product management",
+          "children": [
+            {"code": "PSPO_VALUE_DRIVEN", "name": "Value-Driven Development", "description": "Maximize product value"},
+            {"code": "PSPO_STAKEHOLDER", "name": "Stakeholder Management", "description": "Manage stakeholder expectations"},
+            {"code": "PSPO_MARKET_SENSE", "name": "Market Sensing", "description": "Understand market and customers"}
+          ]
+        },
+        {
+          "code": "PSPO_BACKLOG_MGMT",
+          "name": "Product Backlog Management",
+          "description": "Managing the Product Backlog",
+          "children": [
+            {"code": "PSPO_PBI_CREATION", "name": "PBI Creation", "description": "Create clear Product Backlog Items"},
+            {"code": "PSPO_ORDERING", "name": "Ordering Techniques", "description": "Order backlog for maximum value"},
+            {"code": "PSPO_REFINEMENT", "name": "Refinement", "description": "Refine and detail backlog items"}
+          ]
+        },
+        {
+          "code": "PSPO_PRODUCT_VISION",
+          "name": "Product Vision & Goal",
+          "description": "Defining product direction",
+          "children": [
+            {"code": "PSPO_VISION", "name": "Product Vision", "description": "Create compelling product vision"},
+            {"code": "PSPO_GOAL", "name": "Product Goal", "description": "Define measurable product goals"},
+            {"code": "PSPO_ROADMAP", "name": "Product Roadmap", "description": "Create and maintain roadmap"}
+          ]
+        },
+        {
+          "code": "PSPO_SCRUM_EVENTS",
+          "name": "PO in Scrum Events",
+          "description": "PO participation in events",
+          "children": [
+            {"code": "PSPO_PLANNING", "name": "Sprint Planning", "description": "PO role in Sprint Planning"},
+            {"code": "PSPO_REVIEW", "name": "Sprint Review", "description": "PO role in Sprint Review"},
+            {"code": "PSPO_RELEASE", "name": "Release Management", "description": "Managing product releases"}
+          ]
+        }
+      ]
+    },
+    {
+      "certification_id": "ISTQB_FOUNDATION",
+      "name": "ISTQB Foundation Level",
+      "description": "ISTQB CTFL v4.0 Syllabus",
+      "skills": [
+        {
+          "code": "ISTQB_FUNDAMENTALS",
+          "name": "Testing Fundamentals",
+          "description": "Fundamentals of testing",
+          "children": [
+            {"code": "ISTQB_WHAT_TESTING", "name": "What is Testing", "description": "Definition and objectives of testing"},
+            {"code": "ISTQB_WHY_TESTING", "name": "Why Testing is Necessary", "description": "Testing contribution to success"},
+            {"code": "ISTQB_PRINCIPLES", "name": "Testing Principles", "description": "Seven testing principles"},
+            {"code": "ISTQB_ACTIVITIES", "name": "Test Activities", "description": "Test process activities"},
+            {"code": "ISTQB_TESTWARE", "name": "Testware", "description": "Work products of testing"},
+            {"code": "ISTQB_PSYCHOLOGY", "name": "Psychology of Testing", "description": "Human aspects of testing"}
+          ]
+        },
+        {
+          "code": "ISTQB_LIFECYCLE",
+          "name": "Testing in SDLC",
+          "description": "Testing throughout the lifecycle",
+          "children": [
+            {"code": "ISTQB_SDLC_MODELS", "name": "SDLC Models", "description": "Testing in different SDLC models"},
+            {"code": "ISTQB_TEST_LEVELS", "name": "Test Levels", "description": "Component, integration, system, acceptance testing"},
+            {"code": "ISTQB_TEST_TYPES", "name": "Test Types", "description": "Functional, non-functional, maintenance testing"},
+            {"code": "ISTQB_MAINTENANCE", "name": "Maintenance Testing", "description": "Testing for maintenance"}
+          ]
+        },
+        {
+          "code": "ISTQB_STATIC",
+          "name": "Static Testing",
+          "description": "Static testing techniques",
+          "children": [
+            {"code": "ISTQB_STATIC_BASICS", "name": "Static Testing Basics", "description": "Fundamentals of static testing"},
+            {"code": "ISTQB_REVIEW_PROCESS", "name": "Review Process", "description": "Formal review process"},
+            {"code": "ISTQB_REVIEW_TYPES", "name": "Review Types", "description": "Types of reviews"}
+          ]
+        },
+        {
+          "code": "ISTQB_TECHNIQUES",
+          "name": "Test Techniques",
+          "description": "Test design techniques",
+          "children": [
+            {"code": "ISTQB_BB_TECHNIQUES", "name": "Black-box Techniques", "description": "EP, BVA, Decision Tables, State Transition"},
+            {"code": "ISTQB_WB_TECHNIQUES", "name": "White-box Techniques", "description": "Statement, Branch coverage"},
+            {"code": "ISTQB_EXPERIENCE", "name": "Experience-based", "description": "Error guessing, exploratory testing"}
+          ]
+        },
+        {
+          "code": "ISTQB_MANAGEMENT",
+          "name": "Test Management",
+          "description": "Managing the test process",
+          "children": [
+            {"code": "ISTQB_PLANNING", "name": "Test Planning", "description": "Test planning and estimation"},
+            {"code": "ISTQB_MONITORING", "name": "Test Monitoring", "description": "Test progress monitoring"},
+            {"code": "ISTQB_CONFIG_MGMT", "name": "Configuration Management", "description": "Test configuration management"},
+            {"code": "ISTQB_DEFECT_MGMT", "name": "Defect Management", "description": "Defect management process"}
+          ]
+        },
+        {
+          "code": "ISTQB_TOOLS",
+          "name": "Test Tools",
+          "description": "Tool support for testing",
+          "children": [
+            {"code": "ISTQB_TOOL_TYPES", "name": "Tool Types", "description": "Types of test tools"},
+            {"code": "ISTQB_TOOL_BENEFITS", "name": "Tool Benefits & Risks", "description": "Benefits and risks of tools"}
+          ]
+        }
+      ]
+    },
+    {
+      "certification_id": "ISTQB_AGILE",
+      "name": "ISTQB Agile Tester",
+      "description": "ISTQB Agile Tester Extension",
+      "skills": [
+        {
+          "code": "ISTQB_AGILE_FUND",
+          "name": "Agile Fundamentals",
+          "description": "Agile software development fundamentals",
+          "children": [
+            {"code": "ISTQB_AGILE_VALUES", "name": "Agile Values", "description": "Agile Manifesto values"},
+            {"code": "ISTQB_AGILE_APPROACHES", "name": "Agile Approaches", "description": "Scrum, Kanban, XP"},
+            {"code": "ISTQB_WHOLE_TEAM", "name": "Whole-Team Approach", "description": "Collaborative testing approach"}
+          ]
+        },
+        {
+          "code": "ISTQB_AGILE_TESTING",
+          "name": "Agile Testing",
+          "description": "Testing in Agile projects",
+          "children": [
+            {"code": "ISTQB_AGILE_DIFF", "name": "Differences from Traditional", "description": "How Agile testing differs"},
+            {"code": "ISTQB_AGILE_STATUS", "name": "Test Status in Agile", "description": "Communicating test status"},
+            {"code": "ISTQB_REGRESSION_AGILE", "name": "Regression in Agile", "description": "Managing regression risk"}
+          ]
+        },
+        {
+          "code": "ISTQB_AGILE_TECHNIQUES",
+          "name": "Agile Testing Techniques",
+          "description": "Testing techniques for Agile",
+          "children": [
+            {"code": "ISTQB_TDD", "name": "TDD", "description": "Test-Driven Development"},
+            {"code": "ISTQB_ATDD", "name": "ATDD", "description": "Acceptance Test-Driven Development"},
+            {"code": "ISTQB_BDD", "name": "BDD", "description": "Behavior-Driven Development"}
+          ]
+        },
+        {
+          "code": "ISTQB_AGILE_TOOLS",
+          "name": "Tools in Agile",
+          "description": "Tool support for Agile testing",
+          "children": [
+            {"code": "ISTQB_AUTOMATION_AGILE", "name": "Test Automation", "description": "Automation in Agile"},
+            {"code": "ISTQB_CI_CD", "name": "CI/CD Tools", "description": "Continuous Integration tools"}
+          ]
+        }
+      ]
+    },
+    {
+      "certification_id": "CBAP",
+      "name": "Certified Business Analysis Professional",
+      "description": "IIBA CBAP based on BABOK v3",
+      "skills": [
+        {
+          "code": "CBAP_PLANNING",
+          "name": "BA Planning & Monitoring",
+          "description": "Planning and monitoring BA activities",
+          "children": [
+            {"code": "CBAP_APPROACH", "name": "Plan BA Approach", "description": "Define business analysis approach"},
+            {"code": "CBAP_STAKEHOLDER_PLAN", "name": "Plan Stakeholder Engagement", "description": "Plan stakeholder engagement"},
+            {"code": "CBAP_GOVERNANCE", "name": "Plan BA Governance", "description": "Plan governance approach"},
+            {"code": "CBAP_INFO_MGMT", "name": "Plan Information Management", "description": "Plan information management"}
+          ]
+        },
+        {
+          "code": "CBAP_ELICITATION",
+          "name": "Elicitation & Collaboration",
+          "description": "Eliciting and collaborating on requirements",
+          "children": [
+            {"code": "CBAP_PREPARE_ELICIT", "name": "Prepare for Elicitation", "description": "Prepare for elicitation"},
+            {"code": "CBAP_CONDUCT_ELICIT", "name": "Conduct Elicitation", "description": "Conduct elicitation activities"},
+            {"code": "CBAP_CONFIRM_ELICIT", "name": "Confirm Elicitation Results", "description": "Confirm elicitation results"},
+            {"code": "CBAP_COMMUNICATE", "name": "Communicate BA Information", "description": "Communicate BA information"}
+          ]
+        },
+        {
+          "code": "CBAP_LIFECYCLE",
+          "name": "Requirements Lifecycle",
+          "description": "Managing requirements lifecycle",
+          "children": [
+            {"code": "CBAP_TRACE", "name": "Trace Requirements", "description": "Trace requirements"},
+            {"code": "CBAP_MAINTAIN", "name": "Maintain Requirements", "description": "Maintain requirements"},
+            {"code": "CBAP_PRIORITIZE", "name": "Prioritize Requirements", "description": "Prioritize requirements"},
+            {"code": "CBAP_ASSESS_CHANGES", "name": "Assess Requirements Changes", "description": "Assess requirement changes"},
+            {"code": "CBAP_APPROVE", "name": "Approve Requirements", "description": "Approve requirements"}
+          ]
+        },
+        {
+          "code": "CBAP_ANALYSIS",
+          "name": "Requirements Analysis",
+          "description": "Analyzing requirements",
+          "children": [
+            {"code": "CBAP_SPECIFY", "name": "Specify & Model Requirements", "description": "Specify and model requirements"},
+            {"code": "CBAP_VERIFY", "name": "Verify Requirements", "description": "Verify requirements"},
+            {"code": "CBAP_VALIDATE", "name": "Validate Requirements", "description": "Validate requirements"},
+            {"code": "CBAP_DEFINE_ARCH", "name": "Define Requirements Architecture", "description": "Define requirements architecture"}
+          ]
+        },
+        {
+          "code": "CBAP_STRATEGY",
+          "name": "Strategy Analysis",
+          "description": "Analyzing business strategy",
+          "children": [
+            {"code": "CBAP_CURRENT_STATE", "name": "Analyze Current State", "description": "Analyze current state"},
+            {"code": "CBAP_FUTURE_STATE", "name": "Define Future State", "description": "Define future state"},
+            {"code": "CBAP_ASSESS_RISK", "name": "Assess Risks", "description": "Assess risks"},
+            {"code": "CBAP_CHANGE_STRATEGY", "name": "Define Change Strategy", "description": "Define change strategy"}
+          ]
+        },
+        {
+          "code": "CBAP_SOLUTION",
+          "name": "Solution Evaluation",
+          "description": "Evaluating solutions",
+          "children": [
+            {"code": "CBAP_MEASURE_PERF", "name": "Measure Solution Performance", "description": "Measure solution performance"},
+            {"code": "CBAP_ANALYZE_VALUE", "name": "Analyze Performance Value", "description": "Analyze performance measures"},
+            {"code": "CBAP_ASSESS_LIMITS", "name": "Assess Solution Limitations", "description": "Assess solution limitations"},
+            {"code": "CBAP_RECOMMEND", "name": "Recommend Actions", "description": "Recommend actions for value"}
+          ]
+        }
+      ]
+    },
+    {
+      "certification_id": "CCBA",
+      "name": "Certification of Capability in Business Analysis",
+      "description": "IIBA CCBA intermediate level",
+      "skills": [
+        {
+          "code": "CCBA_PLANNING",
+          "name": "BA Planning & Monitoring",
+          "description": "Planning and monitoring BA work",
+          "children": [
+            {"code": "CCBA_APPROACH", "name": "Plan BA Approach", "description": "Define approach for BA"},
+            {"code": "CCBA_STAKEHOLDER", "name": "Stakeholder Engagement", "description": "Engage stakeholders effectively"}
+          ]
+        },
+        {
+          "code": "CCBA_ELICITATION",
+          "name": "Elicitation & Collaboration",
+          "description": "Gathering requirements",
+          "children": [
+            {"code": "CCBA_TECHNIQUES", "name": "Elicitation Techniques", "description": "Apply elicitation techniques"},
+            {"code": "CCBA_COLLABORATION", "name": "Collaboration", "description": "Collaborate with stakeholders"}
+          ]
+        },
+        {
+          "code": "CCBA_ANALYSIS",
+          "name": "Requirements Analysis",
+          "description": "Analyzing requirements",
+          "children": [
+            {"code": "CCBA_SPECIFY", "name": "Specify Requirements", "description": "Specify and document requirements"},
+            {"code": "CCBA_MODEL", "name": "Model Requirements", "description": "Model requirements visually"}
+          ]
+        },
+        {
+          "code": "CCBA_LIFECYCLE",
+          "name": "Requirements Lifecycle",
+          "description": "Managing requirements",
+          "children": [
+            {"code": "CCBA_TRACE", "name": "Trace Requirements", "description": "Trace and maintain requirements"},
+            {"code": "CCBA_PRIORITIZE", "name": "Prioritize", "description": "Prioritize requirements"}
+          ]
+        }
+      ]
+    },
+    {
+      "certification_id": "ECBA",
+      "name": "Entry Certificate in Business Analysis",
+      "description": "IIBA ECBA entry level",
+      "skills": [
+        {
+          "code": "ECBA_FUNDAMENTALS",
+          "name": "BA Fundamentals",
+          "description": "Business Analysis fundamentals",
+          "children": [
+            {"code": "ECBA_WHAT_BA", "name": "What is BA", "description": "Understanding business analysis"},
+            {"code": "ECBA_BA_ROLE", "name": "BA Role", "description": "Role of business analyst"}
+          ]
+        },
+        {
+          "code": "ECBA_TECHNIQUES",
+          "name": "BA Techniques",
+          "description": "Basic BA techniques",
+          "children": [
+            {"code": "ECBA_ELICIT", "name": "Basic Elicitation", "description": "Basic elicitation techniques"},
+            {"code": "ECBA_DOCUMENT", "name": "Documentation", "description": "Documenting requirements"}
+          ]
+        },
+        {
+          "code": "ECBA_STAKEHOLDER",
+          "name": "Stakeholder Management",
+          "description": "Managing stakeholders",
+          "children": [
+            {"code": "ECBA_IDENTIFY", "name": "Identify Stakeholders", "description": "Identify stakeholders"},
+            {"code": "ECBA_COMMUNICATE", "name": "Communication", "description": "Communicate effectively"}
+          ]
+        }
+      ]
+    }
+  ]
+}

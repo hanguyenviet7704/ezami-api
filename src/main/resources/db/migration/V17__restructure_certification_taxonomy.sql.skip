@@ -1,0 +1,192 @@
+-- V17: Extend Certification Taxonomy (wp_ez_certifications already exists)
+-- Purpose: Add category hierarchy and enhance existing certifications table
+-- Author: Claude Code
+-- Date: 2025-12-27
+-- Note: wp_ez_certifications table already exists, we only extend it
+
+-- ============================================
+-- CREATE CERTIFICATION CATEGORIES TABLE
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS wp_ez_certification_categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_code VARCHAR(50) UNIQUE NOT NULL COMMENT 'Unique code (e.g., CLOUD_AWS, AGILE_SCRUM)',
+    category_name VARCHAR(100) NOT NULL COMMENT 'Display name in English',
+    category_name_vi VARCHAR(100) COMMENT 'Display name in Vietnamese',
+    parent_category_code VARCHAR(50) COMMENT 'Parent category for hierarchy',
+    description TEXT COMMENT 'Category description',
+    icon VARCHAR(255) COMMENT 'Icon URL or name',
+    display_order INT DEFAULT 0 COMMENT 'Sort order for UI',
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX idx_category_code (category_code),
+    INDEX idx_parent_category (parent_category_code),
+    INDEX idx_display_order (display_order),
+    FOREIGN KEY (parent_category_code) REFERENCES wp_ez_certification_categories(category_code) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Certification category hierarchy';
+
+-- ============================================
+-- CREATE CERTIFICATIONS METADATA TABLE
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS wp_ez_certifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    certification_id VARCHAR(100) UNIQUE NOT NULL COMMENT 'Unique certification code',
+    name VARCHAR(255) NOT NULL COMMENT 'Certification name in English',
+    name_vi VARCHAR(255) COMMENT 'Certification name in Vietnamese',
+    description TEXT COMMENT 'Full description',
+    primary_category VARCHAR(50) COMMENT 'Primary category code',
+    secondary_category VARCHAR(50) COMMENT 'Secondary category code (optional)',
+    level VARCHAR(20) COMMENT 'ENTRY, ASSOCIATE, PROFESSIONAL, EXPERT',
+    vendor VARCHAR(100) COMMENT 'Issuing organization (AWS, Scrum.org, ISTQB, etc.)',
+    exam_code VARCHAR(50) COMMENT 'Official exam code (e.g., SAA-C03, AZ-104)',
+    pass_score INT COMMENT 'Passing score if applicable',
+    total_questions INT COMMENT 'Number of questions in actual exam',
+    duration_minutes INT COMMENT 'Exam duration',
+    is_active BOOLEAN DEFAULT TRUE,
+    is_featured BOOLEAN DEFAULT FALSE COMMENT 'Show on homepage',
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX idx_certification_id (certification_id),
+    INDEX idx_primary_category (primary_category),
+    INDEX idx_level (level),
+    INDEX idx_vendor (vendor),
+    INDEX idx_active_featured (is_active, is_featured),
+    FOREIGN KEY (primary_category) REFERENCES wp_ez_certification_categories(category_code) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Certification metadata and taxonomy';
+
+-- ============================================
+-- SEED CATEGORIES
+-- ============================================
+
+INSERT INTO wp_ez_certification_categories (category_code, category_name, category_name_vi, description, display_order) VALUES
+-- Level 1: Main domains
+('CLOUD_COMPUTING', 'Cloud Computing', 'Điện toán đám mây', 'Cloud platform certifications (AWS, Azure, GCP)', 1),
+('SOFTWARE_DEVELOPMENT', 'Software Development', 'Phát triển phần mềm', 'Programming and development certifications', 2),
+('QUALITY_ASSURANCE', 'Quality Assurance & Testing', 'Đảm bảo chất lượng & Kiểm thử', 'Software testing certifications', 3),
+('AGILE_METHODOLOGIES', 'Agile & Scrum', 'Agile & Scrum', 'Agile framework certifications', 4),
+('INFRASTRUCTURE_DEVOPS', 'Infrastructure & DevOps', 'Hạ tầng & DevOps', 'Infrastructure and DevOps certifications', 5),
+('SECURITY', 'Cybersecurity', 'An ninh mạng', 'Information security certifications', 6),
+('BUSINESS_ANALYSIS', 'Business Analysis', 'Phân tích nghiệp vụ', 'Business analyst certifications', 7),
+('PROJECT_MANAGEMENT', 'Project Management', 'Quản lý dự án', 'Project and program management', 8),
+
+-- Level 2: Sub-categories
+('CLOUD_AWS', 'Amazon Web Services (AWS)', 'Amazon Web Services', 'AWS certifications', 10),
+('CLOUD_AZURE', 'Microsoft Azure', 'Microsoft Azure', 'Azure certifications', 11),
+('CLOUD_GCP', 'Google Cloud Platform', 'Google Cloud', 'GCP certifications', 12),
+('DEV_BACKEND', 'Backend Development', 'Phát triển Backend', 'Server-side development', 20),
+('DEV_FRONTEND', 'Frontend Development', 'Phát triển Frontend', 'Client-side development', 21),
+('DEV_FULLSTACK', 'Full Stack Development', 'Phát triển Full Stack', 'End-to-end development', 22),
+('CONTAINER_ORCHESTRATION', 'Container & Orchestration', 'Container & Điều phối', 'Docker, Kubernetes', 30),
+('INFRASTRUCTURE_AS_CODE', 'Infrastructure as Code', 'Hạ tầng dưới dạng Code', 'Terraform, CloudFormation', 31);
+
+-- Update parent relationships
+UPDATE wp_ez_certification_categories SET parent_category_code = 'CLOUD_COMPUTING' WHERE category_code IN ('CLOUD_AWS', 'CLOUD_AZURE', 'CLOUD_GCP');
+UPDATE wp_ez_certification_categories SET parent_category_code = 'SOFTWARE_DEVELOPMENT' WHERE category_code IN ('DEV_BACKEND', 'DEV_FRONTEND', 'DEV_FULLSTACK');
+UPDATE wp_ez_certification_categories SET parent_category_code = 'INFRASTRUCTURE_DEVOPS' WHERE category_code IN ('CONTAINER_ORCHESTRATION', 'INFRASTRUCTURE_AS_CODE');
+
+-- ============================================
+-- SEED CERTIFICATIONS FROM EXISTING DATA
+-- ============================================
+
+INSERT INTO wp_ez_certifications (certification_id, name, primary_category, level, vendor, exam_code, is_active)
+SELECT DISTINCT
+    certification_id,
+    -- Generate readable name from ID
+    REPLACE(REPLACE(REPLACE(certification_id, '_', ' '), 'PSM I', 'Professional Scrum Master I'), 'ISTQB', 'ISTQB'),
+    -- Determine category
+    CASE
+        WHEN certification_id LIKE 'AWS_%' THEN 'CLOUD_AWS'
+        WHEN certification_id LIKE 'AZURE_%' OR certification_id LIKE 'MICROSOFT_%' THEN 'CLOUD_AZURE'
+        WHEN certification_id LIKE 'GCP_%' OR certification_id LIKE 'GOOGLE_%' THEN 'CLOUD_GCP'
+        WHEN certification_id LIKE '%PSM%' OR certification_id LIKE '%PSPO%' OR certification_id LIKE '%SCRUM%' OR certification_id LIKE 'AGILE_%' THEN 'AGILE_METHODOLOGIES'
+        WHEN certification_id LIKE 'ISTQB_%' THEN 'QUALITY_ASSURANCE'
+        WHEN certification_id LIKE 'DEV_%' THEN 'SOFTWARE_DEVELOPMENT'
+        WHEN certification_id LIKE '%KUBERNETES%' OR certification_id LIKE '%DOCKER%' THEN 'CONTAINER_ORCHESTRATION'
+        WHEN certification_id LIKE '%TERRAFORM%' THEN 'INFRASTRUCTURE_AS_CODE'
+        WHEN certification_id LIKE '%JAVA%' OR certification_id LIKE '%SPRING%' THEN 'SOFTWARE_DEVELOPMENT'
+        WHEN certification_id LIKE '%BA%' OR certification_id LIKE '%BUSINESS%' THEN 'BUSINESS_ANALYSIS'
+        WHEN certification_id LIKE '%SECURITY%' OR certification_id LIKE '%CISSP%' THEN 'SECURITY'
+        WHEN certification_id LIKE '%PMP%' THEN 'PROJECT_MANAGEMENT'
+        ELSE 'SOFTWARE_DEVELOPMENT'
+    END,
+    -- Determine level
+    CASE
+        WHEN certification_id LIKE '%_I' OR certification_id LIKE '%FOUNDATION%' OR certification_id LIKE '%CTFL%' OR certification_id LIKE 'ECBA' THEN 'ENTRY'
+        WHEN certification_id LIKE '%_II' OR certification_id LIKE '%ASSOCIATE%' OR certification_id LIKE '%ACE%' OR certification_id LIKE 'CCBA' THEN 'ASSOCIATE'
+        WHEN certification_id LIKE '%PROFESSIONAL%' OR certification_id LIKE '%_PRO' OR certification_id LIKE 'CBAP' OR certification_id LIKE '%ARCHITECT%' THEN 'PROFESSIONAL'
+        WHEN certification_id LIKE '%EXPERT%' OR certification_id LIKE '%ADVANCED%' THEN 'EXPERT'
+        ELSE 'ASSOCIATE'
+    END,
+    -- Extract vendor
+    CASE
+        WHEN certification_id LIKE 'AWS_%' THEN 'Amazon Web Services'
+        WHEN certification_id LIKE 'AZURE_%' OR certification_id LIKE 'MICROSOFT_%' THEN 'Microsoft'
+        WHEN certification_id LIKE 'GCP_%' OR certification_id LIKE 'GOOGLE_%' THEN 'Google Cloud'
+        WHEN certification_id LIKE '%PSM%' OR certification_id LIKE '%PSPO%' OR certification_id LIKE 'SCRUM_%' THEN 'Scrum.org'
+        WHEN certification_id LIKE 'ISTQB_%' THEN 'ISTQB'
+        WHEN certification_id LIKE '%KUBERNETES%' THEN 'Cloud Native Computing Foundation'
+        WHEN certification_id LIKE '%DOCKER%' THEN 'Docker Inc'
+        WHEN certification_id LIKE '%TERRAFORM%' THEN 'HashiCorp'
+        WHEN certification_id LIKE 'JAVA_%' THEN 'Oracle'
+        WHEN certification_id LIKE '%SPRING%' THEN 'VMware/Spring'
+        WHEN certification_id LIKE '%CBAP%' OR certification_id LIKE '%CCBA%' OR certification_id LIKE '%ECBA%' THEN 'IIBA'
+        WHEN certification_id LIKE 'PMI_%' OR certification_id LIKE '%PMP%' THEN 'PMI'
+        WHEN certification_id LIKE 'COMPTIA_%' THEN 'CompTIA'
+        WHEN certification_id LIKE 'ISC2_%' THEN 'ISC2'
+        ELSE 'Industry Standard'
+    END,
+    -- Exam code (clean version)
+    certification_id,
+    TRUE
+FROM wp_ez_skills
+WHERE certification_id IS NOT NULL
+ON DUPLICATE KEY UPDATE
+    primary_category = VALUES(primary_category),
+    level = VALUES(level),
+    vendor = VALUES(vendor);
+
+-- ============================================
+-- ADD CATEGORY COLUMNS TO SKILLS TABLE
+-- ============================================
+
+ALTER TABLE wp_ez_skills
+ADD COLUMN IF NOT EXISTS primary_category VARCHAR(50) COMMENT 'Maps to certification primary category',
+ADD COLUMN IF NOT EXISTS skill_domain VARCHAR(50) COMMENT 'High-level domain classification',
+ADD INDEX idx_skills_primary_category (primary_category),
+ADD INDEX idx_skills_domain (skill_domain);
+
+-- Populate category data in skills table
+UPDATE wp_ez_skills s
+INNER JOIN wp_ez_certifications c ON s.certification_id = c.certification_id
+SET s.primary_category = c.primary_category;
+
+-- ============================================
+-- VERIFICATION QUERIES
+-- ============================================
+
+-- Verify categories created
+SELECT category_code, category_name, parent_category_code
+FROM wp_ez_certification_categories
+ORDER BY display_order;
+
+-- Verify certifications seeded
+SELECT
+    primary_category,
+    COUNT(*) as cert_count
+FROM wp_ez_certifications
+GROUP BY primary_category
+ORDER BY cert_count DESC;
+
+-- Verify skills updated
+SELECT
+    primary_category,
+    COUNT(*) as skill_count
+FROM wp_ez_skills
+WHERE primary_category IS NOT NULL
+GROUP BY primary_category
+ORDER BY skill_count DESC;
