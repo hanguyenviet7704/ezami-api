@@ -5,12 +5,18 @@ spring:
       url: ${DB_URL}
       username: ${DB_USER}
       password: ${DB_PASS}
-
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 5
+        connection-timeout: 30000
+        idle-timeout: 600000
+        max-lifetime: 1740000
   jpa:
     open-in-view: false
     show-sql: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
         implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
         physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
         format_sql: true
@@ -109,7 +115,7 @@ cors:
     - https://api-v2.ezami.io
     - https://v2.ezami.io
     - https://ezami.io
-    - https://6da5a5c4214f.ngrok-free.app
+    - https://cfca921bd658.ngrok-free.app
   allowed-methods:
     - GET
     - POST
