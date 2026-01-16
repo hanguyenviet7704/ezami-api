@@ -116,6 +116,7 @@ cors:
     - https://v2.ezami.io
     - https://ezami.io
     - https://cfca921bd658.ngrok-free.app
+    - https://ezami-api-1027814282887.asia-southeast1.run.app
   allowed-methods:
     - GET
     - POST
