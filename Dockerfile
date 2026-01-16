@@ -1,44 +1,103 @@
-# === Build stage ===
-FROM gradle:8.5-jdk17 AS builder
+# ============================================
+# Multi-stage Dockerfile cho Ezami API
+# ============================================
+
+# === Stage 1: Build ===
+FROM gradle:8.5-jdk17-alpine AS builder
+
+# Metadata
+LABEL maintainer="ezami-team"
+LABEL description="Ezami API - Spring Boot Application"
+LABEL version="1.2.0"
 
 WORKDIR /app
-ARG CACHEBUST=2
 
+# Install build dependencies
+RUN apk add --no-cache \
+    curl \
+    bash \
+    && rm -rf /var/cache/apk/*
+
+# Copy Gradle wrapper và config files trước (để tận dụng cache)
 COPY gradlew gradlew.bat ./
 COPY gradle/ gradle/
 COPY build.gradle settings.gradle ./
 
-RUN chmod +x gradlew && sed -i 's/\r$//' gradlew
+# Make gradlew executable
+RUN chmod +x gradlew
 
-# Download dependencies (warm cache)
-RUN ./gradlew dependencies --no-daemon || true
+# Download dependencies (cache layer này)
+# Sử dụng --no-daemon để tránh background process
+RUN ./gradlew dependencies --no-daemon --stacktrace || true
 
+# Copy source code
 COPY src/ src/
 
-# Build ONLY bootJar (Spring Boot) để tránh sinh ra nhiều jar (vd: *-plain.jar)
-RUN ./gradlew clean bootJar -x test --no-daemon --stacktrace
+# Build application (skip tests để build nhanh hơn, tests chạy riêng trong CI/CD)
+RUN ./gradlew clean build \
+    -x test \
+    -x testClasses \
+    --no-daemon \
+    --stacktrace \
+    --info
 
-RUN ls -la /app/build/libs/ || echo "Build folder not found"
+# Verify JAR file exists
+RUN ls -lah /app/build/libs/*.jar || (echo "ERROR: JAR file not found!" && exit 1)
 
+# === Stage 2: Runtime ===
+FROM eclipse-temurin:17-jre-alpine
 
-# === Runtime stage ===
-FROM eclipse-temurin:17-jre
+# Metadata
+LABEL maintainer="ezami-team"
+LABEL description="Ezami API - Runtime Image"
 
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+# Install runtime dependencies
+RUN apk add --no-cache \
+    curl \
+    tzdata \
+    && rm -rf /var/cache/apk/*
 
-RUN groupadd -g 1001 appuser || true && useradd -r -u 1001 -g appuser appuser || true
+# Set timezone
+ENV TZ=Asia/Ho_Chi_Minh
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S appuser && \
+    adduser -u 1001 -S -G appuser appuser
 
 WORKDIR /app
 
-# Copy đúng 1 file jar (đã set tên app.jar trong build.gradle - xem note bên dưới)
-COPY --from=builder /app/build/libs/app.jar /app/app.jar
+# Copy JAR from builder stage
+COPY --from=builder /app/build/libs/*.jar app.jar
 
-# Create uploads directories and set permissions
-RUN mkdir -p /app/uploads/images /app/uploads/avatars /app/uploads/temp \
-  && chown -R appuser:appuser /app/uploads
+# Create necessary directories
+RUN mkdir -p /app/uploads/images \
+    /app/uploads/avatars \
+    /app/uploads/temp \
+    /app/logs && \
+    chown -R appuser:appuser /app
 
+# Switch to non-root user
 USER appuser
+
+# Expose port
 EXPOSE 8080
 
-ENV JAVA_OPTS="-Xmx512m -Xms256m -XX:+UseG1GC -XX:G1HeapRegionSize=16m -XX:+UseContainerSupport"
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.jar"]
+# Health check endpoint
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+    CMD curl -f http://localhost:8080/actuator/health || exit 1
+
+# JVM Options optimized for containers
+ENV JAVA_OPTS="-Xmx512m \
+    -Xms256m \
+    -XX:+UseG1GC \
+    -XX:G1HeapRegionSize=16m \
+    -XX:+UseContainerSupport \
+    -XX:MaxRAMPercentage=75.0 \
+    -XX:+HeapDumpOnOutOfMemoryError \
+    -XX:HeapDumpPath=/app/logs/heapdump.hprof \
+    -Djava.security.egd=file:/dev/./urandom \
+    -Dspring.profiles.active=prod"
+
+# Entry point
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
