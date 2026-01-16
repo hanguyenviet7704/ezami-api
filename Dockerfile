@@ -29,11 +29,11 @@ COPY src/ src/
 
 # Build application (skip tests để build nhanh hơn)
 RUN ./gradlew clean build \
-    -x test \
-    -x testClasses \
-    --no-daemon \
-    --stacktrace \
-    --info
+  -x test \
+  -x testClasses \
+  --no-daemon \
+  --stacktrace \
+  --info
 
 # Verify JAR files
 RUN ls -lah /app/build/libs/*.jar || (echo "ERROR: JAR file not found!" && exit 1)
@@ -56,12 +56,12 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Create non-root user (idempotent + fallback nếu UID/GID bị trùng)
 RUN set -eux; \
-    if ! getent group appuser >/dev/null 2>&1; then \
-      addgroup -S -g 1001 appuser || addgroup -S appuser; \
-    fi; \
-    if ! id -u appuser >/dev/null 2>&1; then \
-      adduser -S -u 1001 -G appuser appuser || adduser -S -G appuser appuser; \
-    fi
+  if ! getent group appuser >/dev/null 2>&1; then \
+    addgroup -S -g 1001 appuser || addgroup -S appuser; \
+  fi; \
+  if ! id -u appuser >/dev/null 2>&1; then \
+    adduser -S -u 1001 -G appuser appuser || adduser -S -G appuser appuser; \
+  fi
 
 WORKDIR /app
 
@@ -70,19 +70,22 @@ COPY --from=builder /app/build/libs/*.jar /app/app.jar
 
 # Create necessary directories + permission
 RUN mkdir -p /app/uploads/images \
-    /app/uploads/avatars \
-    /app/uploads/temp \
-    /app/logs && \
-    chown -R appuser:appuser /app
+  /app/uploads/avatars \
+  /app/uploads/temp \
+  /app/logs && \
+  chown -R appuser:appuser /app
 
 USER appuser
 
+# Cloud Run inject PORT (mặc định 8080). Expose để rõ ràng, nhưng app phải bind theo $PORT
 EXPOSE 8080
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
-  CMD curl -f http://localhost:8080/actuator/health || exit 1
+# (Khuyến nghị) Tạm bỏ HEALTHCHECK trong Dockerfile khi deploy Cloud Run để tránh fail khó debug.
+# Cloud Run tự quản lý health/startup check bằng cơ chế riêng.
+# HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+#   CMD curl -f http://localhost:8080/actuator/health || exit 1
 
-# JVM Options optimized for containers
+# JVM Options optimized for containers + bind Spring Boot theo PORT của Cloud Run
 ENV JAVA_OPTS="-Xmx512m \
   -Xms256m \
   -XX:+UseG1GC \
@@ -92,6 +95,7 @@ ENV JAVA_OPTS="-Xmx512m \
   -XX:+HeapDumpOnOutOfMemoryError \
   -XX:HeapDumpPath=/app/logs/heapdump.hprof \
   -Djava.security.egd=file:/dev/./urandom \
-  -Dspring.profiles.active=prod"
+  -Dspring.profiles.active=prod \
+  -Dserver.port=${PORT}"
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.jar"]
